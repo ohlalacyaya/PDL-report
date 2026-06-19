@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>统一经营分析入口</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7f4;
+      --panel: #ffffff;
+      --ink: #18201d;
+      --muted: #64706a;
+      --line: #dbe2dc;
+      --green: #087443;
+      --blue: #2457c5;
+      --amber: #9a5b00;
+      --red: #b42318;
+      --head: #e8f3ee;
+      --soft: #f1f4ef;
+      --shadow: 0 10px 24px rgba(27, 39, 32, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+    .shell {
+      width: min(1480px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 22px 0 34px;
+    }
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 4px 0 18px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    .status-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 360px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #39433e;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .pill.ok { color: var(--green); background: #ecf8f0; border-color: #cbead5; font-weight: 720; }
+    .pill.warn { color: var(--amber); background: #fff6df; border-color: #f0dfb5; font-weight: 720; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    nav a {
+      text-decoration: none;
+      color: #26312c;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 680;
+    }
+    nav a:hover { border-color: #97b7a6; background: #f7fbf8; }
+    main .shell { padding-top: 18px; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 94px;
+      box-shadow: var(--shadow);
+    }
+    .kpi-label { color: var(--muted); font-size: 12px; margin-bottom: 9px; }
+    .kpi-value { font-size: 22px; line-height: 1.15; font-weight: 760; white-space: nowrap; }
+    .kpi-sub { color: var(--muted); font-size: 12px; margin-top: 8px; line-height: 1.45; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .wide { grid-column: 1 / -1; }
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    h2 { margin: 0; font-size: 16px; line-height: 1.35; }
+    .unit { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .chart { height: 330px; width: 100%; }
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .module {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 13px;
+      min-height: 146px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .module h3 { margin: 0; font-size: 15px; }
+    .module p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 12px; }
+    .module a {
+      margin-top: auto;
+      display: inline-flex;
+      width: fit-content;
+      text-decoration: none;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 720;
+    }
+    .status {
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 760;
+    }
+    .status.pass, .status.checked { color: var(--green); background: #ecf8f0; }
+    .status.pending { color: var(--amber); background: #fff6df; }
+    .audit {
+      margin-top: 14px;
+      background: #fffaf0;
+      border: 1px solid #eadbb8;
+      border-radius: 8px;
+      padding: 13px 15px;
+      color: #5d410b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #edf1ea;
+      text-align: right;
+      white-space: nowrap;
+    }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: var(--head); color: #315048; font-weight: 760; }
+    .neg { color: var(--red); font-weight: 720; }
+    .pos { color: var(--green); font-weight: 720; }
+    @media (max-width: 1100px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid, .module-grid { grid-template-columns: 1fr; }
+      .topbar { display: block; }
+      .status-strip { justify-content: flex-start; margin-top: 12px; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <div class="topbar">
+        <div>
+          <h1>统一经营分析入口</h1>
+          <div class="subtitle">把工作台、白名单、LTV、权责放在同一个经营视角下查看。首页只保留跨模块关键指标和入口，细节仍回到各专题页面。</div>
+        </div>
+        <div class="status-strip">
+          <span class="pill ok">观察截止 2026-06-18</span>
+          <span class="pill ok">完整日口径</span>
+          <span class="pill">口径版本：现金流 Take Rate</span>
+        </div>
+      </div>
+      <nav>
+        <a id="link-workbench" href="#">工作台</a>
+        <a id="link-whitelist" href="#">白名单</a>
+        <a id="link-ltv" href="#">LTV by month</a>
+        <a id="link-accrual" href="#">权责</a>
+        <a id="link-audit" href="#">审核记录</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="shell">
+      <section class="kpis" id="kpis"></section>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-title"><h2>月度合同金额结构</h2><span class="unit">首贷 / 复贷，NGN</span></div>
+          <div class="chart" id="chart-monthly"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h2>最近 30 天放款趋势</h2><span class="unit">工作台 T1</span></div>
+          <div class="chart" id="chart-daily"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h2>LTV 首贷 Cohort</h2><span class="unit">首贷净现金 Take Rate / M1复购率</span></div>
+          <div class="chart" id="chart-ltv"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h2>白名单累计转化</h2><span class="unit">CUM / overall</span></div>
+          <div class="chart" id="chart-whitelist"></div>
+        </div>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-title"><h2>模块入口与刷新状态</h2><span class="unit">点击进入细节页</span></div>
+        <div class="module-grid" id="modules"></div>
+        <div class="audit" id="audit-note"></div>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-title"><h2>成熟月经营核算</h2><span class="unit">权责表整体口径</span></div>
+        <table>
+          <thead>
+            <tr><th>月份</th><th>合同金额</th><th>成熟合同金额</th><th>息费-坏账</th><th>Take Rate</th></tr>
+          </thead>
+          <tbody id="take-table"></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script>
+    const payload = {"meta": {"title": "统一经营分析入口", "data_date": "2026-06-18", "snapshot_note": "默认使用运行日 2026-06-19 的前一完整自然日 2026-06-18 作为目标观察截止日；低频模块会使用不晚于该日期的最近一次产物，并在模块卡片中展示实际区间。", "latest_month": "2026-06", "latest_full_take_month": "2026-05"}, "links": {"workbench": "可视化工作台原型.html", "accrual": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html", "whitelist": "data/manual_exports/whitelist_cohort/2026-05-01_2026-06-18_obs_2026-06-18/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-05-01_2026-06-18_obs_2026-06-18.html", "ltv": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-18.html", "ltv_weekly": "#", "audit": "业务Agent刷新审核记录_2026-06-18.md"}, "kpis": [{"label": "2026-06-18 放款量", "value": "924", "sub": "NGN 16.1M"}, {"label": "2026-06 合同金额", "value": "NGN 259.1M", "sub": "首贷 6,006 / 复贷 6,034 笔"}, {"label": "2026-05 Take Rate", "value": "3.18%", "sub": "成熟资产现金流口径"}, {"label": "2026-06 首贷 Cohort", "value": "6,006", "sub": "合同金额 NGN 48.0M"}, {"label": "白名单累计放款率", "value": "3.91%", "sub": "category_date / CUM / overall"}], "module_status": [{"module": "工作台", "status": "PASS", "range": "2026-01-01 至 2026-06-18", "note": "过程监控，完整日口径", "href": "可视化工作台原型.html"}, {"module": "白名单", "status": "CHECKED", "range": "2026-05-01 至 2026-06-18", "note": "993 行，三套锚点", "href": "data/manual_exports/whitelist_cohort/2026-05-01_2026-06-18_obs_2026-06-18/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-05-01_2026-06-18_obs_2026-06-18.html"}, {"module": "LTV / MOB", "status": "PASS", "range": "2026-01 至 2026-06", "note": "by month，首贷月 cohort", "href": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-18.html"}, {"module": "权责", "status": "CHECKED", "range": "2026-01 至 2026-06", "note": "最新成熟 Take Rate 月份：2026-05", "href": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html"}], "monthly_series": [{"month": "2026-01", "overall_contract_amt": 214267598.0, "matured_contract_amt": 214267598.0, "net_cash_revenue_amt": 6441759.0, "first_contract_amt": 57541500.0, "reloan_contract_amt": 156726098.0, "take_rate": 0.030064}, {"month": "2026-02", "overall_contract_amt": 226707800.0, "matured_contract_amt": 226707800.0, "net_cash_revenue_amt": 9916142.99, "first_contract_amt": 48520500.0, "reloan_contract_amt": 178187300.0, "take_rate": 0.04374}, {"month": "2026-03", "overall_contract_amt": 313731158.0, "matured_contract_amt": 313731158.0, "net_cash_revenue_amt": -1277076.33, "first_contract_amt": 87990400.0, "reloan_contract_amt": 225740758.0, "take_rate": -0.004071}, {"month": "2026-04", "overall_contract_amt": 338940550.0, "matured_contract_amt": 338940550.0, "net_cash_revenue_amt": 8504732.12, "first_contract_amt": 93850500.0, "reloan_contract_amt": 245090050.0, "take_rate": 0.025092}, {"month": "2026-05", "overall_contract_amt": 376713250.0, "matured_contract_amt": 327573250.0, "net_cash_revenue_amt": 10421986.25, "first_contract_amt": 89184500.0, "reloan_contract_amt": 287528750.0, "take_rate": 0.031816}, {"month": "2026-06", "overall_contract_amt": 259099000.0, "matured_contract_amt": 0.0, "net_cash_revenue_amt": null, "first_contract_amt": 48013500.0, "reloan_contract_amt": 211085500.0, "take_rate": null}], "daily_series": [{"day": "2026-05-20", "loan_cnt": 1000.0, "contract_amount": 16236500.0}, {"day": "2026-05-21", "loan_cnt": 936.0, "contract_amount": 14296500.0}, {"day": "2026-05-22", "loan_cnt": 1407.0, "contract_amount": 13969750.0}, {"day": "2026-05-23", "loan_cnt": 669.0, "contract_amount": 12679750.0}, {"day": "2026-05-24", "loan_cnt": 522.0, "contract_amount": 11581250.0}, {"day": "2026-05-25", "loan_cnt": 645.0, "contract_amount": 15793500.0}, {"day": "2026-05-26", "loan_cnt": 606.0, "contract_amount": 14240500.0}, {"day": "2026-05-27", "loan_cnt": 577.0, "contract_amount": 13241500.0}, {"day": "2026-05-28", "loan_cnt": 565.0, "contract_amount": 11862500.0}, {"day": "2026-05-29", "loan_cnt": 506.0, "contract_amount": 11887500.0}, {"day": "2026-05-30", "loan_cnt": 692.0, "contract_amount": 13906750.0}, {"day": "2026-05-31", "loan_cnt": 452.0, "contract_amount": 11483250.0}, {"day": "2026-06-01", "loan_cnt": 663.0, "contract_amount": 16075500.0}, {"day": "2026-06-02", "loan_cnt": 517.0, "contract_amount": 13930000.0}, {"day": "2026-06-03", "loan_cnt": 649.0, "contract_amount": 12250500.0}, {"day": "2026-06-04", "loan_cnt": 643.0, "contract_amount": 11039500.0}, {"day": "2026-06-05", "loan_cnt": 575.0, "contract_amount": 13897750.0}, {"day": "2026-06-06", "loan_cnt": 546.0, "contract_amount": 14962500.0}, {"day": "2026-06-07", "loan_cnt": 445.0, "contract_amount": 12165750.0}, {"day": "2026-06-08", "loan_cnt": 580.0, "contract_amount": 16186250.0}, {"day": "2026-06-09", "loan_cnt": 561.0, "contract_amount": 14652000.0}, {"day": "2026-06-10", "loan_cnt": 698.0, "contract_amount": 11772250.0}, {"day": "2026-06-11", "loan_cnt": 747.0, "contract_amount": 14531000.0}, {"day": "2026-06-12", "loan_cnt": 587.0, "contract_amount": 12866000.0}, {"day": "2026-06-13", "loan_cnt": 849.0, "contract_amount": 13724750.0}, {"day": "2026-06-14", "loan_cnt": 531.0, "contract_amount": 14510750.0}, {"day": "2026-06-15", "loan_cnt": 817.0, "contract_amount": 19006500.0}, {"day": "2026-06-16", "loan_cnt": 762.0, "contract_amount": 15931000.0}, {"day": "2026-06-17", "loan_cnt": 946.0, "contract_amount": 15509000.0}, {"day": "2026-06-18", "loan_cnt": 924.0, "contract_amount": 16088000.0}], "whitelist_summary": [{"anchor_type": "category_date", "whitelist_mobile_cnt": 346938.0, "register_mobile_cnt": 27463.0, "release_mobile_cnt": 13571.0, "register_rate": 0.07915823576546818, "release_rate": 0.03911649920158645}, {"anchor_type": "create_time", "whitelist_mobile_cnt": 261814.0, "register_mobile_cnt": 38019.0, "release_mobile_cnt": 19378.0, "register_rate": 0.1452137777200608, "release_rate": 0.07401437661851544}, {"anchor_type": "update_time", "whitelist_mobile_cnt": 188472.0, "register_mobile_cnt": 7355.0, "release_mobile_cnt": 4017.0, "register_rate": 0.039024364361815014, "release_rate": 0.021313510760219024}], "ltv_take_rate_rows": [{"cohort_month": "2026-01", "first_loan_order_cnt": 8811.0, "first_contract_amt": 57541500.0, "first_net_take_rate": -0.066, "cum_repurchase_user_rate": 0.3672}, {"cohort_month": "2026-02", "first_loan_order_cnt": 7148.0, "first_contract_amt": 48520500.0, "first_net_take_rate": -0.0307, "cum_repurchase_user_rate": 0.3969}, {"cohort_month": "2026-03", "first_loan_order_cnt": 10209.0, "first_contract_amt": 87990400.0, "first_net_take_rate": -0.0631, "cum_repurchase_user_rate": 0.3791}, {"cohort_month": "2026-04", "first_loan_order_cnt": 10377.0, "first_contract_amt": 93850500.0, "first_net_take_rate": -0.0381, "cum_repurchase_user_rate": 0.4051}, {"cohort_month": "2026-05", "first_loan_order_cnt": 10296.0, "first_contract_amt": 89184500.0, "first_net_take_rate": -0.0771, "cum_repurchase_user_rate": null}, {"cohort_month": "2026-06", "first_loan_order_cnt": 6006.0, "first_contract_amt": 48013500.0, "first_net_take_rate": null, "cum_repurchase_user_rate": null}], "audit": {"workbench": {"status": "PASS", "issues": [], "latest_complete_day": "2026-06-18", "export_dir": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/db_refresh/2026-06-19"}, "ltv": {"rows": 36, "cohort_months": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"], "matured_rows": 10, "check_status": "PASS", "output": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-18_obs_2026-06-18/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-18_obs_2026-06-18.csv", "sql": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-18_obs_2026-06-18/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-18_obs_2026-06-18.sql"}}};
+    const fmt = {
+      int: v => v == null ? '--' : Math.round(Number(v)).toLocaleString('en-US'),
+      money: v => {
+        if (v == null || Number.isNaN(Number(v))) return '--';
+        const n = Number(v);
+        if (Math.abs(n) >= 1e9) return `NGN ${(n / 1e9).toFixed(2)}B`;
+        return `NGN ${(n / 1e6).toFixed(1)}M`;
+      },
+      pct: v => v == null || Number.isNaN(Number(v)) ? '--' : `${(Number(v) * 100).toFixed(2)}%`
+    };
+    const abs = href => href;
+    document.getElementById('link-workbench').href = abs(payload.links.workbench);
+    document.getElementById('link-whitelist').href = abs(payload.links.whitelist);
+    document.getElementById('link-ltv').href = abs(payload.links.ltv);
+    if (payload.links.ltv_weekly && payload.links.ltv_weekly !== '#') {
+      const weeklyLink = document.createElement('a');
+      weeklyLink.id = 'link-ltv-weekly';
+      weeklyLink.href = abs(payload.links.ltv_weekly);
+      weeklyLink.textContent = 'LTV by week';
+      document.getElementById('link-accrual').before(weeklyLink);
+    }
+    document.getElementById('link-accrual').href = abs(payload.links.accrual);
+    document.getElementById('link-audit').href = abs(payload.links.audit);
+
+    document.getElementById('kpis').innerHTML = payload.kpis.map(item => `
+      <article class="kpi">
+        <div class="kpi-label">${item.label}</div>
+        <div class="kpi-value">${item.value}</div>
+        <div class="kpi-sub">${item.sub}</div>
+      </article>
+    `).join('');
+
+    document.getElementById('modules').innerHTML = payload.module_status.map(item => `
+      <article class="module">
+        <h3>${item.module}</h3>
+        <span class="status ${String(item.status).toLowerCase()}">${item.status}</span>
+        <p>${item.range}</p>
+        <p>${item.note}</p>
+        <a href="${item.href}">打开模块</a>
+      </article>
+    `).join('');
+    document.getElementById('audit-note').textContent = payload.meta.snapshot_note;
+
+    const months = payload.monthly_series.map(d => d.month);
+    echarts.init(document.getElementById('chart-monthly')).setOption({
+      tooltip: { trigger: 'axis', valueFormatter: fmt.money },
+      legend: { top: 0 },
+      grid: { top: 46, left: 70, right: 20, bottom: 40 },
+      xAxis: { type: 'category', data: months, axisLabel: { rotate: 35 } },
+      yAxis: [
+        { type: 'value', axisLabel: { formatter: v => `${Math.round(v/1e6)}M` } },
+        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } }
+      ],
+      series: [
+        { name: '首贷', type: 'bar', stack: 'amt', data: payload.monthly_series.map(d => d.first_contract_amt), itemStyle: { color: '#4f8f79' } },
+        { name: '复贷', type: 'bar', stack: 'amt', data: payload.monthly_series.map(d => d.reloan_contract_amt), itemStyle: { color: '#2457c5' } },
+        { name: 'Take Rate', type: 'line', yAxisIndex: 1, data: payload.monthly_series.map(d => d.take_rate), itemStyle: { color: '#b42318' } }
+      ]
+    });
+
+    echarts.init(document.getElementById('chart-daily')).setOption({
+      tooltip: { trigger: 'axis' },
+      grid: { top: 24, left: 56, right: 24, bottom: 40 },
+      xAxis: { type: 'category', data: payload.daily_series.map(d => d.day.slice(5)), axisLabel: { rotate: 35 } },
+      yAxis: { type: 'value' },
+      series: [
+        { name: '放款量', type: 'line', smooth: true, data: payload.daily_series.map(d => d.loan_cnt), itemStyle: { color: '#087443' }, areaStyle: { opacity: .12 } }
+      ]
+    });
+
+    echarts.init(document.getElementById('chart-ltv')).setOption({
+      tooltip: { trigger: 'axis' },
+      legend: { top: 0 },
+      grid: { top: 46, left: 55, right: 42, bottom: 40 },
+      xAxis: { type: 'category', data: payload.ltv_take_rate_rows.map(d => d.cohort_month) },
+      yAxis: [
+        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } },
+        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } }
+      ],
+      series: [
+        { name: '首贷净现金 Take Rate', type: 'line', data: payload.ltv_take_rate_rows.map(d => d.first_net_take_rate), itemStyle: { color: '#b42318' }, label: { show: false } },
+        { name: 'M1累计复购率', type: 'bar', yAxisIndex: 1, data: payload.ltv_take_rate_rows.map(d => d.cum_repurchase_user_rate), itemStyle: { color: '#4f8f79' } }
+      ]
+    });
+
+    echarts.init(document.getElementById('chart-whitelist')).setOption({
+      tooltip: { trigger: 'axis', valueFormatter: fmt.pct },
+      legend: { top: 0 },
+      grid: { top: 46, left: 52, right: 24, bottom: 40 },
+      xAxis: { type: 'category', data: payload.whitelist_summary.map(d => d.anchor_type) },
+      yAxis: { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } },
+      series: [
+        { name: '注册率', type: 'bar', data: payload.whitelist_summary.map(d => d.register_rate), itemStyle: { color: '#2457c5' } },
+        { name: '放款率', type: 'bar', data: payload.whitelist_summary.map(d => d.release_rate), itemStyle: { color: '#087443' } }
+      ]
+    });
+
+    const matureRows = payload.monthly_series
+      .filter(d => d.take_rate != null)
+      .slice(-8);
+    document.getElementById('take-table').innerHTML = matureRows.map(d => `
+      <tr>
+        <td>${d.month}</td>
+        <td>${fmt.money(d.overall_contract_amt)}</td>
+        <td>${fmt.money(d.matured_contract_amt)}</td>
+        <td class="${d.net_cash_revenue_amt >= 0 ? 'pos' : 'neg'}">${fmt.money(d.net_cash_revenue_amt)}</td>
+        <td class="${d.take_rate >= 0 ? 'pos' : 'neg'}">${fmt.pct(d.take_rate)}</td>
+      </tr>
+    `).join('');
+
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.chart').forEach(el => echarts.getInstanceByDom(el)?.resize());
+    });
+  </script>
+</body>
+</html>
