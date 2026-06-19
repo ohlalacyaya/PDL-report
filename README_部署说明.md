@@ -2,39 +2,17 @@
 
 这个目录是统一经营分析入口的静态站点发布包。
 
-## 上传内容
+- 最新观察截止日：`2026-06-18`
+- `index.html` 指向最新版本。
+- 历史快照保存在 `reports/2026-06-18/`。
+- `.nojekyll` 用于禁用 Jekyll 处理，按静态文件原样发布。
 
-把本目录下所有文件和子目录完整上传到 GitHub 仓库根目录，或上传到仓库的 `docs/` 目录。
+## 本次复制文件
 
-关键文件：
-
-- `index.html`：GitHub Pages 默认首页，内容等同于统一经营分析入口。
-- `统一经营分析入口_2026-06-18.html`：原始入口文件。
-- `可视化工作台原型.html`：工作台详情页。
-- `LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-18.html`：LTV by month 详情页。
-- `data/manual_exports/...`：白名单、权责详情页。
-- `.nojekyll`：禁用 Jekyll 处理，按静态文件原样发布。
-
-## GitHub Pages 设置
-
-在 GitHub 仓库中进入：
-
-`Settings -> Pages -> Build and deployment`
-
-如果文件放在仓库根目录：
-
-- Source: `Deploy from a branch`
-- Branch: `main`
-- Folder: `/ (root)`
-
-如果文件放在 `docs/`：
-
-- Source: `Deploy from a branch`
-- Branch: `main`
-- Folder: `/docs`
-
-保存后等待 GitHub Pages 构建完成，访问页面提示的 URL。
-
-## 注意
-
-GitHub Pages 页面通常是公网可访问的。这个报表包含经营数据，发布前请确认是否可以对外暴露。
+- `统一经营分析入口_2026-06-18.html`
+- `index.html`
+- `可视化工作台原型.html`
+- `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html`
+- `data/manual_exports/whitelist_cohort/2026-05-01_2026-06-18_obs_2026-06-18/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-05-01_2026-06-18_obs_2026-06-18.html`
+- `LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-18.html`
+- `业务Agent刷新审核记录_2026-06-18.md`

@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>月度权责经营表</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --panel: #ffffff;
+      --ink: #202124;
+      --muted: #66707a;
+      --line: #ded9ce;
+      --head: #edf6f3;
+      --band: #f3f1ea;
+      --subband: #faf8f2;
+      --warn-bg: #fff4dd;
+      --warn: #9a5b00;
+      --neg: #b42318;
+      --pos: #087443;
+      --shadow: 0 10px 24px rgba(30, 35, 42, 0.08);
+      --type-col: 92px;
+      --group-col: 116px;
+      --metric-col: 178px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    .shell {
+      width: min(1460px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 24px 0 38px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      padding: 8px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 720;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 360px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: #3f454c;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) 1fr;
+      gap: 12px;
+      align-items: end;
+      margin: 18px 0 14px;
+      padding: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    select {
+      width: 100%;
+      height: 38px;
+      border: 1px solid #cfcac0;
+      border-radius: 6px;
+      padding: 0 10px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 14px;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      justify-self: end;
+      text-align: right;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      min-height: 78px;
+    }
+    .kpi-title {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 21px;
+      font-weight: 720;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .chart-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 14px 14px 10px;
+      min-width: 0;
+    }
+    .chart-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .chart-title h2 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+    .chart-title span {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .chart {
+      width: 100%;
+      height: 320px;
+    }
+    .chart-empty {
+      display: none;
+      height: 320px;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      background: #fbfaf7;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 72vh;
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      min-width: max-content;
+      border-collapse: collapse;
+    }
+    th, td {
+      border-bottom: 1px solid #ece8df;
+      border-right: 1px solid #f1eee7;
+      padding: 9px 11px;
+      text-align: right;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th:last-child, td:last-child { border-right: 0; }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      background: var(--head);
+      color: #244a47;
+      font-weight: 720;
+    }
+    th.month-head {
+      min-width: 116px;
+    }
+    .left-head {
+      z-index: 6;
+      text-align: left;
+    }
+    th.type-head, td.type-cell {
+      left: 0;
+      width: var(--type-col);
+      min-width: var(--type-col);
+      max-width: var(--type-col);
+    }
+    th.group-head, td.group-cell {
+      left: var(--type-col);
+      width: var(--group-col);
+      min-width: var(--group-col);
+      max-width: var(--group-col);
+    }
+    th.metric-head, td.metric-name {
+      left: calc(var(--type-col) + var(--group-col));
+      width: var(--metric-col);
+      min-width: var(--metric-col);
+      max-width: var(--metric-col);
+    }
+    td.type-cell, td.group-cell, td.metric-name {
+      position: sticky;
+      z-index: 2;
+      text-align: left;
+      background: #fff;
+      color: #30343a;
+    }
+    td.type-cell {
+      background: #f3f1ea;
+      color: #5c5143;
+      font-weight: 760;
+      vertical-align: top;
+      border-right: 1px solid #e5dfd2;
+    }
+    td.group-cell {
+      background: #faf8f2;
+      color: #766b5a;
+      font-weight: 720;
+      vertical-align: top;
+    }
+    td.metric-name {
+      text-align: left;
+      background: #fff;
+      font-weight: 640;
+    }
+    td.value-cell {
+      min-width: 116px;
+    }
+    tbody tr:hover td {
+      background: #f8fbfa;
+    }
+    tbody tr:hover td.type-cell {
+      background: #eeebe3;
+    }
+    tbody tr:hover td.group-cell {
+      background: #f5f2eb;
+    }
+    tbody tr:hover td.metric-name {
+      background: #f8fbfa;
+    }
+    .negative { color: var(--neg); font-weight: 680; }
+    .positive { color: var(--pos); font-weight: 680; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 680;
+    }
+    .status.done { color: var(--pos); background: #e9f7ef; }
+    .status.pending { color: var(--warn); background: var(--warn-bg); }
+    .notes {
+      margin-top: 16px;
+      padding: 16px 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .notes h2 {
+      margin: 0 0 12px;
+      font-size: 17px;
+    }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 8px 24px;
+    }
+    .note {
+      margin: 0;
+      color: #3f454c;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    code {
+      background: #f3f1ea;
+      border: 1px solid #e4ded2;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+    @media (max-width: 900px) {
+      .shell { width: min(100vw - 24px, 1460px); padding-top: 14px; }
+      header { display: block; }
+      .meta { justify-content: flex-start; min-width: 0; margin-top: 10px; }
+      .filters { grid-template-columns: 1fr; }
+      .hint { justify-self: start; text-align: left; }
+      .summary { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .chart-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 23px; }
+      .notes-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <h1>月度权责经营表</h1>
+        <div class="subtitle">横向为放款月份，纵向列出整体、首贷、复贷及派生经营指标；坏账和利润类指标只在订单成熟后进入统计。</div>
+      </div>
+      <div class="meta">
+        <span class="pill">放款区间：2026-01-01 至 2026-06-18</span>
+        <span class="pill">观察日：2026-06-18</span>
+        <span class="pill">1 USD = 1476.8 NGN</span>
+        <span class="pill">1 RMB = 208 NGN</span>
+      </div>
+    </header>
+
+    <section class="filters" aria-label="筛选项">
+      <label>币种
+        <select id="currency">
+          <option value="NGN">NGN</option>
+          <option value="USD">USD</option>
+          <option value="RMB">RMB</option>
+        </select>
+      </label>
+      <div class="hint">首贷、复贷、整体均已展开为指标行。金额按所选币种换算，比例类指标不受币种影响。</div>
+    </section>
+
+    <section class="summary" aria-label="汇总指标">
+      <div class="kpi"><div class="kpi-title">整体累计订单</div><div class="kpi-value" id="sumOrders">--</div></div>
+      <div class="kpi"><div class="kpi-title">整体累计合同金额</div><div class="kpi-value" id="sumContract">--</div></div>
+      <div class="kpi"><div class="kpi-title">整体累计应收息费</div><div class="kpi-value" id="sumReceivable">--</div></div>
+      <div class="kpi"><div class="kpi-title">整体累计实收息费</div><div class="kpi-value" id="sumActualReceived">--</div></div>
+      <div class="kpi"><div class="kpi-title">整体成熟订单数</div><div class="kpi-value" id="sumMaturedOrders">--</div></div>
+    </section>
+
+    <section class="chart-grid" aria-label="趋势图">
+      <div class="chart-panel">
+        <div class="chart-title"><h2>整体经营概览</h2><span>合同金额 / 实收息费 / Take Rate</span></div>
+        <div class="chart" id="chartOverview"></div>
+        <div class="chart-empty" id="chartOverviewEmpty">图表库未加载，可继续查看下方表格。</div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-title"><h2>首复贷 Take Rate</h2><span>首贷 / 复贷 / 整体</span></div>
+        <div class="chart" id="chartTakeRate"></div>
+        <div class="chart-empty" id="chartTakeRateEmpty">图表库未加载，可继续查看下方表格。</div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-title"><h2>合同金额结构</h2><span>首贷 vs 复贷</span></div>
+        <div class="chart" id="chartStructure"></div>
+        <div class="chart-empty" id="chartStructureEmpty">图表库未加载，可继续查看下方表格。</div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-title"><h2>成熟资产表现</h2><span>成熟合同金额 / 息费-坏账</span></div>
+        <div class="chart" id="chartMatured"></div>
+        <div class="chart-empty" id="chartMaturedEmpty">图表库未加载，可继续查看下方表格。</div>
+      </div>
+    </section>
+
+    <section class="table-wrap" aria-label="月度权责经营矩阵表">
+      <table>
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </section>
+
+    <section class="notes">
+      <h2>指标口径说明</h2>
+      <div class="notes-grid">
+        <p class="note">放款月份：按 <code>fin_application.pay_time</code> 所在月份归属；成功放款取 <code>fin_application.status = 31</code>。</p>
+        <p class="note">首复贷：<code>user_order.secondary_loan = 0</code> 为首贷，其他含加贷并入复贷；整体为首贷和复贷合计。</p>
+        <p class="note">合同金额：业绩口径，取 <code>fin_application.principal</code>；底层金额为 NGN，页面按固定汇率换算展示。</p>
+        <p class="note">实际放款金额：优先取 <code>payment_record.amount</code>，缺失时使用 <code>合同金额 - due_fee1</code> 兜底。</p>
+        <p class="note">应收息费：<code>repayment_schedule.due_fee1 + due_interest</code>，不计罚息、减免、展期。</p>
+        <p class="note">实收息费：<code>paid_fee1 + paid_interest + paid_penalty</code>，罚息按实际收回计入。</p>
+        <p class="note">成熟判断：订单最后一期 <code>due_date + 15 天宽限期 <= 观察日</code> 后，进入坏账及利润计算。</p>
+        <p class="note">息费-坏账：<code>实收服务费 + 实还本金 + 实收利息 + 实收罚息 - 合同金额</code>，允许为负数。</p>
+        <p class="note">Take Rate：计算公式为 <code>息费-坏账 / 成熟合同金额</code>，仅统计已成熟订单。</p>
+        <p class="note">派生指标：当前仅保留应收费率，计算公式为 <code>应收息费 / 合同金额</code>。</p>
+        <p class="note">成本：当前仅在整体口径展示月度成本，不拆分到首贷/复贷；变动成本暂按 15,000,000 NGN/月，短信成本 7,000,000 NGN/月，服务器成本 2,000,000 NGN/月。</p>
+        <p class="note">经营利润额：<code>整体 Take Rate * 整体合同金额 - 变动成本 - 短信成本 - 服务器成本</code>；经营利润率：<code>经营利润额 / 整体合同金额</code>。</p>
+        <p class="note">成本备注：当前成本拆分仍待细化，催收/电销拆分明细待补齐电销人数和绩效口径后再更新。</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const rawRows = [{"pay_month":"2026-01","loan_type":"first_loan","release_order_cnt":8811.0,"contract_amt":57541500.0,"actual_disbursement_amt":37401975.0,"actual_disbursement_fallback_order_cnt":2.0,"avg_contract_amt":6530.64,"receivable_interest_fee_amt":20139525.0,"actual_received_interest_fee_amt":21209834.0,"matured_order_cnt":8811.0,"unmatured_order_cnt":0.0,"matured_contract_amt":57541500.0,"unmatured_contract_amt":0.0,"bad_debt_amt":-3795062.0,"bad_debt_rate_matured_contract":-0.065953,"receivable_income_minus_bad_debt_amt":23934587.0,"receivable_income_minus_bad_debt_rate":0.415953,"actual_income_minus_bad_debt_amt":25004896.0,"actual_income_minus_bad_debt_rate":0.434554,"is_month_fully_matured":1.0,"min_pay_time":"2026-01-01 08:14:46","max_pay_time":"2026-01-31 22:15:35","max_mature_date":"2026-02-22"},{"pay_month":"2026-01","loan_type":"reloan","release_order_cnt":7104.0,"contract_amt":156726098.0,"actual_disbursement_amt":101871964.0,"actual_disbursement_fallback_order_cnt":0.0,"avg_contract_amt":22061.67,"receivable_interest_fee_amt":54854134.0,"actual_received_interest_fee_amt":58223928.0,"matured_order_cnt":7104.0,"unmatured_order_cnt":0.0,"matured_contract_amt":156726098.0,"unmatured_contract_amt":0.0,"bad_debt_amt":10236821.0,"bad_debt_rate_matured_contract":0.065317,"receivable_income_minus_bad_debt_amt":44617313.0,"receivable_income_minus_bad_debt_rate":0.284683,"actual_income_minus_bad_debt_amt":47987107.0,"actual_income_minus_bad_debt_rate":0.306185,"is_month_fully_matured":1.0,"min_pay_time":"2026-01-01 00:22:18","max_pay_time":"2026-01-31 23:57:15","max_mature_date":"2026-02-22"},{"pay_month":"2026-01","loan_type":"overall","release_order_cnt":15915.0,"contract_amt":214267598.0,"actual_disbursement_amt":139273939.0,"actual_disbursement_fallback_order_cnt":2.0,"avg_contract_amt":13463.25,"receivable_interest_fee_amt":74993659.0,"actual_received_interest_fee_amt":79433762.0,"matured_order_cnt":15915.0,"unmatured_order_cnt":0.0,"matured_contract_amt":214267598.0,"unmatured_contract_amt":0.0,"bad_debt_amt":6441759.0,"bad_debt_rate_matured_contract":0.030064,"receivable_income_minus_bad_debt_amt":68551900.0,"receivable_income_minus_bad_debt_rate":0.319936,"actual_income_minus_bad_debt_amt":72992003.0,"actual_income_minus_bad_debt_rate":0.340658,"is_month_fully_matured":1.0,"min_pay_time":"2026-01-01 00:22:18","max_pay_time":"2026-01-31 23:57:15","max_mature_date":"2026-02-22"},{"pay_month":"2026-02","loan_type":"first_loan","release_order_cnt":7148.0,"contract_amt":48520500.0,"actual_disbursement_amt":31538325.0,"actual_disbursement_fallback_order_cnt":3.0,"avg_contract_amt":6787.98,"receivable_interest_fee_amt":16982175.0,"actual_received_interest_fee_amt":17672150.0,"matured_order_cnt":7148.0,"unmatured_order_cnt":0.0,"matured_contract_amt":48520500.0,"unmatured_contract_amt":0.0,"bad_debt_amt":-1488363.0,"bad_debt_rate_matured_contract":-0.030675,"receivable_income_minus_bad_debt_amt":18470538.0,"receivable_income_minus_bad_debt_rate":0.380675,"actual_income_minus_bad_debt_amt":19160513.0,"actual_income_minus_bad_debt_rate":0.394895,"is_month_fully_matured":1.0,"min_pay_time":"2026-02-01 17:03:43","max_pay_time":"2026-02-28 22:12:13","max_mature_date":"2026-03-22"},{"pay_month":"2026-02","loan_type":"reloan","release_order_cnt":7683.0,"contract_amt":178187300.0,"actual_disbursement_amt":115821745.0,"actual_disbursement_fallback_order_cnt":4.0,"avg_contract_amt":23192.41,"receivable_interest_fee_amt":62365555.0,"actual_received_interest_fee_amt":65448849.0,"matured_order_cnt":7683.0,"unmatured_order_cnt":0.0,"matured_contract_amt":178187300.0,"unmatured_contract_amt":0.0,"bad_debt_amt":11404505.99,"bad_debt_rate_matured_contract":0.064003,"receivable_income_minus_bad_debt_amt":50961049.01,"receivable_income_minus_bad_debt_rate":0.285997,"actual_income_minus_bad_debt_amt":54044343.01,"actual_income_minus_bad_debt_rate":0.303301,"is_month_fully_matured":1.0,"min_pay_time":"2026-02-01 00:10:34","max_pay_time":"2026-02-28 23:49:30","max_mature_date":"2026-03-22"},{"pay_month":"2026-02","loan_type":"overall","release_order_cnt":14831.0,"contract_amt":226707800.0,"actual_disbursement_amt":147360070.0,"actual_disbursement_fallback_order_cnt":7.0,"avg_contract_amt":15286.08,"receivable_interest_fee_amt":79347730.0,"actual_received_interest_fee_amt":83120999.0,"matured_order_cnt":14831.0,"unmatured_order_cnt":0.0,"matured_contract_amt":226707800.0,"unmatured_contract_amt":0.0,"bad_debt_amt":9916142.99,"bad_debt_rate_matured_contract":0.04374,"receivable_income_minus_bad_debt_amt":69431587.01,"receivable_income_minus_bad_debt_rate":0.30626,"actual_income_minus_bad_debt_amt":73204856.01,"actual_income_minus_bad_debt_rate":0.322904,"is_month_fully_matured":1.0,"min_pay_time":"2026-02-01 00:10:34","max_pay_time":"2026-02-28 23:49:30","max_mature_date":"2026-03-22"},{"pay_month":"2026-03","loan_type":"first_loan","release_order_cnt":10209.0,"contract_amt":87990400.0,"actual_disbursement_amt":57193760.0,"actual_disbursement_fallback_order_cnt":9.0,"avg_contract_amt":8618.9,"receivable_interest_fee_amt":30796640.0,"actual_received_interest_fee_amt":32110252.0,"matured_order_cnt":10209.0,"unmatured_order_cnt":0.0,"matured_contract_amt":87990400.0,"unmatured_contract_amt":0.0,"bad_debt_amt":-5551470.15,"bad_debt_rate_matured_contract":-0.063092,"receivable_income_minus_bad_debt_amt":36348110.15,"receivable_income_minus_bad_debt_rate":0.413092,"actual_income_minus_bad_debt_amt":37661722.15,"actual_income_minus_bad_debt_rate":0.428021,"is_month_fully_matured":1.0,"min_pay_time":"2026-03-01 02:24:38","max_pay_time":"2026-03-31 23:52:34","max_mature_date":"2026-04-22"},{"pay_month":"2026-03","loan_type":"reloan","release_order_cnt":10212.0,"contract_amt":225740758.0,"actual_disbursement_amt":146731497.0,"actual_disbursement_fallback_order_cnt":7.0,"avg_contract_amt":22105.44,"receivable_interest_fee_amt":79009261.0,"actual_received_interest_fee_amt":82785416.0,"matured_order_cnt":10212.0,"unmatured_order_cnt":0.0,"matured_contract_amt":225740758.0,"unmatured_contract_amt":0.0,"bad_debt_amt":4274393.82,"bad_debt_rate_matured_contract":0.018935,"receivable_income_minus_bad_debt_amt":74734867.18,"receivable_income_minus_bad_debt_rate":0.331065,"actual_income_minus_bad_debt_amt":78511022.18,"actual_income_minus_bad_debt_rate":0.347793,"is_month_fully_matured":1.0,"min_pay_time":"2026-03-01 00:07:42","max_pay_time":"2026-03-31 23:59:20","max_mature_date":"2026-04-22"},{"pay_month":"2026-03","loan_type":"overall","release_order_cnt":20421.0,"contract_amt":313731158.0,"actual_disbursement_amt":203925257.0,"actual_disbursement_fallback_order_cnt":16.0,"avg_contract_amt":15363.16,"receivable_interest_fee_amt":109805901.0,"actual_received_interest_fee_amt":114895668.0,"matured_order_cnt":20421.0,"unmatured_order_cnt":0.0,"matured_contract_amt":313731158.0,"unmatured_contract_amt":0.0,"bad_debt_amt":-1277076.33,"bad_debt_rate_matured_contract":-0.004071,"receivable_income_minus_bad_debt_amt":111082977.33,"receivable_income_minus_bad_debt_rate":0.354071,"actual_income_minus_bad_debt_amt":116172744.33,"actual_income_minus_bad_debt_rate":0.370294,"is_month_fully_matured":1.0,"min_pay_time":"2026-03-01 00:07:42","max_pay_time":"2026-03-31 23:59:20","max_mature_date":"2026-04-22"},{"pay_month":"2026-04","loan_type":"first_loan","release_order_cnt":10377.0,"contract_amt":93850500.0,"actual_disbursement_amt":61002825.0,"actual_disbursement_fallback_order_cnt":0.0,"avg_contract_amt":9044.09,"receivable_interest_fee_amt":32847675.0,"actual_received_interest_fee_amt":34325714.0,"matured_order_cnt":10377.0,"unmatured_order_cnt":0.0,"matured_contract_amt":93850500.0,"unmatured_contract_amt":0.0,"bad_debt_amt":-3577149.0,"bad_debt_rate_matured_contract":-0.038115,"receivable_income_minus_bad_debt_amt":36424824.0,"receivable_income_minus_bad_debt_rate":0.388115,"actual_income_minus_bad_debt_amt":37902863.0,"actual_income_minus_bad_debt_rate":0.403864,"is_month_fully_matured":1.0,"min_pay_time":"2026-04-01 06:58:04","max_pay_time":"2026-04-30 23:31:08","max_mature_date":"2026-05-22"},{"pay_month":"2026-04","loan_type":"reloan","release_order_cnt":11566.0,"contract_amt":245090050.0,"actual_disbursement_amt":159308587.0,"actual_disbursement_fallback_order_cnt":1.0,"avg_contract_amt":21190.56,"receivable_interest_fee_amt":85781463.0,"actual_received_interest_fee_amt":90177903.22,"matured_order_cnt":11566.0,"unmatured_order_cnt":0.0,"matured_contract_amt":245090050.0,"unmatured_contract_amt":0.0,"bad_debt_amt":12081881.12,"bad_debt_rate_matured_contract":0.049296,"receivable_income_minus_bad_debt_amt":73699581.88,"receivable_income_minus_bad_debt_rate":0.300704,"actual_income_minus_bad_debt_amt":78096022.1,"actual_income_minus_bad_debt_rate":0.318642,"is_month_fully_matured":1.0,"min_pay_time":"2026-04-01 00:29:04","max_pay_time":"2026-04-30 23:52:15","max_mature_date":"2026-05-22"},{"pay_month":"2026-04","loan_type":"overall","release_order_cnt":21943.0,"contract_amt":338940550.0,"actual_disbursement_amt":220311412.0,"actual_disbursement_fallback_order_cnt":1.0,"avg_contract_amt":15446.41,"receivable_interest_fee_amt":118629138.0,"actual_received_interest_fee_amt":124503617.22,"matured_order_cnt":21943.0,"unmatured_order_cnt":0.0,"matured_contract_amt":338940550.0,"unmatured_contract_amt":0.0,"bad_debt_amt":8504732.12,"bad_debt_rate_matured_contract":0.025092,"receivable_income_minus_bad_debt_amt":110124405.88,"receivable_income_minus_bad_debt_rate":0.324908,"actual_income_minus_bad_debt_amt":115998885.1,"actual_income_minus_bad_debt_rate":0.34224,"is_month_fully_matured":1.0,"min_pay_time":"2026-04-01 00:29:04","max_pay_time":"2026-04-30 23:52:15","max_mature_date":"2026-05-22"},{"pay_month":"2026-05","loan_type":"first_loan","release_order_cnt":10296.0,"contract_amt":89184500.0,"actual_disbursement_amt":57969925.0,"actual_disbursement_fallback_order_cnt":1.0,"avg_contract_amt":8662.05,"receivable_interest_fee_amt":31214575.0,"actual_received_interest_fee_amt":32301653.0,"matured_order_cnt":9318.0,"unmatured_order_cnt":978.0,"matured_contract_amt":80392000.0,"unmatured_contract_amt":8792500.0,"bad_debt_amt":-6226776.0,"bad_debt_rate_matured_contract":-0.077455,"receivable_income_minus_bad_debt_amt":34363976.0,"receivable_income_minus_bad_debt_rate":0.427455,"actual_income_minus_bad_debt_amt":35375515.0,"actual_income_minus_bad_debt_rate":0.440038,"is_month_fully_matured":0.0,"min_pay_time":"2026-05-01 00:36:37","max_pay_time":"2026-05-31 23:30:46","max_mature_date":"2026-06-22"},{"pay_month":"2026-05","loan_type":"reloan","release_order_cnt":11223.0,"contract_amt":287528750.0,"actual_disbursement_amt":186893813.0,"actual_disbursement_fallback_order_cnt":1.0,"avg_contract_amt":25619.6,"receivable_interest_fee_amt":100634937.0,"actual_received_interest_fee_amt":104242168.0,"matured_order_cnt":9986.0,"unmatured_order_cnt":1237.0,"matured_contract_amt":247181250.0,"unmatured_contract_amt":40347500.0,"bad_debt_amt":16648762.25,"bad_debt_rate_matured_contract":0.067354,"receivable_income_minus_bad_debt_amt":69864564.75,"receivable_income_minus_bad_debt_rate":0.282645,"actual_income_minus_bad_debt_amt":73008469.75,"actual_income_minus_bad_debt_rate":0.295364,"is_month_fully_matured":0.0,"min_pay_time":"2026-05-01 00:01:24","max_pay_time":"2026-05-31 23:38:25","max_mature_date":"2026-06-22"},{"pay_month":"2026-05","loan_type":"overall","release_order_cnt":21519.0,"contract_amt":376713250.0,"actual_disbursement_amt":244863738.0,"actual_disbursement_fallback_order_cnt":2.0,"avg_contract_amt":17506.08,"receivable_interest_fee_amt":131849512.0,"actual_received_interest_fee_amt":136543821.0,"matured_order_cnt":19304.0,"unmatured_order_cnt":2215.0,"matured_contract_amt":327573250.0,"unmatured_contract_amt":49140000.0,"bad_debt_amt":10421986.25,"bad_debt_rate_matured_contract":0.031816,"receivable_income_minus_bad_debt_amt":104228540.75,"receivable_income_minus_bad_debt_rate":0.318184,"actual_income_minus_bad_debt_amt":108383984.75,"actual_income_minus_bad_debt_rate":0.330869,"is_month_fully_matured":0.0,"min_pay_time":"2026-05-01 00:01:24","max_pay_time":"2026-05-31 23:38:25","max_mature_date":"2026-06-22"},{"pay_month":"2026-06","loan_type":"first_loan","release_order_cnt":6006.0,"contract_amt":48013500.0,"actual_disbursement_amt":31208775.0,"actual_disbursement_fallback_order_cnt":0.0,"avg_contract_amt":7994.26,"receivable_interest_fee_amt":16804725.0,"actual_received_interest_fee_amt":16923531.0,"matured_order_cnt":0.0,"unmatured_order_cnt":6006.0,"matured_contract_amt":0.0,"unmatured_contract_amt":48013500.0,"bad_debt_amt":null,"bad_debt_rate_matured_contract":null,"receivable_income_minus_bad_debt_amt":null,"receivable_income_minus_bad_debt_rate":null,"actual_income_minus_bad_debt_amt":null,"actual_income_minus_bad_debt_rate":null,"is_month_fully_matured":0.0,"min_pay_time":"2026-06-01 00:17:15","max_pay_time":"2026-06-18 23:51:43","max_mature_date":"2026-07-10"},{"pay_month":"2026-06","loan_type":"reloan","release_order_cnt":6034.0,"contract_amt":211085500.0,"actual_disbursement_amt":137205599.0,"actual_disbursement_fallback_order_cnt":2.0,"avg_contract_amt":34982.68,"receivable_interest_fee_amt":73879901.0,"actual_received_interest_fee_amt":74426281.0,"matured_order_cnt":0.0,"unmatured_order_cnt":6034.0,"matured_contract_amt":0.0,"unmatured_contract_amt":211085500.0,"bad_debt_amt":null,"bad_debt_rate_matured_contract":null,"receivable_income_minus_bad_debt_amt":null,"receivable_income_minus_bad_debt_rate":null,"actual_income_minus_bad_debt_amt":null,"actual_income_minus_bad_debt_rate":null,"is_month_fully_matured":0.0,"min_pay_time":"2026-06-01 00:00:40","max_pay_time":"2026-06-18 23:31:27","max_mature_date":"2026-07-10"},{"pay_month":"2026-06","loan_type":"overall","release_order_cnt":12040.0,"contract_amt":259099000.0,"actual_disbursement_amt":168414374.0,"actual_disbursement_fallback_order_cnt":2.0,"avg_contract_amt":21519.85,"receivable_interest_fee_amt":90684626.0,"actual_received_interest_fee_amt":91349812.0,"matured_order_cnt":0.0,"unmatured_order_cnt":12040.0,"matured_contract_amt":0.0,"unmatured_contract_amt":259099000.0,"bad_debt_amt":null,"bad_debt_rate_matured_contract":null,"receivable_income_minus_bad_debt_amt":null,"receivable_income_minus_bad_debt_rate":null,"actual_income_minus_bad_debt_amt":null,"actual_income_minus_bad_debt_rate":null,"is_month_fully_matured":0.0,"min_pay_time":"2026-06-01 00:00:40","max_pay_time":"2026-06-18 23:51:43","max_mature_date":"2026-07-10"}];
+    const rates = { NGN: 1, USD: 1476.8, RMB: 208 };
+    const currencySymbol = { NGN: "NGN", USD: "USD", RMB: "RMB" };
+    const controls = { currency: document.getElementById("currency") };
+    const typeLabels = { overall: "整体", first_loan: "首贷", reloan: "复贷" };
+    const typeOrder = ["first_loan", "reloan", "overall"];
+    const monthlyCosts = {
+      variable_cost_amt: 15000000,
+      sms_cost_amt: 7000000,
+      server_cost_amt: 2000000
+    };
+
+    const metricGroups = [
+      { group: "规模", metrics: [
+        { label: "放款订单数", field: "release_order_cnt", type: "int" },
+        { label: "合同金额", field: "contract_amt", type: "money" },
+        { label: "实际放款金额", field: "actual_disbursement_amt", type: "money" },
+        { label: "实际放款兜底订单数", field: "actual_disbursement_fallback_order_cnt", type: "int" },
+        { label: "件均合同金额", field: "avg_contract_amt", type: "money" }
+      ]},
+      { group: "收入", metrics: [
+        { label: "应收息费", field: "receivable_interest_fee_amt", type: "money" },
+        { label: "实收息费", field: "actual_received_interest_fee_amt", type: "money" }
+      ]},
+      { group: "成熟与坏账", metrics: [
+        { label: "成熟状态", field: "is_month_fully_matured", type: "status" },
+        { label: "成熟订单数", field: "matured_order_cnt", type: "int" },
+        { label: "未成熟订单数", field: "unmatured_order_cnt", type: "int" },
+        { label: "成熟合同金额", field: "matured_contract_amt", type: "money" },
+        { label: "息费-坏账", field: "bad_debt_amt", type: "moneySigned" },
+        { label: "Take Rate", field: "bad_debt_rate_matured_contract", type: "rateSigned" }
+      ]},
+      { group: "派生指标", metrics: [
+        { label: "应收费率", calc: "receivable_fee_rate", type: "rate" },
+      ]},
+      { group: "成本", metrics: [
+        { label: "变动成本", calc: "variable_cost_amt", type: "money", onlyTypes: ["overall"] },
+        { label: "短信成本", calc: "sms_cost_amt", type: "money", onlyTypes: ["overall"] },
+        { label: "服务器成本", calc: "server_cost_amt", type: "money", onlyTypes: ["overall"] },
+      ]},
+      { group: "经营利润", metrics: [
+        { label: "经营利润额", calc: "operating_profit_amt", type: "moneySigned", onlyTypes: ["overall"] },
+        { label: "经营利润率", calc: "operating_profit_rate", type: "rateSigned", onlyTypes: ["overall"] },
+      ]}
+    ];
+
+    function months() {
+      return [...new Set(rawRows.map(row => row.pay_month))].sort();
+    }
+
+    function rowMap() {
+      const map = new Map();
+      rawRows.forEach(row => map.set(`${row.pay_month}|${row.loan_type}`, row));
+      return map;
+    }
+
+    function rowFor(map, month, type) {
+      return map.get(`${month}|${type}`);
+    }
+
+    function safeDiv(num, den) {
+      if (num === null || num === undefined || den === null || den === undefined || Number(den) === 0) return null;
+      return Number(num) / Number(den);
+    }
+
+    function metricValue(row, metric, month, type, map) {
+      if (!row) return null;
+      if (!metric.calc) return row[metric.field];
+      const overall = rowFor(map, month, "overall");
+      const costTotal = monthlyCosts.variable_cost_amt + monthlyCosts.sms_cost_amt + monthlyCosts.server_cost_amt;
+      const operatingProfitAmt = overall?.bad_debt_rate_matured_contract === null || overall?.bad_debt_rate_matured_contract === undefined
+        ? null
+        : Number(overall.bad_debt_rate_matured_contract) * Number(overall.contract_amt || 0) - costTotal;
+      switch (metric.calc) {
+        case "variable_cost_amt": return monthlyCosts.variable_cost_amt;
+        case "sms_cost_amt": return monthlyCosts.sms_cost_amt;
+        case "server_cost_amt": return monthlyCosts.server_cost_amt;
+        case "operating_profit_amt": return operatingProfitAmt;
+        case "operating_profit_rate": return safeDiv(operatingProfitAmt, overall?.contract_amt);
+        case "order_share": return safeDiv(row.release_order_cnt, overall?.release_order_cnt);
+        case "contract_share": return safeDiv(row.contract_amt, overall?.contract_amt);
+        case "disbursement_contract_rate": return safeDiv(row.actual_disbursement_amt, row.contract_amt);
+        case "receivable_fee_rate": return safeDiv(row.receivable_interest_fee_amt, row.contract_amt);
+        case "actual_fee_rate": return safeDiv(row.actual_received_interest_fee_amt, row.contract_amt);
+        case "actual_minus_receivable_fee":
+          if (row.actual_received_interest_fee_amt === null || row.receivable_interest_fee_amt === null) return null;
+          return Number(row.actual_received_interest_fee_amt) - Number(row.receivable_interest_fee_amt);
+        case "actual_receivable_rate": return safeDiv(row.actual_received_interest_fee_amt, row.receivable_interest_fee_amt);
+        case "matured_order_rate": return safeDiv(row.matured_order_cnt, row.release_order_cnt);
+        case "matured_contract_rate": return safeDiv(row.matured_contract_amt, row.contract_amt);
+        case "bad_debt_actual_disbursement_rate": return safeDiv(row.bad_debt_amt, row.actual_disbursement_amt);
+        default: return null;
+      }
+    }
+
+    function convert(value) {
+      if (value === null || value === undefined || value === "") return null;
+      return Number(value) / rates[controls.currency.value];
+    }
+
+    function fmtInt(value) {
+      if (value === null || value === undefined || value === "") return "--";
+      return Math.round(Number(value)).toLocaleString("en-US");
+    }
+
+    function fmtMoney(value, compact = false) {
+      const num = convert(value);
+      if (num === null || Number.isNaN(num)) return "--";
+      const display = Math.round(num).toLocaleString("en-US", { maximumFractionDigits: 0 });
+      return `${currencySymbol[controls.currency.value]} ${display}`;
+    }
+
+    function fmtRate(value) {
+      if (value === null || value === undefined || value === "") return "--";
+      return (Number(value) * 100).toFixed(2) + "%";
+    }
+
+    function signedClass(value) {
+      if (value === null || value === undefined || value === "") return "";
+      const num = Number(value);
+      if (num < 0) return "negative";
+      if (num > 0) return "positive";
+      return "";
+    }
+
+    function formatValue(row, metric, value) {
+      if (metric.type === "int") return fmtInt(value);
+      if (metric.type === "money") return fmtMoney(value);
+      if (metric.type === "moneySigned") return fmtMoney(value);
+      if (metric.type === "rate" || metric.type === "rateSigned") return fmtRate(value);
+      if (metric.type === "status") {
+        if (!row) return "--";
+        if (row.is_month_fully_matured === 1) return '<span class="status done">已成熟</span>';
+        return '<span class="status pending">未完全成熟</span>';
+      }
+      return value ?? "--";
+    }
+
+    function renderSummary(map, monthList) {
+      const rows = monthList.map(month => rowFor(map, month, "overall")).filter(Boolean);
+      const sum = (items, field) => items.reduce((acc, row) => acc + Number(row[field] || 0), 0);
+      const orders = sum(rows, "release_order_cnt");
+      const contract = sum(rows, "contract_amt");
+      const receivable = sum(rows, "receivable_interest_fee_amt");
+      const actualReceived = sum(rows, "actual_received_interest_fee_amt");
+      const matured = sum(rows, "matured_order_cnt");
+      document.getElementById("sumOrders").textContent = fmtInt(orders);
+      document.getElementById("sumContract").textContent = fmtMoney(contract, true);
+      document.getElementById("sumReceivable").textContent = fmtMoney(receivable, true);
+      document.getElementById("sumActualReceived").textContent = fmtMoney(actualReceived, true);
+      document.getElementById("sumMaturedOrders").textContent = fmtInt(matured);
+    }
+
+    let chartInstances = [];
+
+    function showChartFallback() {
+      document.querySelectorAll(".chart").forEach(el => el.style.display = "none");
+      document.querySelectorAll(".chart-empty").forEach(el => el.style.display = "flex");
+    }
+
+    function clearCharts() {
+      chartInstances.forEach(chart => chart.dispose());
+      chartInstances = [];
+      document.querySelectorAll(".chart").forEach(el => el.style.display = "block");
+      document.querySelectorAll(".chart-empty").forEach(el => el.style.display = "none");
+    }
+
+    function moneyNumber(value) {
+      if (value === null || value === undefined || value === "") return null;
+      return Number(value) / rates[controls.currency.value];
+    }
+
+    function moneyAxis(value) {
+      const abs = Math.abs(Number(value));
+      if (abs >= 1000000000) return (Number(value) / 1000000000).toFixed(1) + "B";
+      if (abs >= 1000000) return (Number(value) / 1000000).toFixed(1) + "M";
+      if (abs >= 1000) return (Number(value) / 1000).toFixed(0) + "K";
+      return Math.round(Number(value)).toLocaleString("en-US");
+    }
+
+    function tooltipMoney(value) {
+      if (value === null || value === undefined || Number.isNaN(Number(value))) return "--";
+      return `${currencySymbol[controls.currency.value]} ${Math.round(Number(value)).toLocaleString("en-US")}`;
+    }
+
+    function tooltipRate(value) {
+      if (value === null || value === undefined || Number.isNaN(Number(value))) return "--";
+      return Number(value).toFixed(2) + "%";
+    }
+
+    function moneyData(map, monthList, type, field) {
+      return monthList.map(month => moneyNumber(rowFor(map, month, type)?.[field]));
+    }
+
+    function rateData(map, monthList, type, field) {
+      return monthList.map(month => {
+        const value = rowFor(map, month, type)?.[field];
+        return value === null || value === undefined || value === "" ? null : Number(value) * 100;
+      });
+    }
+
+    function intData(map, monthList, type, field) {
+      return monthList.map(month => {
+        const value = rowFor(map, month, type)?.[field];
+        return value === null || value === undefined || value === "" ? null : Number(value);
+      });
+    }
+
+    function baseChartOption() {
+      return {
+        color: ["#2563eb", "#059669", "#d97706", "#7c3aed", "#dc2626"],
+        textStyle: { fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" },
+        grid: { left: 58, right: 54, top: 54, bottom: 42 },
+        legend: { top: 4, itemWidth: 10, itemHeight: 10, textStyle: { color: "#4b5563" } },
+        tooltip: { trigger: "axis", confine: true },
+        xAxis: { type: "category", axisTick: { show: false }, axisLabel: { color: "#66707a" } },
+      };
+    }
+
+    function renderCharts(map, monthList) {
+      if (typeof echarts === "undefined") {
+        showChartFallback();
+        return;
+      }
+      clearCharts();
+
+      const overview = echarts.init(document.getElementById("chartOverview"));
+      overview.setOption({
+        ...baseChartOption(),
+        tooltip: {
+          trigger: "axis",
+          confine: true,
+          formatter: params => params.map(p => {
+            const val = p.seriesName === "Take Rate" ? tooltipRate(p.value) : tooltipMoney(p.value);
+            return `${p.marker}${p.seriesName}：${val}`;
+          }).join("<br>")
+        },
+        xAxis: { ...baseChartOption().xAxis, data: monthList },
+        yAxis: [
+          { type: "value", name: currencySymbol[controls.currency.value], axisLabel: { formatter: moneyAxis, color: "#66707a" }, splitLine: { lineStyle: { color: "#eee8de" } } },
+          { type: "value", name: "Take Rate", axisLabel: { formatter: value => value.toFixed(0) + "%", color: "#66707a" }, splitLine: { show: false } }
+        ],
+        series: [
+          { name: "合同金额", type: "bar", data: moneyData(map, monthList, "overall", "contract_amt"), barMaxWidth: 24 },
+          { name: "实收息费", type: "bar", data: moneyData(map, monthList, "overall", "actual_received_interest_fee_amt"), barMaxWidth: 24 },
+          { name: "Take Rate", type: "line", yAxisIndex: 1, data: rateData(map, monthList, "overall", "bad_debt_rate_matured_contract"), smooth: true, symbolSize: 7 }
+        ]
+      });
+
+      const takeRate = echarts.init(document.getElementById("chartTakeRate"));
+      takeRate.setOption({
+        ...baseChartOption(),
+        tooltip: {
+          trigger: "axis",
+          confine: true,
+          formatter: params => params.map(p => `${p.marker}${p.seriesName}：${tooltipRate(p.value)}`).join("<br>")
+        },
+        xAxis: { ...baseChartOption().xAxis, data: monthList },
+        yAxis: { type: "value", axisLabel: { formatter: value => value.toFixed(0) + "%", color: "#66707a" }, splitLine: { lineStyle: { color: "#eee8de" } } },
+        series: [
+          { name: "首贷", type: "line", data: rateData(map, monthList, "first_loan", "bad_debt_rate_matured_contract"), smooth: true, symbolSize: 7 },
+          { name: "复贷", type: "line", data: rateData(map, monthList, "reloan", "bad_debt_rate_matured_contract"), smooth: true, symbolSize: 7 },
+          { name: "整体", type: "line", data: rateData(map, monthList, "overall", "bad_debt_rate_matured_contract"), smooth: true, symbolSize: 7 }
+        ]
+      });
+
+      const structure = echarts.init(document.getElementById("chartStructure"));
+      structure.setOption({
+        ...baseChartOption(),
+        tooltip: {
+          trigger: "axis",
+          confine: true,
+          formatter: params => params.map(p => {
+            const val = p.seriesName.includes("订单") ? fmtInt(p.value) : tooltipMoney(p.value);
+            return `${p.marker}${p.seriesName}：${val}`;
+          }).join("<br>")
+        },
+        xAxis: { ...baseChartOption().xAxis, data: monthList },
+        yAxis: [
+          { type: "value", name: currencySymbol[controls.currency.value], axisLabel: { formatter: moneyAxis, color: "#66707a" }, splitLine: { lineStyle: { color: "#eee8de" } } },
+          { type: "value", name: "订单数", axisLabel: { formatter: value => Math.round(value).toLocaleString("en-US"), color: "#66707a" }, splitLine: { show: false } }
+        ],
+        series: [
+          { name: "首贷合同金额", type: "bar", stack: "contract", data: moneyData(map, monthList, "first_loan", "contract_amt"), barMaxWidth: 28 },
+          { name: "复贷合同金额", type: "bar", stack: "contract", data: moneyData(map, monthList, "reloan", "contract_amt"), barMaxWidth: 28 },
+          { name: "整体订单数", type: "line", yAxisIndex: 1, data: intData(map, monthList, "overall", "release_order_cnt"), smooth: true, symbolSize: 7 }
+        ]
+      });
+
+      const matured = echarts.init(document.getElementById("chartMatured"));
+      matured.setOption({
+        ...baseChartOption(),
+        tooltip: {
+          trigger: "axis",
+          confine: true,
+          formatter: params => params.map(p => `${p.marker}${p.seriesName}：${tooltipMoney(p.value)}`).join("<br>")
+        },
+        xAxis: { ...baseChartOption().xAxis, data: monthList },
+        yAxis: { type: "value", axisLabel: { formatter: moneyAxis, color: "#66707a" }, splitLine: { lineStyle: { color: "#eee8de" } } },
+        series: [
+          { name: "成熟合同金额", type: "bar", data: moneyData(map, monthList, "overall", "matured_contract_amt"), barMaxWidth: 28 },
+          { name: "息费-坏账", type: "line", data: moneyData(map, monthList, "overall", "bad_debt_amt"), smooth: true, symbolSize: 7 }
+        ]
+      });
+
+      chartInstances = [overview, takeRate, structure, matured];
+    }
+
+    function renderTable() {
+      const monthList = months();
+      const map = rowMap();
+      document.getElementById("thead").innerHTML = `
+        <tr>
+          <th class="type-head left-head">口径</th>
+          <th class="group-head left-head">模块</th>
+          <th class="metric-head left-head">指标</th>
+          ${monthList.map(month => `<th class="month-head">${month}</th>`).join("")}
+        </tr>
+      `;
+      const html = [];
+      for (const type of typeOrder) {
+        const groups = visibleGroupsForType(type);
+        const typeRowCount = groups.reduce((sum, group) => sum + group.metrics.length, 0);
+        let typeRendered = false;
+        for (const group of metricGroups) {
+          const visibleMetrics = visibleMetricsForType(group, type);
+          if (!visibleMetrics.length) continue;
+          let groupRendered = false;
+          for (const metric of visibleMetrics) {
+            html.push(renderMetricRow({
+              label: metric.label,
+              metric,
+              type,
+              groupName: group.group,
+              typeRowCount,
+              groupRowCount: visibleMetrics.length,
+              renderType: !typeRendered,
+              renderGroup: !groupRendered,
+              monthList,
+              map
+            }));
+            typeRendered = true;
+            groupRendered = true;
+          }
+        }
+      }
+      document.getElementById("tbody").innerHTML = html.join("");
+      renderSummary(map, monthList);
+      renderCharts(map, monthList);
+    }
+
+    function visibleMetricsForType(group, type) {
+      return group.metrics.filter(metric => {
+        if ((metric.skipTypes || []).includes(type)) return false;
+        if (metric.onlyTypes && !metric.onlyTypes.includes(type)) return false;
+        return true;
+      });
+    }
+
+    function visibleGroupsForType(type) {
+      return metricGroups
+        .map(group => ({ group: group.group, metrics: visibleMetricsForType(group, type) }))
+        .filter(group => group.metrics.length > 0);
+    }
+
+    function renderMetricRow(config) {
+      const { label, metric, type, groupName, typeRowCount, groupRowCount, renderType, renderGroup, monthList, map } = config;
+      const cells = monthList.map(month => {
+        const row = rowFor(map, month, type);
+        const value = metricValue(row, metric, month, type, map);
+        const cls = metric.type.includes("Signed") ? signedClass(value) : "";
+        return `<td class="value-cell ${cls}">${formatValue(row, metric, value)}</td>`;
+      }).join("");
+      const typeCell = renderType ? `<td class="type-cell" rowspan="${typeRowCount}">${typeLabels[type]}</td>` : "";
+      const groupCell = renderGroup ? `<td class="group-cell" rowspan="${groupRowCount}">${groupName}</td>` : "";
+      return `<tr>${typeCell}${groupCell}<td class="metric-name">${label}</td>${cells}</tr>`;
+    }
+
+    controls.currency.addEventListener("change", renderTable);
+    window.addEventListener("resize", () => chartInstances.forEach(chart => chart.resize()));
+    renderTable();
+  </script>
+</body>
+</html>
