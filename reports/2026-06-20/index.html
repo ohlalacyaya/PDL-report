@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>统一经营分析入口</title>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
   <style>
     :root {
       --bg: #f5f7f4;
@@ -183,6 +182,37 @@
       font-size: 13px;
       line-height: 1.7;
     }
+    .brief-home {
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .brief-home h2 {
+      margin: 22px 0 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 17px;
+    }
+    .brief-home h2:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .brief-home h3 { margin: 16px 0 8px; font-size: 15px; }
+    .brief-home p { margin: 8px 0; color: #26312c; }
+    .brief-home ul { margin: 8px 0 14px; padding-left: 20px; }
+    .brief-home li { margin: 4px 0; }
+    .brief-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .brief-actions a {
+      display: inline-flex;
+      text-decoration: none;
+      color: var(--blue);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 720;
+      background: #fff;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -212,7 +242,7 @@
       <div class="topbar">
         <div>
           <h1>统一经营分析入口</h1>
-          <div class="subtitle">把工作台、白名单、LTV、权责放在同一个经营视角下查看。首页只保留跨模块关键指标和入口，细节仍回到各专题页面。</div>
+          <div class="subtitle">首页展示每日经营 Agent 简报；工作台、白名单、LTV、权责等模块作为明细入口继续保留。</div>
         </div>
         <div class="status-strip">
           <span class="pill ok">观察截止 2026-06-20</span>
@@ -221,6 +251,7 @@
         </div>
       </div>
       <nav>
+        <a id="link-brief" href="#">每日简报</a>
         <a id="link-workbench" href="#">工作台</a>
         <a id="link-whitelist" href="#">白名单</a>
         <a id="link-ltv" href="#">LTV by month</a>
@@ -231,24 +262,12 @@
   </header>
   <main>
     <div class="shell">
-      <section class="kpis" id="kpis"></section>
-
-      <section class="grid">
-        <div class="panel">
-          <div class="panel-title"><h2>月度合同金额结构</h2><span class="unit">首贷 / 复贷，NGN</span></div>
-          <div class="chart" id="chart-monthly"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-title"><h2>最近 30 天放款趋势</h2><span class="unit">工作台 T1</span></div>
-          <div class="chart" id="chart-daily"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-title"><h2>LTV 首贷 Cohort</h2><span class="unit">首贷净现金 Take Rate / M1复购率</span></div>
-          <div class="chart" id="chart-ltv"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-title"><h2>白名单累计转化</h2><span class="unit">CUM / overall</span></div>
-          <div class="chart" id="chart-whitelist"></div>
+      <section class="panel wide">
+        <div class="panel-title"><h2>每日经营 Agent 简报</h2><span class="unit">首页摘要</span></div>
+        <div class="brief-home" id="brief-home"></div>
+        <div class="brief-actions">
+          <a id="brief-full-link" href="#">打开完整简报</a>
+          <a id="workbench-action-link" href="#">进入工作台看明细</a>
         </div>
       </section>
 
@@ -257,20 +276,10 @@
         <div class="module-grid" id="modules"></div>
         <div class="audit" id="audit-note"></div>
       </section>
-
-      <section class="panel wide">
-        <div class="panel-title"><h2>成熟月经营核算</h2><span class="unit">权责表整体口径</span></div>
-        <table>
-          <thead>
-            <tr><th>月份</th><th>合同金额</th><th>成熟合同金额</th><th>息费-坏账</th><th>Take Rate</th></tr>
-          </thead>
-          <tbody id="take-table"></tbody>
-        </table>
-      </section>
     </div>
   </main>
   <script>
-    const payload = {"meta": {"title": "统一经营分析入口", "data_date": "2026-06-20", "snapshot_note": "默认使用运行日 2026-06-21 的前一完整自然日 2026-06-20 作为目标观察截止日；低频模块会使用不晚于该日期的最近一次产物，并在模块卡片中展示实际区间。", "latest_month": "2026-06", "latest_full_take_month": "2026-05"}, "links": {"workbench": "可视化工作台原型.html", "accrual": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html", "whitelist": "data/manual_exports/whitelist_cohort/2026-03-01_2026-06-20_obs_2026-06-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-06-20_obs_2026-06-20.html", "ltv": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-19.html", "ltv_weekly": "#", "audit": "业务Agent刷新审核记录_2026-06-20.md"}, "kpis": [{"label": "2026-06-20 放款量", "value": "888", "sub": "NGN 15.6M"}, {"label": "2026-06 合同金额", "value": "NGN 259.1M", "sub": "首贷 6,006 / 复贷 6,034 笔"}, {"label": "2026-05 Take Rate", "value": "3.18%", "sub": "成熟资产现金流口径"}, {"label": "2026-06 首贷 Cohort", "value": "6,032", "sub": "合同金额 NGN 48.2M"}, {"label": "白名单累计放款率", "value": "4.17%", "sub": "category_date / CUM / overall"}], "module_status": [{"module": "工作台", "status": "PASS", "range": "2026-01-01 至 2026-06-20", "note": "过程监控，完整日口径", "href": "可视化工作台原型.html"}, {"module": "白名单", "status": "CHECKED", "range": "2026-03-01 至 2026-06-20", "note": "2,061 行，三套锚点", "href": "data/manual_exports/whitelist_cohort/2026-03-01_2026-06-20_obs_2026-06-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-06-20_obs_2026-06-20.html"}, {"module": "LTV / MOB", "status": "PASS", "range": "2026-01 至 2026-06", "note": "by month，首贷月 cohort", "href": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-19.html"}, {"module": "权责", "status": "CHECKED", "range": "2026-01 至 2026-06", "note": "最新成熟 Take Rate 月份：2026-05", "href": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html"}], "monthly_series": [{"month": "2026-01", "overall_contract_amt": 214267598.0, "matured_contract_amt": 214267598.0, "net_cash_revenue_amt": 6441759.0, "first_contract_amt": 57541500.0, "reloan_contract_amt": 156726098.0, "take_rate": 0.030064}, {"month": "2026-02", "overall_contract_amt": 226707800.0, "matured_contract_amt": 226707800.0, "net_cash_revenue_amt": 9916142.99, "first_contract_amt": 48520500.0, "reloan_contract_amt": 178187300.0, "take_rate": 0.04374}, {"month": "2026-03", "overall_contract_amt": 313731158.0, "matured_contract_amt": 313731158.0, "net_cash_revenue_amt": -1277076.33, "first_contract_amt": 87990400.0, "reloan_contract_amt": 225740758.0, "take_rate": -0.004071}, {"month": "2026-04", "overall_contract_amt": 338940550.0, "matured_contract_amt": 338940550.0, "net_cash_revenue_amt": 8504732.12, "first_contract_amt": 93850500.0, "reloan_contract_amt": 245090050.0, "take_rate": 0.025092}, {"month": "2026-05", "overall_contract_amt": 376713250.0, "matured_contract_amt": 327573250.0, "net_cash_revenue_amt": 10421986.25, "first_contract_amt": 89184500.0, "reloan_contract_amt": 287528750.0, "take_rate": 0.031816}, {"month": "2026-06", "overall_contract_amt": 259099000.0, "matured_contract_amt": 0.0, "net_cash_revenue_amt": null, "first_contract_amt": 48013500.0, "reloan_contract_amt": 211085500.0, "take_rate": null}], "daily_series": [{"day": "2026-05-22", "loan_cnt": 1407.0, "contract_amount": 13969750.0}, {"day": "2026-05-23", "loan_cnt": 669.0, "contract_amount": 12679750.0}, {"day": "2026-05-24", "loan_cnt": 522.0, "contract_amount": 11581250.0}, {"day": "2026-05-25", "loan_cnt": 645.0, "contract_amount": 15793500.0}, {"day": "2026-05-26", "loan_cnt": 606.0, "contract_amount": 14240500.0}, {"day": "2026-05-27", "loan_cnt": 577.0, "contract_amount": 13241500.0}, {"day": "2026-05-28", "loan_cnt": 565.0, "contract_amount": 11862500.0}, {"day": "2026-05-29", "loan_cnt": 506.0, "contract_amount": 11887500.0}, {"day": "2026-05-30", "loan_cnt": 692.0, "contract_amount": 13906750.0}, {"day": "2026-05-31", "loan_cnt": 452.0, "contract_amount": 11483250.0}, {"day": "2026-06-01", "loan_cnt": 663.0, "contract_amount": 16075500.0}, {"day": "2026-06-02", "loan_cnt": 517.0, "contract_amount": 13930000.0}, {"day": "2026-06-03", "loan_cnt": 649.0, "contract_amount": 12250500.0}, {"day": "2026-06-04", "loan_cnt": 643.0, "contract_amount": 11039500.0}, {"day": "2026-06-05", "loan_cnt": 575.0, "contract_amount": 13897750.0}, {"day": "2026-06-06", "loan_cnt": 546.0, "contract_amount": 14962500.0}, {"day": "2026-06-07", "loan_cnt": 445.0, "contract_amount": 12165750.0}, {"day": "2026-06-08", "loan_cnt": 580.0, "contract_amount": 16186250.0}, {"day": "2026-06-09", "loan_cnt": 561.0, "contract_amount": 14652000.0}, {"day": "2026-06-10", "loan_cnt": 698.0, "contract_amount": 11772250.0}, {"day": "2026-06-11", "loan_cnt": 747.0, "contract_amount": 14531000.0}, {"day": "2026-06-12", "loan_cnt": 587.0, "contract_amount": 12866000.0}, {"day": "2026-06-13", "loan_cnt": 849.0, "contract_amount": 13724750.0}, {"day": "2026-06-14", "loan_cnt": 531.0, "contract_amount": 14510750.0}, {"day": "2026-06-15", "loan_cnt": 817.0, "contract_amount": 19006500.0}, {"day": "2026-06-16", "loan_cnt": 762.0, "contract_amount": 15931000.0}, {"day": "2026-06-17", "loan_cnt": 946.0, "contract_amount": 15509000.0}, {"day": "2026-06-18", "loan_cnt": 924.0, "contract_amount": 16088000.0}, {"day": "2026-06-19", "loan_cnt": 625.0, "contract_amount": 14403750.0}, {"day": "2026-06-20", "loan_cnt": 888.0, "contract_amount": 15568750.0}], "whitelist_summary": [{"anchor_type": "category_date", "whitelist_mobile_cnt": 534918.0, "register_mobile_cnt": 43739.0, "release_mobile_cnt": 22300.0, "register_rate": 0.0817676728021865, "release_rate": 0.04168863265023798}, {"anchor_type": "create_time", "whitelist_mobile_cnt": 605203.0, "register_mobile_cnt": 95499.0, "release_mobile_cnt": 51779.0, "register_rate": 0.15779664013562392, "release_rate": 0.08555641660732019}, {"anchor_type": "update_time", "whitelist_mobile_cnt": 337417.0, "register_mobile_cnt": 15543.0, "release_mobile_cnt": 8059.0, "register_rate": 0.04606466182794584, "release_rate": 0.023884392309812486}], "ltv_take_rate_rows": [{"cohort_month": "2026-01", "first_loan_order_cnt": 8811.0, "first_contract_amt": 57541500.0, "first_net_take_rate": -0.066, "cum_repurchase_user_rate": 0.3672}, {"cohort_month": "2026-02", "first_loan_order_cnt": 7148.0, "first_contract_amt": 48520500.0, "first_net_take_rate": -0.0307, "cum_repurchase_user_rate": 0.3969}, {"cohort_month": "2026-03", "first_loan_order_cnt": 10209.0, "first_contract_amt": 87990400.0, "first_net_take_rate": -0.0631, "cum_repurchase_user_rate": 0.3791}, {"cohort_month": "2026-04", "first_loan_order_cnt": 10377.0, "first_contract_amt": 93850500.0, "first_net_take_rate": -0.0381, "cum_repurchase_user_rate": 0.4051}, {"cohort_month": "2026-05", "first_loan_order_cnt": 10296.0, "first_contract_amt": 89184500.0, "first_net_take_rate": -0.0771, "cum_repurchase_user_rate": null}, {"cohort_month": "2026-06", "first_loan_order_cnt": 6032.0, "first_contract_amt": 48185500.0, "first_net_take_rate": null, "cum_repurchase_user_rate": null}], "audit": {"workbench": {"status": "PASS", "issues": [], "latest_complete_day": "2026-06-20", "export_dir": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/db_refresh/2026-06-21", "duration_sec": 266.04, "query_timings": [{"name": "postloan_case_day_detail", "range": "2026-01-01~2026-06-20", "rows": 376572, "duration_sec": 129.91}, {"name": "postloan_snapshot_cache", "rows": 376572, "duration_sec": 0, "missing_ranges": ["2026-01-01~2026-06-20"], "cache_path": "/Users/ohlala/Documents/线上现金贷/data/cache/business_agent/postloan_daily/postloan_case_day_detail_2026-01-01.csv"}, {"name": "postloan_snapshot_aggregate", "rows": 3152, "duration_sec": 2.15}, {"name": "t1", "rows": 513, "duration_sec": 3.25}, {"name": "t1_app", "rows": 1082, "duration_sec": 5.85}, {"name": "t2_overall", "rows": 171, "duration_sec": 15.54}, {"name": "t2_source", "rows": 342, "duration_sec": 13.16}, {"name": "t2_app", "rows": 378, "duration_sec": 12.73}, {"name": "t2_whitelist", "rows": 64, "duration_sec": 28.9}, {"name": "t3_extra", "rows": 171, "duration_sec": 2.26}, {"name": "t3_extra_app", "rows": 171, "duration_sec": 2.91}, {"name": "t3_main", "rows": 171, "duration_sec": 6.2}, {"name": "t3_main_app", "rows": 339, "duration_sec": 7.34}, {"name": "t4_fpd", "rows": 171, "duration_sec": 2.7}, {"name": "t4_fpd_dim", "rows": 1638, "duration_sec": 9.64}, {"name": "t4_highrisk", "rows": 171, "duration_sec": 12.71}], "slow_queries": [{"name": "postloan_case_day_detail", "range": "2026-01-01~2026-06-20", "rows": 376572, "duration_sec": 129.91}]}, "ltv": {"rows": 36, "cohort_months": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"], "matured_rows": 10, "check_status": "PASS", "output": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-19_obs_2026-06-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-19_obs_2026-06-19.csv", "sql": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-19_obs_2026-06-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-19_obs_2026-06-19.sql"}}};
+    const payload = {"meta": {"title": "统一经营分析入口", "data_date": "2026-06-20", "snapshot_note": "默认使用运行日 2026-06-21 的前一完整自然日 2026-06-20 作为目标观察截止日；低频模块会使用不晚于该日期的最近一次产物，并在模块卡片中展示实际区间。", "latest_month": "2026-06", "latest_full_take_month": "2026-05"}, "links": {"brief": "每日经营Agent简报_2026-06-20.html", "workbench": "可视化工作台原型.html", "accrual": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html", "whitelist": "data/manual_exports/whitelist_cohort/2026-03-01_2026-06-20_obs_2026-06-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-06-20_obs_2026-06-20.html", "ltv": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-19.html", "ltv_weekly": "#", "audit": "业务Agent刷新审核记录_2026-06-20.md"}, "brief_home_html": "<h2>结论</h2>\n<p>昨日整体放款 888 单，较近 7 日均值 +13.97%；合同金额 15,568,750 NGN，较近 7 日均值 -0.18%。核心判断：订单增长主要来自白名单首贷 / SmartNaira，白名单首贷放款增量中，约 75% 来自前端用信申请量增加，约 21% 来自放款成功率提升，约 4% 为交互项；继续向前拆，前端量增加主要来自注册基数变大。</p>\n<h2>关键证据</h2>\n<table><thead><tr><th>指标</th><th>昨日</th><th>近7日均值</th><th>差异</th></tr></thead><tbody>\n<tr><td>整体放款订单</td><td>888</td><td>779</td><td>+13.97%</td></tr>\n<tr><td>整体合同金额</td><td>15,568,750 NGN</td><td>15,596,250 NGN</td><td>-0.18%</td></tr>\n<tr><td>首贷放款订单</td><td>534</td><td>404</td><td>+130</td></tr>\n<tr><td>复贷放款订单合计</td><td>354</td><td>375</td><td>-21</td></tr>\n<tr><td>结清复贷 / 主贷</td><td>309</td><td>328</td><td>-19</td></tr>\n<tr><td>加贷</td><td>45</td><td>47</td><td>-2</td></tr>\n</tbody></table>\n<ul>\n<li>主增量：白名单 source 首贷放款较近 7 日多 130 单；SmartNaira App 首贷放款多 139 单；整体 App 维度主要由 SmartNaira 多 123 单拉动。</li>\n</ul>\n<h2>主因拆解：白名单首贷</h2>\n<ul>\n<li>一句话归因：白名单首贷放款增量中，约 75% 来自前端用信申请量增加，约 21% 来自放款成功率提升，约 4% 为交互项；继续向前拆，前端量增加主要来自注册基数变大。</li>\n<li>供给侧：新增白名单记录较近 7 日少 5,528，本次增长不应归因为当天供给放大。</li>\n<li>注册侧：白名单注册较近 7 日多 280 人，是前半段增长的主驱动。</li>\n<li>注册到进件：T0 进件率仅小幅提升 +1.55pp，不是主要解释。</li>\n<li>进件到用信申请：转化率下降 -0.38pp，用信申请增长来自进件量变多，而不是该段转化变好。</li>\n</ul>\n<table><thead><tr><th>环节</th><th>昨日</th><th>近7日均值</th><th>差异</th></tr></thead><tbody>\n<tr><td>新增白名单记录</td><td>15,629</td><td>21,157</td><td>-5,528</td></tr>\n<tr><td>白名单注册人数</td><td>1,072</td><td>792</td><td>+280</td></tr>\n<tr><td>进件数</td><td>1,082</td><td>852</td><td>+230</td></tr>\n<tr><td>用信申请数</td><td>585</td><td>464</td><td>+121</td></tr>\n<tr><td>放款数</td><td>534</td><td>404</td><td>+130</td></tr>\n<tr><td>授信通过率</td><td>58.60%</td><td>56.37%</td><td>+2.23pp</td></tr>\n<tr><td>用信申请到放款率</td><td>91.28%</td><td>86.34%</td><td>+4.94pp</td></tr>\n</tbody></table>\n<h2>显著转化节点</h2>\n<ul>\n<li>一句话总结：用信申请到放款率提升 +4.94pp；分母 用信申请数 585，较近7日 +121，分子 放款数 534，较近7日 +130。按 `用信申请数 × 转化率` 粗拆，分母基数变化贡献约 +104 单，转化率变化贡献约 +29 单。</li>\n<li>显著节点拆解：用信申请到放款率变化 +4.95pp，直接原因是放款失败率变化 -4.55pp，`transfer fail!` 从近7日均 24 单降到 4 单，主要落在 SmartNaira / PALM_PAY，18-23 时段改善最明显。</li>\n<li>辅助因素：风控审核拒绝率变化 -2.44pp。</li>\n<li>一句话总结：授信通过率提升 +2.23pp；分母 进件数 1,082，较近7日 +230，分子 授信通过数 634，较近7日 +143。按 `进件数 × 转化率` 粗拆，分母基数变化贡献约 +129 单，转化率变化贡献约 +24 单。</li>\n<li>进一步原因可用专项 SQL 下钻；优先补充：授信审批状态、拒绝原因、风控策略版本、App/source 交叉明细。</li>\n</ul>\n<h2>复贷 Gap 拆解</h2>\n<ul>\n<li>一句话总结：复贷合计 -21 单，其中结清复贷/主贷 -19 单，加贷 -2 单；主要缺口来自结清复贷/主贷。</li>\n<li>主贷 App 拆分：SmartNaira 主贷放款较近 7 日少 14 单。</li>\n<li>加贷 App 拆分：SmartNaira 加贷放款较近 7 日少 2 单。</li>\n</ul>\n<table><thead><tr><th>环节</th><th>昨日</th><th>近7日均值</th><th>差异</th></tr></thead><tbody>\n<tr><td>主贷结清用户数</td><td>362</td><td>390</td><td>-28</td></tr>\n<tr><td>主贷T0再进件率</td><td>66.30%</td><td>68.89%</td><td>-2.59pp</td></tr>\n<tr><td>主贷进件数</td><td>481</td><td>501</td><td>-20</td></tr>\n<tr><td>主贷授信通过率</td><td>67.78%</td><td>71.23%</td><td>-3.45pp</td></tr>\n<tr><td>主贷用信申请数</td><td>333</td><td>369</td><td>-36</td></tr>\n<tr><td>主贷放款成功率</td><td>92.79%</td><td>89.46%</td><td>+3.33pp</td></tr>\n<tr><td>主贷放款数</td><td>309</td><td>328</td><td>-19</td></tr>\n<tr><td>加贷进件数</td><td>66</td><td>69</td><td>-3</td></tr>\n<tr><td>加贷放款成功率</td><td>68.18%</td><td>69.05%</td><td>-0.87pp</td></tr>\n<tr><td>加贷放款数</td><td>45</td><td>47</td><td>-2</td></tr>\n</tbody></table>\n<h2>需要跟进</h2>\n<ul>\n<li>复贷跟进：优先看结清复贷/主贷的结清池、T0再进件和授信通过率；加贷本次不是主要拖累。</li>\n<li>合同金额没有明显跟随订单数增长，SmartNaira 合同金额较近 7 日少 90,143 NGN。</li>\n<li>风险提示：最近可观察 FPD0 放款日 2026-06-13，FPD0 45.82%，较前 7 个成熟放款日 -6.49pp。</li>\n<li>风险提示：最近可观察 FPD7 放款日 2026-06-06，FPD7 47.99%，较前 7 个成熟放款日 +3.90pp。</li>\n<li>风险拆分：当前可按 App / Source / 首复贷 / 主贷-加贷拆；FPD0 最高 App=SmartNaira 46.80%，FPD0 最高 Source=白名单 46.03%，FPD0 最高类型=加贷 54.17%，FPD7 最高 App=SkyLend 62.50%，FPD7 最高 Source=白名单 48.51%，FPD7 最高首复贷=首贷 58.59%，FPD7 最高类型=首贷 58.59%。</li>\n<li>风险归因边界：当前日报能定位到维度层，不能直接解释策略、额度或客群原因；若继续下钻，Agent 可跑专项 SQL，优先补额度段、风险策略版本、客群标签和还款行为明细。</li>\n<li>刷新性能：最慢查询 `postloan_case_day_detail` 耗时 2 分 10 秒，后续继续走快照/索引优化。</li>\n</ul>", "kpis": [{"label": "2026-06-20 放款量", "value": "888", "sub": "NGN 15.6M"}, {"label": "2026-06 合同金额", "value": "NGN 259.1M", "sub": "首贷 6,006 / 复贷 6,034 笔"}, {"label": "2026-05 Take Rate", "value": "3.18%", "sub": "成熟资产现金流口径"}, {"label": "2026-06 首贷 Cohort", "value": "6,032", "sub": "合同金额 NGN 48.2M"}, {"label": "白名单累计放款率", "value": "4.17%", "sub": "category_date / CUM / overall"}], "module_status": [{"module": "工作台", "status": "PASS", "range": "2026-01-01 至 2026-06-20", "note": "过程监控，完整日口径", "href": "可视化工作台原型.html"}, {"module": "白名单", "status": "CHECKED", "range": "2026-03-01 至 2026-06-20", "note": "2,061 行，三套锚点", "href": "data/manual_exports/whitelist_cohort/2026-03-01_2026-06-20_obs_2026-06-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-06-20_obs_2026-06-20.html"}, {"module": "LTV / MOB", "status": "PASS", "range": "2026-01 至 2026-06", "note": "by month，首贷月 cohort", "href": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-06-19.html"}, {"module": "权责", "status": "CHECKED", "range": "2026-01 至 2026-06", "note": "最新成熟 Take Rate 月份：2026-05", "href": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-18_obs_2026-06-18/monthly_accrual_operating_2026-01-01_2026-06-18_obs_2026-06-18_matrix.html"}], "monthly_series": [{"month": "2026-01", "overall_contract_amt": 214267598.0, "matured_contract_amt": 214267598.0, "net_cash_revenue_amt": 6441759.0, "first_contract_amt": 57541500.0, "reloan_contract_amt": 156726098.0, "take_rate": 0.030064}, {"month": "2026-02", "overall_contract_amt": 226707800.0, "matured_contract_amt": 226707800.0, "net_cash_revenue_amt": 9916142.99, "first_contract_amt": 48520500.0, "reloan_contract_amt": 178187300.0, "take_rate": 0.04374}, {"month": "2026-03", "overall_contract_amt": 313731158.0, "matured_contract_amt": 313731158.0, "net_cash_revenue_amt": -1277076.33, "first_contract_amt": 87990400.0, "reloan_contract_amt": 225740758.0, "take_rate": -0.004071}, {"month": "2026-04", "overall_contract_amt": 338940550.0, "matured_contract_amt": 338940550.0, "net_cash_revenue_amt": 8504732.12, "first_contract_amt": 93850500.0, "reloan_contract_amt": 245090050.0, "take_rate": 0.025092}, {"month": "2026-05", "overall_contract_amt": 376713250.0, "matured_contract_amt": 327573250.0, "net_cash_revenue_amt": 10421986.25, "first_contract_amt": 89184500.0, "reloan_contract_amt": 287528750.0, "take_rate": 0.031816}, {"month": "2026-06", "overall_contract_amt": 259099000.0, "matured_contract_amt": 0.0, "net_cash_revenue_amt": null, "first_contract_amt": 48013500.0, "reloan_contract_amt": 211085500.0, "take_rate": null}], "daily_series": [{"day": "2026-05-22", "loan_cnt": 1407.0, "contract_amount": 13969750.0}, {"day": "2026-05-23", "loan_cnt": 669.0, "contract_amount": 12679750.0}, {"day": "2026-05-24", "loan_cnt": 522.0, "contract_amount": 11581250.0}, {"day": "2026-05-25", "loan_cnt": 645.0, "contract_amount": 15793500.0}, {"day": "2026-05-26", "loan_cnt": 606.0, "contract_amount": 14240500.0}, {"day": "2026-05-27", "loan_cnt": 577.0, "contract_amount": 13241500.0}, {"day": "2026-05-28", "loan_cnt": 565.0, "contract_amount": 11862500.0}, {"day": "2026-05-29", "loan_cnt": 506.0, "contract_amount": 11887500.0}, {"day": "2026-05-30", "loan_cnt": 692.0, "contract_amount": 13906750.0}, {"day": "2026-05-31", "loan_cnt": 452.0, "contract_amount": 11483250.0}, {"day": "2026-06-01", "loan_cnt": 663.0, "contract_amount": 16075500.0}, {"day": "2026-06-02", "loan_cnt": 517.0, "contract_amount": 13930000.0}, {"day": "2026-06-03", "loan_cnt": 649.0, "contract_amount": 12250500.0}, {"day": "2026-06-04", "loan_cnt": 643.0, "contract_amount": 11039500.0}, {"day": "2026-06-05", "loan_cnt": 575.0, "contract_amount": 13897750.0}, {"day": "2026-06-06", "loan_cnt": 546.0, "contract_amount": 14962500.0}, {"day": "2026-06-07", "loan_cnt": 445.0, "contract_amount": 12165750.0}, {"day": "2026-06-08", "loan_cnt": 580.0, "contract_amount": 16186250.0}, {"day": "2026-06-09", "loan_cnt": 561.0, "contract_amount": 14652000.0}, {"day": "2026-06-10", "loan_cnt": 698.0, "contract_amount": 11772250.0}, {"day": "2026-06-11", "loan_cnt": 747.0, "contract_amount": 14531000.0}, {"day": "2026-06-12", "loan_cnt": 587.0, "contract_amount": 12866000.0}, {"day": "2026-06-13", "loan_cnt": 849.0, "contract_amount": 13724750.0}, {"day": "2026-06-14", "loan_cnt": 531.0, "contract_amount": 14510750.0}, {"day": "2026-06-15", "loan_cnt": 817.0, "contract_amount": 19006500.0}, {"day": "2026-06-16", "loan_cnt": 762.0, "contract_amount": 15931000.0}, {"day": "2026-06-17", "loan_cnt": 946.0, "contract_amount": 15509000.0}, {"day": "2026-06-18", "loan_cnt": 924.0, "contract_amount": 16088000.0}, {"day": "2026-06-19", "loan_cnt": 625.0, "contract_amount": 14403750.0}, {"day": "2026-06-20", "loan_cnt": 888.0, "contract_amount": 15568750.0}], "whitelist_summary": [{"anchor_type": "category_date", "whitelist_mobile_cnt": 534918.0, "register_mobile_cnt": 43739.0, "release_mobile_cnt": 22300.0, "register_rate": 0.0817676728021865, "release_rate": 0.04168863265023798}, {"anchor_type": "create_time", "whitelist_mobile_cnt": 605203.0, "register_mobile_cnt": 95499.0, "release_mobile_cnt": 51779.0, "register_rate": 0.15779664013562392, "release_rate": 0.08555641660732019}, {"anchor_type": "update_time", "whitelist_mobile_cnt": 337417.0, "register_mobile_cnt": 15543.0, "release_mobile_cnt": 8059.0, "register_rate": 0.04606466182794584, "release_rate": 0.023884392309812486}], "ltv_take_rate_rows": [{"cohort_month": "2026-01", "first_loan_order_cnt": 8811.0, "first_contract_amt": 57541500.0, "first_net_take_rate": -0.066, "cum_repurchase_user_rate": 0.3672}, {"cohort_month": "2026-02", "first_loan_order_cnt": 7148.0, "first_contract_amt": 48520500.0, "first_net_take_rate": -0.0307, "cum_repurchase_user_rate": 0.3969}, {"cohort_month": "2026-03", "first_loan_order_cnt": 10209.0, "first_contract_amt": 87990400.0, "first_net_take_rate": -0.0631, "cum_repurchase_user_rate": 0.3791}, {"cohort_month": "2026-04", "first_loan_order_cnt": 10377.0, "first_contract_amt": 93850500.0, "first_net_take_rate": -0.0381, "cum_repurchase_user_rate": 0.4051}, {"cohort_month": "2026-05", "first_loan_order_cnt": 10296.0, "first_contract_amt": 89184500.0, "first_net_take_rate": -0.0771, "cum_repurchase_user_rate": null}, {"cohort_month": "2026-06", "first_loan_order_cnt": 6032.0, "first_contract_amt": 48185500.0, "first_net_take_rate": null, "cum_repurchase_user_rate": null}], "audit": {"workbench": {"status": "PASS", "issues": [], "latest_complete_day": "2026-06-20", "export_dir": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/db_refresh/2026-06-21", "duration_sec": 266.04, "query_timings": [{"name": "postloan_case_day_detail", "range": "2026-01-01~2026-06-20", "rows": 376572, "duration_sec": 129.91}, {"name": "postloan_snapshot_cache", "rows": 376572, "duration_sec": 0, "missing_ranges": ["2026-01-01~2026-06-20"], "cache_path": "/Users/ohlala/Documents/线上现金贷/data/cache/business_agent/postloan_daily/postloan_case_day_detail_2026-01-01.csv"}, {"name": "postloan_snapshot_aggregate", "rows": 3152, "duration_sec": 2.15}, {"name": "t1", "rows": 513, "duration_sec": 3.25}, {"name": "t1_app", "rows": 1082, "duration_sec": 5.85}, {"name": "t2_overall", "rows": 171, "duration_sec": 15.54}, {"name": "t2_source", "rows": 342, "duration_sec": 13.16}, {"name": "t2_app", "rows": 378, "duration_sec": 12.73}, {"name": "t2_whitelist", "rows": 64, "duration_sec": 28.9}, {"name": "t3_extra", "rows": 171, "duration_sec": 2.26}, {"name": "t3_extra_app", "rows": 171, "duration_sec": 2.91}, {"name": "t3_main", "rows": 171, "duration_sec": 6.2}, {"name": "t3_main_app", "rows": 339, "duration_sec": 7.34}, {"name": "t4_fpd", "rows": 171, "duration_sec": 2.7}, {"name": "t4_fpd_dim", "rows": 1638, "duration_sec": 9.64}, {"name": "t4_highrisk", "rows": 171, "duration_sec": 12.71}], "slow_queries": [{"name": "postloan_case_day_detail", "range": "2026-01-01~2026-06-20", "rows": 376572, "duration_sec": 129.91}]}, "ltv": {"rows": 36, "cohort_months": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"], "matured_rows": 10, "check_status": "PASS", "output": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-19_obs_2026-06-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-19_obs_2026-06-19.csv", "sql": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-06-19/monthly_cohort_2026-01-01_2026-06-19_obs_2026-06-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-06-19_obs_2026-06-19.sql"}}};
     const fmt = {
       int: v => v == null ? '--' : Math.round(Number(v)).toLocaleString('en-US'),
       money: v => {
@@ -282,6 +291,7 @@
       pct: v => v == null || Number.isNaN(Number(v)) ? '--' : `${(Number(v) * 100).toFixed(2)}%`
     };
     const abs = href => href;
+    document.getElementById('link-brief').href = abs(payload.links.brief);
     document.getElementById('link-workbench').href = abs(payload.links.workbench);
     document.getElementById('link-whitelist').href = abs(payload.links.whitelist);
     document.getElementById('link-ltv').href = abs(payload.links.ltv);
@@ -295,13 +305,9 @@
     document.getElementById('link-accrual').href = abs(payload.links.accrual);
     document.getElementById('link-audit').href = abs(payload.links.audit);
 
-    document.getElementById('kpis').innerHTML = payload.kpis.map(item => `
-      <article class="kpi">
-        <div class="kpi-label">${item.label}</div>
-        <div class="kpi-value">${item.value}</div>
-        <div class="kpi-sub">${item.sub}</div>
-      </article>
-    `).join('');
+    document.getElementById('brief-home').innerHTML = payload.brief_home_html || '<p>每日经营 Agent 简报尚未生成。</p>';
+    document.getElementById('brief-full-link').href = abs(payload.links.brief);
+    document.getElementById('workbench-action-link').href = abs(payload.links.workbench);
 
     document.getElementById('modules').innerHTML = payload.module_status.map(item => `
       <article class="module">
@@ -313,77 +319,6 @@
       </article>
     `).join('');
     document.getElementById('audit-note').textContent = payload.meta.snapshot_note;
-
-    const months = payload.monthly_series.map(d => d.month);
-    echarts.init(document.getElementById('chart-monthly')).setOption({
-      tooltip: { trigger: 'axis', valueFormatter: fmt.money },
-      legend: { top: 0 },
-      grid: { top: 46, left: 70, right: 20, bottom: 40 },
-      xAxis: { type: 'category', data: months, axisLabel: { rotate: 35 } },
-      yAxis: [
-        { type: 'value', axisLabel: { formatter: v => `${Math.round(v/1e6)}M` } },
-        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } }
-      ],
-      series: [
-        { name: '首贷', type: 'bar', stack: 'amt', data: payload.monthly_series.map(d => d.first_contract_amt), itemStyle: { color: '#4f8f79' } },
-        { name: '复贷', type: 'bar', stack: 'amt', data: payload.monthly_series.map(d => d.reloan_contract_amt), itemStyle: { color: '#2457c5' } },
-        { name: 'Take Rate', type: 'line', yAxisIndex: 1, data: payload.monthly_series.map(d => d.take_rate), itemStyle: { color: '#b42318' } }
-      ]
-    });
-
-    echarts.init(document.getElementById('chart-daily')).setOption({
-      tooltip: { trigger: 'axis' },
-      grid: { top: 24, left: 56, right: 24, bottom: 40 },
-      xAxis: { type: 'category', data: payload.daily_series.map(d => d.day.slice(5)), axisLabel: { rotate: 35 } },
-      yAxis: { type: 'value' },
-      series: [
-        { name: '放款量', type: 'line', smooth: true, data: payload.daily_series.map(d => d.loan_cnt), itemStyle: { color: '#087443' }, areaStyle: { opacity: .12 } }
-      ]
-    });
-
-    echarts.init(document.getElementById('chart-ltv')).setOption({
-      tooltip: { trigger: 'axis' },
-      legend: { top: 0 },
-      grid: { top: 46, left: 55, right: 42, bottom: 40 },
-      xAxis: { type: 'category', data: payload.ltv_take_rate_rows.map(d => d.cohort_month) },
-      yAxis: [
-        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } },
-        { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } }
-      ],
-      series: [
-        { name: '首贷净现金 Take Rate', type: 'line', data: payload.ltv_take_rate_rows.map(d => d.first_net_take_rate), itemStyle: { color: '#b42318' }, label: { show: false } },
-        { name: 'M1累计复购率', type: 'bar', yAxisIndex: 1, data: payload.ltv_take_rate_rows.map(d => d.cum_repurchase_user_rate), itemStyle: { color: '#4f8f79' } }
-      ]
-    });
-
-    echarts.init(document.getElementById('chart-whitelist')).setOption({
-      tooltip: { trigger: 'axis', valueFormatter: fmt.pct },
-      legend: { top: 0 },
-      grid: { top: 46, left: 52, right: 24, bottom: 40 },
-      xAxis: { type: 'category', data: payload.whitelist_summary.map(d => d.anchor_type) },
-      yAxis: { type: 'value', axisLabel: { formatter: v => `${(v*100).toFixed(0)}%` } },
-      series: [
-        { name: '注册率', type: 'bar', data: payload.whitelist_summary.map(d => d.register_rate), itemStyle: { color: '#2457c5' } },
-        { name: '放款率', type: 'bar', data: payload.whitelist_summary.map(d => d.release_rate), itemStyle: { color: '#087443' } }
-      ]
-    });
-
-    const matureRows = payload.monthly_series
-      .filter(d => d.take_rate != null)
-      .slice(-8);
-    document.getElementById('take-table').innerHTML = matureRows.map(d => `
-      <tr>
-        <td>${d.month}</td>
-        <td>${fmt.money(d.overall_contract_amt)}</td>
-        <td>${fmt.money(d.matured_contract_amt)}</td>
-        <td class="${d.net_cash_revenue_amt >= 0 ? 'pos' : 'neg'}">${fmt.money(d.net_cash_revenue_amt)}</td>
-        <td class="${d.take_rate >= 0 ? 'pos' : 'neg'}">${fmt.pct(d.take_rate)}</td>
-      </tr>
-    `).join('');
-
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.chart').forEach(el => echarts.getInstanceByDom(el)?.resize());
-    });
   </script>
 </body>
 </html>
