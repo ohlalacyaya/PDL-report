@@ -261,6 +261,8 @@
         <div>白名单锚点之后才完成注册的手机号数，即 <code>user.create_time &gt;= anchor_time</code>，不包含锚点前已注册用户。</div>
         <div>进件 / 授信 / 用信 / 放款手机号</div>
         <div>均只统计白名单锚点之后发生的首贷链路动作；进件为 <code>user_order.secondary_loan = 0</code>，授信为 <code>user_order.status = 21</code>，用信为存在 <code>fin_application</code>，放款为 <code>fin_application.status = 31</code>。</div>
+        <div>首贷重试去重</div>
+        <div>当前 mart 模式使用 <code>analysis_mart.dwd_user_firstloan_lifecycle_detail</code> 中的用户级首次事件。若同一用户在首贷成功前多次提交首贷进件、授信或用信申请，本专题只计入首次进件、首次授信、首次用信和首次放款；后续重试不重复计为新增转化用户。重试行为可单独用于失败重试、策略拒绝或用户反复申请分析，但不进入白名单 cohort 转化人数。</div>
         <div>白名单-注册率</div>
         <div><code>注册手机号 / 白名单分包手机号</code>。它会被锚点前已注册人群稀释。</div>
         <div>未注册-注册率</div>
