@@ -308,6 +308,9 @@
     .incident-note {
       color: #5d410b;
     }
+    #incident-panel {
+      scroll-margin-top: 18px;
+    }
     .status-table-wrap { margin-top: 12px; overflow: auto; }
     .brief-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
     .brief-actions a {
@@ -365,6 +368,7 @@
         <a id="link-ltv" href="#">LTV by month</a>
         <a id="link-accrual" href="#">权责</a>
         <a id="link-audit" href="#">审核记录</a>
+        <a id="link-incident" href="#incident-panel">异常事件</a>
       </nav>
     </div>
   </header>
@@ -379,7 +383,7 @@
         </div>
       </section>
 
-      <section class="panel wide">
+      <section class="panel wide" id="incident-panel">
         <div class="panel-title"><h2>异常事件说明</h2><span class="unit">人工登记事故窗口</span></div>
         <div id="incident-home"></div>
       </section>
