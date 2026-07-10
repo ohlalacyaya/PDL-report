@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>每日经营 Agent 简报 - 2026-07-09</title>
+  <style>
+    :root { --bg:#f5f7f4; --panel:#fff; --ink:#18201d; --muted:#64706a; --line:#dbe2dc; --head:#e8f3ee; --blue:#2457c5; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; letter-spacing:0; }
+    main { width:min(1120px, calc(100vw - 40px)); margin:0 auto; padding:28px 0 44px; }
+    article { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px 28px; box-shadow:0 10px 24px rgba(27,39,32,.08); }
+    h1 { margin:0 0 18px; font-size:28px; line-height:1.25; }
+    h2 { margin:28px 0 12px; padding-top:18px; border-top:1px solid var(--line); font-size:19px; }
+    h3 { margin:20px 0 10px; font-size:16px; }
+    h4 { margin:18px 0 8px; font-size:14px; color:#315048; }
+    p, li { font-size:14px; line-height:1.75; }
+    ul, ol { padding-left:22px; }
+    .diagnosis-summary { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; margin:14px 0 18px; }
+    .diagnosis-card { border:1px solid var(--line); border-radius:8px; padding:14px 15px; background:#fff; min-height:112px; }
+    .diagnosis-card h3 { margin:0 0 8px; font-size:13px; color:var(--muted); font-weight:760; }
+    .diagnosis-card p { margin:6px 0 0; color:#1f2d28; font-size:14px; line-height:1.72; }
+    .diagnosis-card.type { background:#f2f8f4; border-color:#cfe5d7; grid-column:span 1; }
+    .diagnosis-card.overall { background:#f6f8fb; border-color:#d6e0ec; }
+    .diagnosis-card.positive { background:#f3faf5; border-color:#cfe7d5; }
+    .diagnosis-card.negative { background:#fff6f3; border-color:#efcfc6; }
+    .diagnosis-card.warning { background:#fffaf0; border-color:#eadbb8; }
+    .diagnosis-card.danger { background:#fff3f3; border-color:#efc7c7; }
+    .diagnosis-card.judgement { grid-column:1 / -1; background:#f7fbf9; border-color:#cfe2d8; }
+    .diagnosis-card.judgement h3 { color:#23483b; }
+    table { width:100%; border-collapse:collapse; margin:10px 0 18px; font-size:13px; }
+    th, td { padding:9px 10px; border-bottom:1px solid #edf1ea; text-align:right; white-space:nowrap; }
+    th:first-child, td:first-child { text-align:left; }
+    th { background:var(--head); color:#315048; font-weight:760; }
+    code { color:#4a3b00; background:#fff7d6; padding:1px 4px; border-radius:4px; }
+    a { color:var(--blue); text-decoration:none; }
+    .toplink { display:inline-flex; margin-bottom:14px; font-size:13px; font-weight:700; }
+    @media (max-width: 860px) {
+      main { width:min(100vw - 24px, 1120px); }
+      article { padding:20px 16px; }
+      .diagnosis-summary { grid-template-columns:1fr; }
+      .diagnosis-card.judgement { grid-column:auto; }
+      table { display:block; overflow:auto; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="toplink" href="./统一经营分析入口_2026-07-09.html">返回统一入口</a>
+    <article>
+<h1>每日经营 Agent 简报 - 2026-07-09</h1>
+<ul>
+<li>运行日：2026-07-10</li>
+</ul>
+<ul>
+<li>观察截止日：2026-07-09</li>
+</ul>
+<ul>
+<li>数据范围：2026-01-01 起；白名单从 2026-03-01 起</li>
+</ul>
+<h2>经营诊断结论</h2>
+<div class="diagnosis-summary">
+<section class="diagnosis-card type"><h3>观察日类型</h3><p>规模下跌且金额承压日。</p></section>
+<section class="diagnosis-card overall"><h3>整体表现</h3><p>整体放款 553 单，较近 7 日均值 -6.54%；合同金额 11,837,500 NGN，较近 7 日均值 -2.05%。</p></section>
+<section class="diagnosis-card negative"><h3>主拖累</h3><p>首贷净缺口 -51 单，是整体订单下滑的主来源；其中白名单首贷 -54 单是首贷内部核心拖累</p></section>
+<section class="diagnosis-card positive"><h3>抵消项</h3><p>自然量异常放款较近 7 日多 3 单，属于异常抵消，不能视为健康增量；复贷净增 +13 单，其中加贷 +11 单托底、主贷复贷 +2 单；单均合同金额提升 982 NGN，对金额端形成托底</p></section>
+<section class="diagnosis-card warning"><h3>结构性问题</h3><p>订单和合同金额同步低于近 7 日均值，规模与金额端同时承压；复贷仍有增量 13 单但被整体下跌掩盖；单均合同金额提升 982 NGN；加贷增量 +11 单对主贷缺口形成抵消；自然量异常放款绝对量 18 单，较近 7 日多 3 单，对首贷缺口形成口径性抵消</p></section>
+<section class="diagnosis-card danger"><h3>异常风险</h3><p>P0 自然量异常放款 18 单（口径/链路异常）</p></section>
+<section class="diagnosis-card judgement"><h3>业务判断</h3><p>观察日 2026-07-09 放款订单下降，但合同金额基本被托底；</p><p>金额端主要由复贷订单占比提升 +6.40pp、单均合同金额提升 +982 NGN、加贷 +11 单支撑。</p><p>核心拖累来自白名单首贷 -54 单，首贷净缺口 -51 单；</p><p>复贷净变化 +13 单，其中加贷 +11 单形成托底、主贷复贷 +2 单。</p><p>自然量异常放款绝对量 18 单，较近 7 日多 3 单，对首贷缺口形成口径性抵消，需作为 P0 核查；</p><p>复贷订单占比提升 +6.40pp、单均合同金额提升 +982 NGN、加贷 +11 单是否健康，需要结合成熟风险、催收回收、LTV 和权责继续验证。</p></section>
+</div>
+<h2>整体订单金额</h2>
+<table><thead><tr><th>指标</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>放款订单</td><td>553</td><td>592</td><td>-6.54%</td><td>缺口拖累</td></tr>
+<tr><td>合同金额</td><td>11,837,500 NGN</td><td>12,085,000 NGN</td><td>-2.05%</td><td>金额形成缺口</td></tr>
+<tr><td>单均合同金额</td><td>21,406 NGN</td><td>20,424 NGN</td><td>+982 NGN</td><td>单均金额提升</td></tr>
+<tr><td>复贷订单占比</td><td>64.92%</td><td>58.52%</td><td>+6.40pp</td><td>复贷订单占比提升</td></tr>
+</tbody></table>
+<h3>三基准对比</h3>
+<table><thead><tr><th>口径</th><th>整体放款</th><th>首贷</th><th>复贷</th><th>合同金额</th><th>诊断</th></tr></thead><tbody>
+<tr><td>vs 近 7 日均值</td><td>-39</td><td>-51</td><td>+13</td><td>-247,500 NGN</td><td>用于判断短期偏离</td></tr>
+<tr><td>vs 前一日 2026-07-08</td><td>-70</td><td>-62</td><td>-8</td><td>-2,019,000 NGN</td><td>用于判断连续变化</td></tr>
+<tr><td>vs 上周同日 2026-07-02</td><td>-100</td><td>-44</td><td>-56</td><td>-2,282,500 NGN</td><td>用于消除星期效应</td></tr>
+</tbody></table>
+<ul>
+<li>订单和金额同向下降，规模端形成缺口。</li>
+</ul>
+<h2>首贷/复贷</h2>
+<table><thead><tr><th>模块</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>首贷放款</td><td>194</td><td>245</td><td>-51</td><td>首贷缺口 -51 单</td></tr>
+<tr><td>复贷放款</td><td>359</td><td>346</td><td>+13</td><td>复贷增量 +13 单</td></tr>
+<tr><td>结清复贷 / 主贷</td><td>283</td><td>281</td><td>+2</td><td>主贷增量 +2 单</td></tr>
+<tr><td>加贷</td><td>76</td><td>65</td><td>+11</td><td>加贷增量 +11 单</td></tr>
+</tbody></table>
+<ul>
+<li>父子结构：整体放款变化先拆为首贷与复贷；首贷净变化 -51 单，其中白名单首贷 -54 单，自然量异常放款绝对量 18 单，较近 7 日多 3 单，属于异常抵消项，对首贷缺口形成口径性抵消；复贷净变化 +13 单，其中主贷复贷 +2 单、加贷 +11 单。</li>
+</ul>
+<h2>App/source</h2>
+<table><thead><tr><th>维度层</th><th>维度值</th><th>指标</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>App</td><td>SmartNaira</td><td>整体放款</td><td>502</td><td>540</td><td>-38</td><td>SmartNaira缺口 -38 单</td></tr>
+<tr><td>App</td><td>SkyLend</td><td>整体放款</td><td>51</td><td>52</td><td>-1</td><td>SkyLend缺口 -1 单</td></tr>
+<tr><td>Source</td><td>白名单</td><td>首贷放款</td><td>176</td><td>230</td><td>-54</td><td>白名单缺口 -54 单</td></tr>
+<tr><td>Source</td><td>自然量</td><td>首贷放款</td><td>18</td><td>15</td><td>+3</td><td>自然量异常放款绝对量 18 单，较基准多 3 单</td></tr>
+</tbody></table>
+<ul>
+<li>App 维度看，SmartNaira 是主要缺口来源，整体放款较近 7 日少 38 单；App/source 只能作为交叉维度解释，不能替代首贷/复贷主因。</li>
+</ul>
+<ul>
+<li>Source 维度最大拖累来自 白名单，首贷放款较近 7 日少 54 单。</li>
+</ul>
+<h2>关键漏斗</h2>
+<ul>
+<li>白名单专题未刷新至目标观察日，本次仅可使用工作台日更白名单漏斗判断 2026-07-09；白名单专题 tab 仅代表 2026-07-03，不可作为 2026-07-09 结论依据。</li>
+</ul>
+<h3>白名单首贷漏斗（缺口项）</h3>
+<ul>
+<li>一句话归因：白名单首贷放款缺口包含前端量下降和转化下降两类问题；供给、注册、进件低于近 7 日，同时授信通过率下降、进件到用信申请转化下降、用信申请到放款率下降，需要同时拆供给/触达批次和进件后转化。</li>
+</ul>
+<ul>
+<li>供给侧：新增白名单记录较近 7 日少 1,453，供给未放大，会加重白名单首贷缺口。</li>
+</ul>
+<ul>
+<li>注册侧：白名单注册较近 7 日少 163 人，是前端量缺口的重要来源。</li>
+</ul>
+<ul>
+<li>注册到进件：T0 进件率提升 +4.39pp，对进件增长有明显帮助。</li>
+</ul>
+<ul>
+<li>进件到用信申请：转化率下降 -4.85pp，叠加进件减少，用信申请较近 7 日少 53。</li>
+</ul>
+<table><thead><tr><th>环节</th><th>观察日</th><th>近7日均值</th><th>差异</th></tr></thead><tbody>
+<tr><td>新增白名单记录</td><td>9,194</td><td>10,647</td><td>-1,453</td></tr>
+<tr><td>白名单注册人数</td><td>543</td><td>706</td><td>-163</td></tr>
+<tr><td>进件数</td><td>653</td><td>712</td><td>-59</td></tr>
+<tr><td>用信申请数</td><td>204</td><td>257</td><td>-53</td></tr>
+<tr><td>放款数</td><td>176</td><td>230</td><td>-54</td></tr>
+<tr><td>授信通过率</td><td>42.11%</td><td>50.09%</td><td>-7.98pp</td></tr>
+<tr><td>进件到用信申请率</td><td>31.24%</td><td>36.09%</td><td>-4.85pp</td></tr>
+<tr><td>用信申请到放款率</td><td>86.27%</td><td>89.95%</td><td>-3.68pp</td></tr>
+</tbody></table>
+<p>关键节点：</p>
+<ul>
+<li>授信通过率下降 -7.98pp；分母 进件数 653，较近7日 -59，分子 授信通过数 275，较近7日 -88。按 `进件数 × 转化率` 粗拆，转化率变化贡献约 -52 单，是该节点的直接解释。</li>
+</ul>
+<ul>
+<li>进件到用信申请率下降 -4.85pp；分母 进件数 653，较近7日 -59，分子 用信申请数 204，较近7日 -53。按 `进件数 × 转化率` 粗拆，转化率变化贡献约 -32 单，是该节点的直接解释。</li>
+</ul>
+<h2>风险与质量护栏</h2>
+<ul>
+<li>风险与回收指标不能直接归因到 2026-07-09 观察日放款，但它们用于验证当前复贷/加贷/高单均金额托底是否健康。</li>
+</ul>
+<table><thead><tr><th>指标名称</th><th>最新可用观察日</th><th>最新可用值</th><th>比较基准</th><th>较基准变化</th><th>业务含义</th></tr></thead><tbody>
+<tr><td>FPD0</td><td>2026-07-02</td><td>49.62%</td><td>较近 7 个成熟放款日</td><td>-0.53pp</td><td>短期早逾未抬升</td></tr>
+<tr><td>FPD7</td><td>2026-06-25</td><td>38.36%</td><td>较近 7 个成熟放款日</td><td>-2.78pp</td><td>更成熟早逾窗口暂未同步恶化</td></tr>
+<tr><td>M1</td><td>2026-06-02</td><td>38.68%</td><td>较近 7 个成熟观察点</td><td>-0.79pp</td><td>更成熟风险暂未抬升</td></tr>
+<tr><td>催收回收</td><td>2026-07-09</td><td>总案件 1,467 / 总回收 3,303,589 NGN / 总回收率 13.24% / S0 31.34% / S1 9.95%</td><td>较近 7 个观察日</td><td>总 -0.97pp / S0 +2.83pp / S1 -0.14pp</td><td>总回收率下降；S0 改善；S1 下降</td></tr>
+<tr><td>LTV</td><td>2026-07-05</td><td>2026-05 mature cohort / net take -6.66% / 复购 34.96%；2026-07 cohort 未成熟/不适用，不输出 take rate / 复购率结论</td><td>按周更新，最新完整周期截止至 2026-07-05</td><td>不适用</td><td>用于验证首贷 cohort 长期价值，未成熟 cohort 不作为结论</td></tr>
+<tr><td>权责</td><td>2026-06-30</td><td>最新可计算月份 2026-06 / Take Rate 2.48%（部分成熟）；最新完全成熟月份 2026-05</td><td>月更沿用最近产物</td><td>不适用</td><td>用于验证利润质量，部分成熟月份不能当最终成熟结论</td></tr>
+</tbody></table>
+<ul>
+<li>综合判断：FPD0 较基准下降 -0.53pp，短期早逾未抬升；FPD7 较基准下降 -2.78pp，更成熟早逾窗口暂未同步恶化；M1 较基准下降 -0.79pp，更成熟风险暂未抬升；催收回收：总回收率下降；S0 改善；S1 下降。这些信号共同用于判断托底是健康结构优化，还是风险后置。</li>
+</ul>
+<ul>
+<li>P0：自然量异常放款 18 单，属于口径/链路异常；当前口径下不应发生，需优先判断是 source 错分、白名单匹配异常还是放款链路异常。</li>
+</ul>
+<h2>下一步动作</h2>
+<table><thead><tr><th>优先级</th><th>动作</th><th>查什么</th><th>为什么查</th><th>预期判断</th></tr></thead><tbody>
+<tr><td>P0</td><td>核查自然量异常放款</td><td>查 source、App、注册来源、白名单匹配、放款订单号、放款时间、是否命中过白名单、是否存在 source 错分或链路绕过</td><td>当前口径下自然量不应放款，观察日仍有 18 单，需要确认是否为 source 错分、白名单匹配异常、统计口径问题或放款链路异常</td><td>输出自然量异常订单清单，并判断是 source 错分、白名单匹配异常、统计口径问题，还是放款链路异常</td></tr>
+<tr><td>P0</td><td>修复白名单专题刷新失败</td><td>查白名单专题 SQL/CSV/HTML 生成日志、失败 SQL、目标路径、数据库慢查询和中间层依赖</td><td>白名单为日更模块，但本次只沿用 2026-07-03 产物，未生成 2026-07-09 目标日 CSV/HTML；统一入口应降级为 PARTIAL_PASS</td><td>补刷目标日产物，或明确失败原因并保持 STALE_REUSED 状态，禁止用过期专题 tab 支撑当前观察日结论</td></tr>
+<tr><td>P1</td><td>拆首贷授信成功率和用信率下降</td><td>查授信后未用信原因、额度可用性、额度大小、价格、用户主动放弃、产品链路，并按 App、source、白名单批次、策略版本和额度段拆解</td><td>首贷链路不只是白名单放款少；授信成功率、用信率或用信申请数下降会直接影响后段放款承接</td><td>判断是流量质量下降、策略收紧、额度不可用，还是用户意愿下降，并明确需要运营、风控还是产品介入</td></tr>
+<tr><td>P1</td><td>验证复贷/加贷托底质量</td><td>查复贷订单占比、复贷金额占比、加贷占比、单均合同金额、额度段、FPD0/FPD7/M1、催收回收和最新 LTV/权责表现</td><td>当前订单下降但金额被复贷、加贷或高单均托底，不能只看合同金额没掉，需要验证是否为健康结构优化</td><td>判断金额托底来自稳定复贷客群和额度结构优化，还是加贷放量、风险后置或回收压力上升</td></tr>
+<tr><td>P1</td><td>拆 SmartNaira 缺口</td><td>查该 App 的首复贷结构、source、额度段、策略版本、主贷结清池、T0 再进件率、授信通过率、用信申请数和放款成功率</td><td>SmartNaira 较近 7 日均值少约 38 单，是 App 维度主拖累，需要定位其与复贷主贷缺口的交叉关系</td><td>判断缺口来自 App 侧流量/结清池减少、复贷再进件下降、授信转化下降，还是放款链路问题</td></tr>
+<tr><td>P1</td><td>拆白名单首贷缺口</td><td>查白名单供给、注册、进件、授信通过、用信申请、放款成功状态，并按 App/source/category_date 交叉</td><td>白名单首贷逆势下降，且本次供给、注册、进件下降，缺口包含前端量下降与后续转化下降两类问题</td><td>确认缺口分别来自供给/注册/进件减少、授信通过率、进件到用信申请、用信申请到放款，还是某个 App/category_date 的局部问题</td></tr>
+<tr><td>P1</td><td>分析催收回收下降原因</td><td>查 S0、S1、总回收率、案件量、案件金额、人员效率、App/source/首复贷/主贷-加贷结构</td><td>催收总回收率、S0、S1 中存在下降项，说明贷后回收有压力，需要判断是否由案件结构、人员效率或客群质量变化导致</td><td>定位回收下降发生在哪个阶段，并判断是否需要催收资源调整、客群质量复核或策略联动</td></tr>
+<tr><td>P2</td><td>跟踪 LTV 和权责低频模块</td><td>查 LTV 周更、权责月更的最新实际产物截止日、下次刷新日、已成熟 cohort 和部分成熟月份</td><td>LTV 按周更规则沿用 2026-07-05 产物；权责按月更规则正常沿用 2026-06-30 产物；低频模块用于长期质量和利润验证约束，正常频率差异不作为日更异常</td><td>在下次刷新后复核复贷/加贷质量、首贷 cohort 长期价值和权责 Take Rate 是否支持当前经营判断</td></tr>
+<tr><td>P2</td><td>持续观察首贷同周对比回落</td><td>查 2026-07-09 vs 上周同日 2026-07-02 的首贷注册、T0 进件、授信、用信申请、放款成功和白名单/自然量结构</td><td>近 7 日均值下首贷接近持平，但上周同日视角首贷少 44 单，不能只看近 7 日均值漏掉星期效应</td><td>判断首贷同周回落是周末波动、触达异常、名单批次差异，还是 2026-07-03 异常事件的延续影响</td></tr>
+</tbody></table>
+<h2>数据状态</h2>
+<table><thead><tr><th>模块</th><th>频率</th><th>状态</th><th>实际截止日</th><th>是否沿用</th><th>原因</th><th>耗时</th></tr></thead><tbody>
+<tr><td>workbench</td><td>日更</td><td>PASS</td><td>2026-07-09</td><td>否</td><td>本次已刷新至目标观察日</td><td>2 分 35 秒</td></tr>
+<tr><td>whitelist</td><td>日更</td><td>STALE_REUSED</td><td>2026-07-03</td><td>是</td><td>export_whitelist_cohort_conversion failed; 日更白名单本次未生成 2026-07-09 目标日产物，沿用 2026-07-03 最近真实产物；统一入口继续生成，白名单专题需补刷或排查</td><td>5 分 14 秒</td></tr>
+<tr><td>ltv</td><td>周更</td><td>REUSED</td><td>2026-07-05</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
+<tr><td>accrual</td><td>月更</td><td>REUSED</td><td>2026-06-30</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
+<tr><td>unified</td><td>每次刷新后重建</td><td>PARTIAL_PASS</td><td>2026-07-09</td><td>否</td><td>本次已刷新至目标观察日</td><td>0 秒</td></tr>
+</tbody></table>
+<ul>
+<li>白名单专题状态提醒：白名单为日更模块，本次状态 STALE_REUSED，实际产物截止日 2026-07-03；当前观察日 2026-07-09 的白名单结论只能使用工作台日更漏斗，统一入口状态应按 PARTIAL_PASS/WARN 复核。</li>
+</ul>
+<ul>
+<li>工作台产物校验状态：PASS。工作台本次已刷新至目标观察日，校验状态 PASS。</li>
+</ul>
+<ul>
+<li>Agent 质检状态：FAIL。报告：`data/manual_exports/business_agent_runs/2026-07-10/daily_brief_quality_2026-07-09.md`</li>
+</ul>
+<ul>
+<li>下钻任务包：`data/manual_exports/business_agent_runs/2026-07-10/diagnostic_drilldown_tasks_2026-07-09.md`（4 个任务）</li>
+</ul>
+<ul>
+<li>周/月诊断框架：`data/manual_exports/business_agent_runs/2026-07-10/period_diagnosis_framework_2026-07-09.md`</li>
+</ul>
+    </article>
+  </main>
+</body>
+</html>
