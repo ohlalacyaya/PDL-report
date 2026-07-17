@@ -1,0 +1,477 @@
+<!doctype html>
+<!-- task_evidence_snapshot: {"extra_reloan_gap_attribution":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"1/3","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/extra_reloan_gap_attribution_result.json","row_count":10,"task_state":"RECOVERY_OBSERVED","top_findings":[{"baseline":"主基准对比日","business_implication":"加贷订单变化已按 App、source、产品期限和额度段拆解。","change":"+8.0 单","direction":"上升","explained_value":"SmartNaira解释 +8.0 单","metric":"加贷订单","primary_dimension":"SmartNaira / 加贷"},{"baseline":"主基准对比日","business_implication":"合同金额变化已和订单变化分开归因，用于识别规模缺口是否被金额结构放大或缓冲。","change":"+213500 NGN","direction":"上升","explained_value":"SmartNaira解释 +213500 NGN","metric":"加贷合同金额","primary_dimension":"SmartNaira / 加贷"},{"baseline":"主基准客单价","business_implication":"客单价用于判断订单缺口对应的经营质量影响，不能只用订单数量完成诊断。","change":"+575 NGN","direction":"上升","explained_value":"客单价 20651 -> 21226 NGN","metric":"加贷客单价","primary_dimension":"加贷金额/订单结构"},{"baseline":"加贷任务全部订单","business_implication":"产品期限缺失部分不得算作已解释质量影响。","change":"BLOCKED_DATA占比 100.00%","direction":"缺失","explained_value":"未识别 160 / 160 单","metric":"产品期限数据完整率","primary_dimension":"product_term"}],"unexplained_ratio":1.0},"mature_risk_deterioration":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"3/3","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/mature_risk_deterioration_result.json","row_count":284,"task_state":"RECOVERY_OBSERVED","top_findings":[{"baseline":"前7个成熟放款日；当前放款日 2026-07-09","business_implication":"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。","change":"+1.08pp","direction":"上升","explained_value":"成熟样本 553 单","metric":"FPD0","primary_dimension":"App / 首贷-主贷-加贷 / source"},{"baseline":"前7个成熟放款日；当前放款日 2026-07-02","business_implication":"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。","change":"-0.76pp","direction":"下降","explained_value":"成熟样本 653 单","metric":"FPD7","primary_dimension":"App / 首贷-主贷-加贷 / source"},{"baseline":"前7个成熟放款日；当前放款日 2026-06-09","business_implication":"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。","change":"-5.74pp","direction":"下降","explained_value":"成熟样本 561 单","metric":"M1","primary_dimension":"App / 首贷-主贷-加贷 / source"}],"unexplained_ratio":1.0},"natural_source_abnormal_orders":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"0/7","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/natural_source_abnormal_orders_result.json","row_count":510,"task_state":"OVERDUE","top_findings":[{"baseline":"正常经营应为0单","business_implication":"异常订单持续存在，必须定位 source 错分、白名单匹配异常、统计口径或链路绕过。","change":"2026-07-16 为 +38 单","direction":"异常","explained_value":"窗口内 464 单集中于 SmartNaira","metric":"自然量异常放款","primary_dimension":"SmartNaira / source=自然量"}],"unexplained_ratio":1.0},"ongoing_product_event_validation":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"0/2","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/ongoing_product_event_validation_result.json","row_count":284,"task_state":"DIAGNOSIS_COMPLETE","top_findings":[{"baseline":"SkyLend 上线前后各14日","business_implication":"主要维度按日均订单绝对贡献且方向一致选择；主贷-6.2单/日，标记为抵消项。","change":"+0.69%","direction":"上升","explained_value":"首贷贡献 +6.6 单/日","metric":"日均放款","primary_dimension":"SkyLend / 首贷"},{"baseline":"SkyLend 上线前后各14日","business_implication":"阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。","change":"日均金额 +27.38%，客单价 +26.51%","direction":"上升","explained_value":"日均金额 762250 -> 970929 NGN","metric":"日均合同金额与客单价","primary_dimension":"SkyLend / 产品结构"},{"baseline":"SmartNaira 上线前后各7日","business_implication":"主要维度按日均订单绝对贡献且方向一致选择；无反方向抵消项。","change":"+11.58%","direction":"上升","explained_value":"首贷贡献 +55.6 单/日","metric":"日均放款","primary_dimension":"SmartNaira / 首贷"},{"baseline":"SmartNaira 上线前后各7日","business_implication":"阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。","change":"日均金额 +6.91%，客单价 -4.19%","direction":"上升","explained_value":"日均金额 10789786 -> 11535571 NGN","metric":"日均合同金额与客单价","primary_dimension":"SmartNaira / 产品结构"}],"unexplained_ratio":0.0},"primary_app_gap_attribution":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"3/3","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/primary_app_gap_attribution_result.json","row_count":12,"task_state":"RECOVERY_OBSERVED","top_findings":[{"baseline":"主基准对比日","business_implication":"App 缺口或增量已拆到首贷、主贷、加贷和 source，可用于安排对应业务动作。","change":"+158.0 单","direction":"上升","explained_value":"首贷解释 +148.0 单","metric":"目标 App 放款","primary_dimension":"首贷"}],"unexplained_ratio":0.0},"whitelist_firstloan_gap_funnel":{"observation_date":"2026-07-16","query_validation_status":"QUERY_VALIDATED","recovery_progress":"3/3","result_artifact":"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/whitelist_firstloan_gap_funnel_result.json","row_count":186,"task_state":"RECOVERY_OBSERVED","top_findings":[{"baseline":"上周同日 2026-07-09","business_implication":"白名单变化已拆成前端基数和转化效率，可据此区分供给问题与策略/链路问题。","change":"+139.0 单","direction":"上升","explained_value":"基数效应 +133.3 单，转化率效应 +5.7 单","metric":"白名单首贷放款","primary_dimension":"注册/进件基数与转化率"}],"unexplained_ratio":6.330935251804893e-05}} -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>统一经营分析入口</title>
+  <style>
+    :root {
+      --bg: #f5f7f4;
+      --panel: #ffffff;
+      --ink: #18201d;
+      --muted: #64706a;
+      --line: #dbe2dc;
+      --green: #087443;
+      --blue: #2457c5;
+      --amber: #9a5b00;
+      --red: #b42318;
+      --head: #e8f3ee;
+      --soft: #f1f4ef;
+      --shadow: 0 10px 24px rgba(27, 39, 32, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+    .shell {
+      width: min(1480px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 22px 0 34px;
+    }
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 4px 0 18px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    .status-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 360px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #39433e;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .pill.ok { color: var(--green); background: #ecf8f0; border-color: #cbead5; font-weight: 720; }
+    .pill.warn { color: var(--amber); background: #fff6df; border-color: #f0dfb5; font-weight: 720; }
+    .pill.fail { color: var(--red); background: #fff3f3; border-color: #efc7c7; font-weight: 720; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    nav a {
+      text-decoration: none;
+      color: #26312c;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 680;
+    }
+    nav a:hover { border-color: #97b7a6; background: #f7fbf8; }
+    main .shell { padding-top: 18px; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 94px;
+      box-shadow: var(--shadow);
+    }
+    .kpi-label { color: var(--muted); font-size: 12px; margin-bottom: 9px; }
+    .kpi-value { font-size: 22px; line-height: 1.15; font-weight: 760; white-space: nowrap; }
+    .kpi-sub { color: var(--muted); font-size: 12px; margin-top: 8px; line-height: 1.45; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .wide { grid-column: 1 / -1; }
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    h2 { margin: 0; font-size: 16px; line-height: 1.35; }
+    .unit { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .chart { height: 330px; width: 100%; }
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .module {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 13px;
+      min-height: 146px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .module h3 { margin: 0; font-size: 15px; }
+    .module p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 12px; }
+    .module a {
+      margin-top: auto;
+      display: inline-flex;
+      width: fit-content;
+      text-decoration: none;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 720;
+    }
+    .status {
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 760;
+    }
+    .status.pass, .status.checked { color: var(--green); background: #ecf8f0; }
+    .status.reused, .status.reused_existing_target_day { color: var(--blue); background: #eef4ff; }
+    .status.stale_reused { color: var(--amber); background: #fff6df; }
+    .status.pending { color: var(--amber); background: #fff6df; }
+    .audit {
+      margin-top: 14px;
+      background: #fffaf0;
+      border: 1px solid #eadbb8;
+      border-radius: 8px;
+      padding: 13px 15px;
+      color: #5d410b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .brief-home {
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .brief-home h2 {
+      margin: 22px 0 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 17px;
+    }
+    .brief-home h2:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .brief-home h3 { margin: 16px 0 8px; font-size: 15px; }
+    .brief-home p { margin: 8px 0; color: #26312c; }
+    .brief-home ul { margin: 8px 0 14px; padding-left: 20px; }
+    .brief-home li { margin: 4px 0; }
+    .brief-home .diagnosis-block { margin: 0 0 18px; }
+    .brief-home .lead {
+      font-size: 16px;
+      line-height: 1.85;
+      color: #17211d;
+      font-weight: 650;
+      background: #f4faf6;
+      border: 1px solid #d7eadf;
+      border-radius: 8px;
+      padding: 13px 15px;
+    }
+    .brief-home .conclusion-stack {
+      display: grid;
+      gap: 9px;
+      background: #f4faf6;
+      border: 1px solid #d7eadf;
+      border-radius: 8px;
+      padding: 13px 15px;
+    }
+    .brief-home .conclusion-stack p {
+      margin: 0;
+      color: #17211d;
+      font-size: 15px;
+      line-height: 1.72;
+      font-weight: 620;
+    }
+    .brief-home .conclusion-stack strong {
+      color: #0f5132;
+      font-weight: 780;
+    }
+    .incident-block {
+      margin-top: 2px;
+      border: 1px solid #f0dfb5;
+      background: #fffaf0;
+      border-radius: 8px;
+      padding: 13px 15px;
+      color: #3f2f0b;
+    }
+    .incident-block p {
+      margin: 8px 0;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .incident-block.no-incident {
+      border-color: var(--line);
+      background: #fbfcfa;
+      color: #4b5a52;
+    }
+    .incident-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .incident-card {
+      background: #fff;
+      border: 1px solid #eadbb8;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .incident-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .incident-head strong {
+      font-size: 13px;
+      color: #5d410b;
+    }
+    .incident-head span {
+      border: 1px solid #f0dfb5;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 760;
+      color: var(--amber);
+      background: #fff6df;
+    }
+    .incident-card dl {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .incident-card dt {
+      color: #75520a;
+      font-weight: 760;
+    }
+    .incident-card dd {
+      margin: 0;
+      color: #26312c;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    .incident-card a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 720;
+    }
+    .incident-note {
+      color: #5d410b;
+    }
+    #incident-panel {
+      scroll-margin-top: 18px;
+    }
+    .status-table-wrap { margin-top: 12px; overflow: auto; }
+    .brief-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .brief-actions a {
+      display: inline-flex;
+      text-decoration: none;
+      color: var(--blue);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 720;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #edf1ea;
+      text-align: right;
+      white-space: nowrap;
+    }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: var(--head); color: #315048; font-weight: 760; }
+    .neg { color: var(--red); font-weight: 720; }
+    .pos { color: var(--green); font-weight: 720; }
+    @media (max-width: 1100px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid, .module-grid { grid-template-columns: 1fr; }
+      .topbar { display: block; }
+      .status-strip { justify-content: flex-start; margin-top: 12px; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <div class="topbar">
+        <div>
+          <h1>统一经营分析入口</h1>
+        <div class="subtitle">首页展示跨模块经营诊断；工作台、白名单、LTV、权责等模块作为明细入口继续保留，并区分日更/周更/月更产物状态。</div>
+        </div>
+        <div class="status-strip">
+          <span class="pill ok">观察截止 2026-07-16</span>
+          <span class="pill ok">完整日口径</span>
+          <span class="pill" id="unified-status-pill">统一状态</span>
+          <span class="pill">口径版本：现金流 Take Rate</span>
+        </div>
+      </div>
+      <nav>
+        <a id="link-brief" href="daily_agent_brief_2026-07-16.html">每日简报</a>
+        <a id="link-workbench" href="workbench.html">工作台</a>
+        <a id="link-whitelist" href="whitelist_cohort.html">白名单</a>
+        <a id="link-ltv" href="ltv_month.html">LTV by month</a>
+        <a id="link-accrual" href="accrual.html">权责</a>
+        <a id="link-audit" href="audit.html">审核记录</a>
+        <a id="link-incident" href="#incident-panel">事件说明</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="shell">
+      <section class="panel wide">
+        <div class="panel-title"><h2>跨模块经营诊断</h2><span class="unit">经营结果 -> 结构变化 -> 核心拖累 -> 质量护栏 -> 下一步动作</span></div>
+        <div class="brief-home" id="brief-home"></div>
+        <div class="brief-actions">
+          <a id="brief-full-link" href="daily_agent_brief_2026-07-16.html">打开完整简报</a>
+          <a id="workbench-action-link" href="workbench.html">进入工作台看明细</a>
+        </div>
+      </section>
+
+      <section class="panel wide" id="incident-panel">
+        <div class="panel-title"><h2>异常事件与经营事件/策略变更</h2><span class="unit">人工登记生效窗口</span></div>
+        <div id="incident-home"></div>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-title"><h2>各 tab 数据状态</h2><span class="unit">点击进入细节页</span></div>
+        <div class="module-grid" id="modules"></div>
+        <div class="status-table-wrap" id="module-status-table"></div>
+        <div class="audit" id="audit-note"></div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const payload = {"meta": {"title": "统一经营分析入口", "data_date": "2026-07-16", "snapshot_note": "默认使用运行日 2026-07-17 的前一完整自然日 2026-07-16 作为目标观察截止日；低频模块会使用不晚于该日期的最近一次产物，并在模块卡片中展示实际区间。", "latest_month": "2026-06", "latest_full_take_month": "2026-05", "unified_status": "PASS", "unified_reason": "统一入口已生成，模块状态未发现关键异常", "content_quality_status": "PASS", "diagnosis_id": "8fb886b4da8e13c5"}, "task_evidence_snapshot": {"extra_reloan_gap_attribution": {"query_validation_status": "QUERY_VALIDATED", "task_state": "RECOVERY_OBSERVED", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/extra_reloan_gap_attribution_result.json", "top_findings": [{"metric": "加贷订单", "baseline": "主基准对比日", "direction": "上升", "change": "+8.0 单", "primary_dimension": "SmartNaira / 加贷", "explained_value": "SmartNaira解释 +8.0 单", "business_implication": "加贷订单变化已按 App、source、产品期限和额度段拆解。"}, {"metric": "加贷合同金额", "baseline": "主基准对比日", "direction": "上升", "change": "+213500 NGN", "primary_dimension": "SmartNaira / 加贷", "explained_value": "SmartNaira解释 +213500 NGN", "business_implication": "合同金额变化已和订单变化分开归因，用于识别规模缺口是否被金额结构放大或缓冲。"}, {"metric": "加贷客单价", "baseline": "主基准客单价", "direction": "上升", "change": "+575 NGN", "primary_dimension": "加贷金额/订单结构", "explained_value": "客单价 20651 -> 21226 NGN", "business_implication": "客单价用于判断订单缺口对应的经营质量影响，不能只用订单数量完成诊断。"}, {"metric": "产品期限数据完整率", "baseline": "加贷任务全部订单", "direction": "缺失", "change": "BLOCKED_DATA占比 100.00%", "primary_dimension": "product_term", "explained_value": "未识别 160 / 160 单", "business_implication": "产品期限缺失部分不得算作已解释质量影响。"}], "observation_date": "2026-07-16", "row_count": 10, "unexplained_ratio": 1.0, "recovery_progress": "1/3"}, "mature_risk_deterioration": {"query_validation_status": "QUERY_VALIDATED", "task_state": "RECOVERY_OBSERVED", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/mature_risk_deterioration_result.json", "top_findings": [{"metric": "FPD0", "baseline": "前7个成熟放款日；当前放款日 2026-07-09", "direction": "上升", "change": "+1.08pp", "primary_dimension": "App / 首贷-主贷-加贷 / source", "explained_value": "成熟样本 553 单", "business_implication": "成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。"}, {"metric": "FPD7", "baseline": "前7个成熟放款日；当前放款日 2026-07-02", "direction": "下降", "change": "-0.76pp", "primary_dimension": "App / 首贷-主贷-加贷 / source", "explained_value": "成熟样本 653 单", "business_implication": "成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。"}, {"metric": "M1", "baseline": "前7个成熟放款日；当前放款日 2026-06-09", "direction": "下降", "change": "-5.74pp", "primary_dimension": "App / 首贷-主贷-加贷 / source", "explained_value": "成熟样本 561 单", "business_implication": "成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。"}], "observation_date": "2026-07-16", "row_count": 284, "unexplained_ratio": 1.0, "recovery_progress": "3/3"}, "natural_source_abnormal_orders": {"query_validation_status": "QUERY_VALIDATED", "task_state": "OVERDUE", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/natural_source_abnormal_orders_result.json", "top_findings": [{"metric": "自然量异常放款", "baseline": "正常经营应为0单", "direction": "异常", "change": "2026-07-16 为 +38 单", "primary_dimension": "SmartNaira / source=自然量", "explained_value": "窗口内 464 单集中于 SmartNaira", "business_implication": "异常订单持续存在，必须定位 source 错分、白名单匹配异常、统计口径或链路绕过。"}], "observation_date": "2026-07-16", "row_count": 510, "unexplained_ratio": 1.0, "recovery_progress": "0/7"}, "ongoing_product_event_validation": {"query_validation_status": "QUERY_VALIDATED", "task_state": "DIAGNOSIS_COMPLETE", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/ongoing_product_event_validation_result.json", "top_findings": [{"metric": "日均放款", "baseline": "SkyLend 上线前后各14日", "direction": "上升", "change": "+0.69%", "primary_dimension": "SkyLend / 首贷", "explained_value": "首贷贡献 +6.6 单/日", "business_implication": "主要维度按日均订单绝对贡献且方向一致选择；主贷-6.2单/日，标记为抵消项。"}, {"metric": "日均合同金额与客单价", "baseline": "SkyLend 上线前后各14日", "direction": "上升", "change": "日均金额 +27.38%，客单价 +26.51%", "primary_dimension": "SkyLend / 产品结构", "explained_value": "日均金额 762250 -> 970929 NGN", "business_implication": "阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。"}, {"metric": "日均放款", "baseline": "SmartNaira 上线前后各7日", "direction": "上升", "change": "+11.58%", "primary_dimension": "SmartNaira / 首贷", "explained_value": "首贷贡献 +55.6 单/日", "business_implication": "主要维度按日均订单绝对贡献且方向一致选择；无反方向抵消项。"}, {"metric": "日均合同金额与客单价", "baseline": "SmartNaira 上线前后各7日", "direction": "上升", "change": "日均金额 +6.91%，客单价 -4.19%", "primary_dimension": "SmartNaira / 产品结构", "explained_value": "日均金额 10789786 -> 11535571 NGN", "business_implication": "阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。"}], "observation_date": "2026-07-16", "row_count": 284, "unexplained_ratio": 0.0, "recovery_progress": "0/2"}, "primary_app_gap_attribution": {"query_validation_status": "QUERY_VALIDATED", "task_state": "RECOVERY_OBSERVED", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/primary_app_gap_attribution_result.json", "top_findings": [{"metric": "目标 App 放款", "baseline": "主基准对比日", "direction": "上升", "change": "+158.0 单", "primary_dimension": "首贷", "explained_value": "首贷解释 +148.0 单", "business_implication": "App 缺口或增量已拆到首贷、主贷、加贷和 source，可用于安排对应业务动作。"}], "observation_date": "2026-07-16", "row_count": 12, "unexplained_ratio": 0.0, "recovery_progress": "3/3"}, "whitelist_firstloan_gap_funnel": {"query_validation_status": "QUERY_VALIDATED", "task_state": "RECOVERY_OBSERVED", "result_artifact": "data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/whitelist_firstloan_gap_funnel_result.json", "top_findings": [{"metric": "白名单首贷放款", "baseline": "上周同日 2026-07-09", "direction": "上升", "change": "+139.0 单", "primary_dimension": "注册/进件基数与转化率", "explained_value": "基数效应 +133.3 单，转化率效应 +5.7 单", "business_implication": "白名单变化已拆成前端基数和转化效率，可据此区分供给问题与策略/链路问题。"}], "observation_date": "2026-07-16", "row_count": 186, "unexplained_ratio": 6.330935251804893e-05, "recovery_progress": "3/3"}}, "tab_integrity": {"status": "PASS", "required_tabs": {"brief": {"href": "每日经营Agent简报_2026-07-16.html", "module": "统一入口", "status": "PASS"}, "workbench": {"href": "可视化工作台原型.html", "module": "工作台", "status": "PASS"}, "accrual": {"href": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30_matrix.html", "module": "权责", "status": "PASS"}, "whitelist": {"href": "data/manual_exports/whitelist_cohort/2026-03-01_2026-07-16_obs_2026-07-16/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-16_obs_2026-07-16.html", "module": "白名单", "status": "PASS"}, "ltv": {"href": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-07-12.html", "module": "LTV / MOB", "status": "PASS"}, "ltv_weekly": {"href": "LTV_首贷7天滚动Cohort复购对比可视化_2026-01_obs_2026-07-12.html", "module": "LTV / WOB", "status": "PASS"}, "audit": {"href": "业务Agent刷新审核记录_2026-07-16.html", "module": "统一入口", "status": "PASS"}}, "missing_tabs": []}, "links": {"brief": "daily_agent_brief_2026-07-16.html", "workbench": "workbench.html", "accrual": "accrual.html", "whitelist": "whitelist_cohort.html", "ltv": "ltv_month.html", "ltv_weekly": "ltv_week.html", "audit": "audit.html"}, "brief_home_html": "<!-- diagnosis_id: 8fb886b4da8e13c5 -->\n<!-- task_evidence_snapshot: {\"extra_reloan_gap_attribution\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"1/3\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/extra_reloan_gap_attribution_result.json\",\"row_count\":10,\"task_state\":\"RECOVERY_OBSERVED\",\"top_findings\":[{\"baseline\":\"主基准对比日\",\"business_implication\":\"加贷订单变化已按 App、source、产品期限和额度段拆解。\",\"change\":\"+8.0 单\",\"direction\":\"上升\",\"explained_value\":\"SmartNaira解释 +8.0 单\",\"metric\":\"加贷订单\",\"primary_dimension\":\"SmartNaira / 加贷\"},{\"baseline\":\"主基准对比日\",\"business_implication\":\"合同金额变化已和订单变化分开归因，用于识别规模缺口是否被金额结构放大或缓冲。\",\"change\":\"+213500 NGN\",\"direction\":\"上升\",\"explained_value\":\"SmartNaira解释 +213500 NGN\",\"metric\":\"加贷合同金额\",\"primary_dimension\":\"SmartNaira / 加贷\"},{\"baseline\":\"主基准客单价\",\"business_implication\":\"客单价用于判断订单缺口对应的经营质量影响，不能只用订单数量完成诊断。\",\"change\":\"+575 NGN\",\"direction\":\"上升\",\"explained_value\":\"客单价 20651 -> 21226 NGN\",\"metric\":\"加贷客单价\",\"primary_dimension\":\"加贷金额/订单结构\"},{\"baseline\":\"加贷任务全部订单\",\"business_implication\":\"产品期限缺失部分不得算作已解释质量影响。\",\"change\":\"BLOCKED_DATA占比 100.00%\",\"direction\":\"缺失\",\"explained_value\":\"未识别 160 / 160 单\",\"metric\":\"产品期限数据完整率\",\"primary_dimension\":\"product_term\"}],\"unexplained_ratio\":1.0},\"mature_risk_deterioration\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"3/3\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/mature_risk_deterioration_result.json\",\"row_count\":284,\"task_state\":\"RECOVERY_OBSERVED\",\"top_findings\":[{\"baseline\":\"前7个成熟放款日；当前放款日 2026-07-09\",\"business_implication\":\"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。\",\"change\":\"+1.08pp\",\"direction\":\"上升\",\"explained_value\":\"成熟样本 553 单\",\"metric\":\"FPD0\",\"primary_dimension\":\"App / 首贷-主贷-加贷 / source\"},{\"baseline\":\"前7个成熟放款日；当前放款日 2026-07-02\",\"business_implication\":\"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。\",\"change\":\"-0.76pp\",\"direction\":\"下降\",\"explained_value\":\"成熟样本 653 单\",\"metric\":\"FPD7\",\"primary_dimension\":\"App / 首贷-主贷-加贷 / source\"},{\"baseline\":\"前7个成熟放款日；当前放款日 2026-06-09\",\"business_implication\":\"成熟资产质量变化需要按业务维度定位贡献，不能直接归因到观察日放款。\",\"change\":\"-5.74pp\",\"direction\":\"下降\",\"explained_value\":\"成熟样本 561 单\",\"metric\":\"M1\",\"primary_dimension\":\"App / 首贷-主贷-加贷 / source\"}],\"unexplained_ratio\":1.0},\"natural_source_abnormal_orders\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"0/7\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/natural_source_abnormal_orders_result.json\",\"row_count\":510,\"task_state\":\"OVERDUE\",\"top_findings\":[{\"baseline\":\"正常经营应为0单\",\"business_implication\":\"异常订单持续存在，必须定位 source 错分、白名单匹配异常、统计口径或链路绕过。\",\"change\":\"2026-07-16 为 +38 单\",\"direction\":\"异常\",\"explained_value\":\"窗口内 464 单集中于 SmartNaira\",\"metric\":\"自然量异常放款\",\"primary_dimension\":\"SmartNaira / source=自然量\"}],\"unexplained_ratio\":1.0},\"ongoing_product_event_validation\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"0/2\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/ongoing_product_event_validation_result.json\",\"row_count\":284,\"task_state\":\"DIAGNOSIS_COMPLETE\",\"top_findings\":[{\"baseline\":\"SkyLend 上线前后各14日\",\"business_implication\":\"主要维度按日均订单绝对贡献且方向一致选择；主贷-6.2单/日，标记为抵消项。\",\"change\":\"+0.69%\",\"direction\":\"上升\",\"explained_value\":\"首贷贡献 +6.6 单/日\",\"metric\":\"日均放款\",\"primary_dimension\":\"SkyLend / 首贷\"},{\"baseline\":\"SkyLend 上线前后各14日\",\"business_implication\":\"阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。\",\"change\":\"日均金额 +27.38%，客单价 +26.51%\",\"direction\":\"上升\",\"explained_value\":\"日均金额 762250 -> 970929 NGN\",\"metric\":\"日均合同金额与客单价\",\"primary_dimension\":\"SkyLend / 产品结构\"},{\"baseline\":\"SmartNaira 上线前后各7日\",\"business_implication\":\"主要维度按日均订单绝对贡献且方向一致选择；无反方向抵消项。\",\"change\":\"+11.58%\",\"direction\":\"上升\",\"explained_value\":\"首贷贡献 +55.6 单/日\",\"metric\":\"日均放款\",\"primary_dimension\":\"SmartNaira / 首贷\"},{\"baseline\":\"SmartNaira 上线前后各7日\",\"business_implication\":\"阶段决策为 DATA_QUALITY_BLOCKED，原因：自然量/source仍存在P0异常。\",\"change\":\"日均金额 +6.91%，客单价 -4.19%\",\"direction\":\"上升\",\"explained_value\":\"日均金额 10789786 -> 11535571 NGN\",\"metric\":\"日均合同金额与客单价\",\"primary_dimension\":\"SmartNaira / 产品结构\"}],\"unexplained_ratio\":0.0},\"primary_app_gap_attribution\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"3/3\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/primary_app_gap_attribution_result.json\",\"row_count\":12,\"task_state\":\"RECOVERY_OBSERVED\",\"top_findings\":[{\"baseline\":\"主基准对比日\",\"business_implication\":\"App 缺口或增量已拆到首贷、主贷、加贷和 source，可用于安排对应业务动作。\",\"change\":\"+158.0 单\",\"direction\":\"上升\",\"explained_value\":\"首贷解释 +148.0 单\",\"metric\":\"目标 App 放款\",\"primary_dimension\":\"首贷\"}],\"unexplained_ratio\":0.0},\"whitelist_firstloan_gap_funnel\":{\"observation_date\":\"2026-07-16\",\"query_validation_status\":\"QUERY_VALIDATED\",\"recovery_progress\":\"3/3\",\"result_artifact\":\"data/manual_exports/business_agent_runs/2026-07-17/task_results/2026-07-16/whitelist_firstloan_gap_funnel_result.json\",\"row_count\":186,\"task_state\":\"RECOVERY_OBSERVED\",\"top_findings\":[{\"baseline\":\"上周同日 2026-07-09\",\"business_implication\":\"白名单变化已拆成前端基数和转化效率，可据此区分供给问题与策略/链路问题。\",\"change\":\"+139.0 单\",\"direction\":\"上升\",\"explained_value\":\"基数效应 +133.3 单，转化率效应 +5.7 单\",\"metric\":\"白名单首贷放款\",\"primary_dimension\":\"注册/进件基数与转化率\"}],\"unexplained_ratio\":6.330935251804893e-05}} -->\n<section class=\"diagnosis-block\" data-diagnosis-id=\"8fb886b4da8e13c5\">\n<h2>管理结论</h2>\n<p><strong>2026-07-16 是增长且结构占比显著变化日，主基准为上周同日 2026-07-09；合同金额较近7日 +13.09%、较前一日 +5.65%、较上周四 +16.93%；金额结构上复贷订单占比下降 3.38pp。规模拖累来自主贷复贷；经营质量拖累为复贷订单占比下降 3.38pp；上周同日 2026-07-09口径下，白名单首贷 拉动 +139 单。成熟风险中FPD0需要关注，自然量异常继续按 P0 管理。优先动作是核查自然量异常持续性口径/链路问题、拆加贷缺口与质量影响、验证成熟风险改善持续性，并完成其余 P1 验证。</strong></p>\n</section>\n<section class=\"diagnosis-block\"><h2>三基准事实</h2>\n<table><thead><tr><th>基准</th><th>整体放款</th><th>首贷</th><th>复贷</th><th>合同金额</th></tr></thead><tbody><tr><td>近 7 日均值</td><td>+82</td><td>+62</td><td>+20</td><td>+NGN 1.6M</td></tr><tr><td>前一日 2026-07-15</td><td>-79</td><td>-98</td><td>+19</td><td>+NGN 740,500</td></tr><tr><td>上周同日 2026-07-09</td><td>+167</td><td>+163</td><td>+4</td><td>+NGN 2.0M</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>金额拆解</h2>\n<p>金额量价拆解：订单量效应 +1,576,149 NGN，单均/客单价效应 +26,208 NGN，订单量效应与客单价效应未形成反向抵消，合同金额最终 +1,602,357 NGN。首贷金额 +1,474,143 NGN，复贷合同金额 +128,214 NGN。</p>\n</section>\n<section class=\"diagnosis-block\"><h2>父子归因</h2>\n<p>主归因基准采用上周同日 2026-07-09：首贷 +163 单，其中白名单 +139 单、自然量异常 +24 单，剔除异常后的正常首贷变化为 +139 单；复贷 +4 单，其中主贷 -4 单、加贷 +8 单。App 同口径暂无明显缺口。白名单较上周同日 2026-07-09：注册 +77 人、进件 +124 单、用信申请 +154 单、放款 +139 单；基数效应 +133 单、转化率效应 +6 单、净增加 139 单。</p>\n<p>短期补充（近 7 日均值）：首贷 +62 单，其中白名单 +53 单、自然量异常 +9 单；复贷 +20 单，其中主贷 +6 单、加贷 +14 单，属于拉动。白名单较近 7 日均值：注册 -18 人、进件 +78 单、用信申请 +63 单、放款 +53 单；基数效应 +56 单、转化率效应 -4 单、净增加 53 单。</p>\n<table><thead><tr><th>层级</th><th>变化</th><th>组成</th><th>语义</th></tr></thead><tbody><tr><td>整体</td><td>+167</td><td>首贷 + 复贷</td><td>父级</td></tr><tr><td>首贷</td><td>+163</td><td>白名单 + 自然量异常</td><td>父级</td></tr><tr><td>白名单首贷</td><td>+139</td><td>正常首贷</td><td>健康贡献</td></tr><tr><td>自然量异常</td><td>+24</td><td>异常增量，不计健康贡献</td><td>P0</td></tr><tr><td>复贷</td><td>+4</td><td>主贷 + 加贷</td><td>父级</td></tr><tr><td>主贷复贷</td><td>-4</td><td>复贷子项</td><td>拖累</td></tr><tr><td>加贷</td><td>+8</td><td>复贷子项</td><td>拉动</td></tr></tbody></table>\n<table><thead><tr><th>App</th><th>观察日放款</th><th>主基准变化</th><th>语义</th></tr></thead><tbody><tr><td>SmartNaira</td><td>+660</td><td>+158</td><td>拉动</td></tr><tr><td>SkyLend</td><td>+60</td><td>+9</td><td>拉动</td></tr><tr><td>PrimeCash</td><td>--</td><td>--</td><td>持平</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>白名单双基准漏斗</h2>\n<p>白名单较上周同日 2026-07-09：注册 +77 人、进件 +124 单、用信申请 +154 单、放款 +139 单；基数效应 +133 单、转化率效应 +6 单、净增加 139 单。</p>\n<p>白名单较近 7 日均值：注册 -18 人、进件 +78 单、用信申请 +63 单、放款 +53 单；基数效应 +56 单、转化率效应 -4 单、净增加 53 单。</p>\n<table><thead><tr><th>环节</th><th>观察日</th><th>较近7日</th><th>较上周同日</th></tr></thead><tbody><tr><td>白名单注册人数</td><td>+636</td><td>-18</td><td>+77</td></tr><tr><td>进件数</td><td>+793</td><td>+78</td><td>+124</td></tr><tr><td>用信申请数</td><td>+362</td><td>+63</td><td>+154</td></tr><tr><td>放款数</td><td>+319</td><td>+53</td><td>+139</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>经营事件/策略变更与异常事件</h2>\n<p>经营事件/策略变更：金融产品 / SkyLend 自 2026-07-02 持续生效；金融产品 / SmartNaira 自 2026-07-10 持续生效。</p>\n<table><thead><tr><th>类型</th><th>生效日</th><th>范围</th><th>事件</th><th>状态</th></tr></thead><tbody><tr><td>经营事件/策略变更</td><td>2026-07-02</td><td>金融产品 / SkyLend</td><td>上线 14 天金融产品</td><td>持续生效</td></tr><tr><td>经营事件/策略变更</td><td>2026-07-10</td><td>金融产品 / SmartNaira</td><td>上线 14 天金融产品</td><td>持续生效</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>成熟风险与 LTV</h2>\n<p>成熟风险观察：成熟窗口风险信号为 FPD0（放款日 2026-07-09）+1.08pp、FPD7（放款日 2026-07-02）-0.76pp、M1（放款日 2026-06-09）-5.74pp；SkyLend FPD0 58.82%，高于 SmartNaira 50.00%。风险指标对应历史成熟放款日，不能直接归因到观察日放款。高风险用户比例下降或催收改善仅作为反向证据，不能自动抵消成熟风险恶化。</p>\n<p>LTV：2026-07 首贷 Cohort（未成熟）；最新成熟 Cohort 为 2026-05。</p>\n<table><thead><tr><th>指标</th><th>对应周期</th><th>值/标签</th><th>较基准</th><th>口径</th></tr></thead><tbody><tr><td>FPD0</td><td>2026-07-09</td><td>50.81%</td><td>+1.08pp</td><td>成熟放款日口径</td></tr><tr><td>FPD7</td><td>2026-07-02</td><td>39.97%</td><td>-0.76pp</td><td>成熟放款日口径</td></tr><tr><td>M1</td><td>2026-06-09</td><td>35.83%</td><td>-5.74pp</td><td>成熟放款日口径</td></tr><tr><td>LTV</td><td>2026-07</td><td>2026-07 首贷 Cohort（未成熟）</td><td>-</td><td>未成熟 Cohort 不输出 KPI 结论</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>下一步动作</h2>\n<table><thead><tr><th>优先级</th><th>动作</th><th>总体状态</th><th>原始截止日</th><th>到期/升级</th><th>查询状态</th><th>业务状态</th><th>诊断状态</th><th>修复状态</th><th>改善观察</th><th>修复后复发观察</th></tr></thead><tbody><tr><td>P0</td><td>核查自然量异常持续性口径/链路问题</td><td>OVERDUE</td><td>2026-07-16</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/7</td><td>NOT_STARTED (0/7)</td></tr><tr><td>P1</td><td>拆加贷缺口与质量影响</td><td>RECOVERY_OBSERVED</td><td>2026-07-20</td><td>OPEN</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED (0/3)</td></tr><tr><td>P1</td><td>验证成熟风险改善持续性</td><td>RECOVERY_OBSERVED</td><td>2026-07-19</td><td>OPEN</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td></tr><tr><td>P1</td><td>验证持续生效的产品调整表现</td><td>DIAGNOSIS_COMPLETE</td><td>2026-07-20</td><td>OPEN</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/2</td><td>NOT_STARTED (0/2)</td></tr><tr><td>P1</td><td>拆 SmartNaira 同口径放款缺口</td><td>RECOVERY_OBSERVED</td><td>2026-07-17</td><td>DUE_TODAY</td><td>QUERY_VALIDATED</td><td>DUE_TODAY</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td></tr><tr><td>P1</td><td>拆白名单首贷缺口</td><td>RECOVERY_OBSERVED</td><td>2026-07-17</td><td>DUE_TODAY</td><td>QUERY_VALIDATED</td><td>DUE_TODAY</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>下钻 SQL 验证：QUERY_PASS_BUSINESS_OPEN</h2>\n<table><thead><tr><th>任务</th><th>阶段性决策</th><th>总体状态</th><th>查询状态</th><th>业务状态</th><th>诊断状态</th><th>修复状态</th><th>改善观察</th><th>修复后复发观察</th><th>EXPLAIN</th><th>输出行数</th><th>耗时(s)</th><th>order_id去重</th><th>事实表对账</th><th>期限BLOCKED_DATA</th></tr></thead><tbody><tr><td>核查自然量异常持续性口径/链路问题</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/7</td><td>NOT_STARTED (0/7)</td><td>PASS</td><td>510</td><td>4.385</td><td>PASS</td><td>PASS</td><td>不适用</td></tr><tr><td>拆加贷缺口与质量影响</td><td>-</td><td>RECOVERY_OBSERVED</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED (0/3)</td><td>PASS</td><td>10</td><td>1.032</td><td>PASS</td><td>PASS</td><td>160 / 160 (100.00%)</td></tr><tr><td>验证成熟风险改善持续性</td><td>-</td><td>RECOVERY_OBSERVED</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td><td>PASS</td><td>284</td><td>2.522</td><td>PASS</td><td>PASS</td><td>不适用</td></tr><tr><td>验证持续生效的产品调整表现</td><td>DATA_QUALITY_BLOCKED</td><td>DIAGNOSIS_COMPLETE</td><td>QUERY_VALIDATED</td><td>OPEN</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/2</td><td>NOT_STARTED (0/2)</td><td>PASS</td><td>284</td><td>9.201</td><td>PASS</td><td>PASS</td><td>0 / 13626 (0.00%)</td></tr><tr><td>拆 SmartNaira 同口径放款缺口</td><td>-</td><td>RECOVERY_OBSERVED</td><td>QUERY_VALIDATED</td><td>DUE_TODAY</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td><td>PASS</td><td>12</td><td>1.299</td><td>PASS</td><td>PASS</td><td>不适用</td></tr><tr><td>拆白名单首贷缺口</td><td>-</td><td>RECOVERY_OBSERVED</td><td>QUERY_VALIDATED</td><td>DUE_TODAY</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>3/3</td><td>NOT_STARTED (0/3)</td><td>PASS</td><td>186</td><td>32.376</td><td>PASS</td><td>PASS</td><td>不适用</td></tr></tbody></table>\n</section>\n<section class=\"diagnosis-block\"><h2>产品事件等长窗口决策</h2>\n<table><thead><tr><th>App</th><th>前/后天数</th><th>日均放款</th><th>日均金额</th><th>客单价</th><th>后窗口首贷/主贷/加贷</th><th>自然量占比</th><th>成熟风险</th><th>成熟覆盖率</th><th>阶段性决策</th></tr></thead><tbody><tr><td>SkyLend</td><td>14 / 14</td><td>62.4 -&gt; 62.9</td><td>762250 -&gt; 970929</td><td>12210 -&gt; 15447</td><td>首贷 65.57% / 主贷 34.43% / 加贷 0.00%</td><td>4.09%</td><td>FPD0 53.88% / FPD7 31.25% / M1 --</td><td>FPD0 46.82% / FPD7 5.45% / M1 0.00%</td><td>DATA_QUALITY_BLOCKED</td></tr><tr><td>SmartNaira</td><td>7 / 7</td><td>525.4 -&gt; 586.3</td><td>10789786 -&gt; 11535571</td><td>20535 -&gt; 19676</td><td>首贷 45.00% / 主贷 42.81% / 加贷 12.18%</td><td>7.09%</td><td>FPD0 -- / FPD7 -- / M1 --</td><td>FPD0 0.00% / FPD7 0.00% / M1 0.00%</td><td>DATA_QUALITY_BLOCKED</td></tr></tbody></table>\n</section>", "incident_windows": [{"incident_id": "EVT-20260702-SKYLEND-14D-PRODUCT-001", "event_date": "2026-07-02", "start_time": "2026-07-02 00:00:00", "end_time": "", "scope": "金融产品 / SkyLend", "issue": "上线 14 天金融产品", "impact": "产品期限结构发生调整；分析 2026-07-02 及以后 SkyLend 的进件、授信、用信、放款和风险表现时需纳入该事件", "evidence_file": "", "status": "confirmed", "event_category": "经营事件/策略变更"}, {"incident_id": "EVT-20260710-SMARTNAIRA-14D-PRODUCT-001", "event_date": "2026-07-10", "start_time": "2026-07-10 00:00:00", "end_time": "", "scope": "金融产品 / SmartNaira", "issue": "上线 14 天金融产品", "impact": "产品期限结构发生调整；分析 2026-07-10 及以后 SmartNaira 的进件、授信、用信、放款和风险表现时需纳入该事件", "evidence_file": "", "status": "confirmed", "event_category": "经营事件/策略变更"}], "incident_html": "<div class=\"incident-block\">\n<p>观察日 2026-07-16 命中已登记事件。系统故障、数据错误和链路中断按异常事件解释；产品上线和策略调整按经营事件/策略变更跟踪。</p>\n<div class=\"incident-list\">\n<article class=\"incident-card\">\n<div class=\"incident-head\"><strong>EVT-20260702-SKYLEND-14D-PRODUCT-001</strong><span>confirmed</span></div>\n<dl>\n<dt>事件类型</dt><dd>经营事件/策略变更</dd>\n<dt>影响时间窗</dt><dd>2026-07-02 00:00:00</dd>\n<dt>影响范围</dt><dd>金融产品 / SkyLend</dd>\n<dt>已确认问题</dt><dd>上线 14 天金融产品</dd>\n<dt>经营影响</dt><dd>产品期限结构发生调整；分析 2026-07-02 及以后 SkyLend 的进件、授信、用信、放款和风险表现时需纳入该事件</dd>\n<dt>证据</dt><dd><span>无证据文件</span></dd>\n</dl>\n</article>\n<article class=\"incident-card\">\n<div class=\"incident-head\"><strong>EVT-20260710-SMARTNAIRA-14D-PRODUCT-001</strong><span>confirmed</span></div>\n<dl>\n<dt>事件类型</dt><dd>经营事件/策略变更</dd>\n<dt>影响时间窗</dt><dd>2026-07-10 00:00:00</dd>\n<dt>影响范围</dt><dd>金融产品 / SmartNaira</dd>\n<dt>已确认问题</dt><dd>上线 14 天金融产品</dd>\n<dt>经营影响</dt><dd>产品期限结构发生调整；分析 2026-07-10 及以后 SmartNaira 的进件、授信、用信、放款和风险表现时需纳入该事件</dd>\n<dt>证据</dt><dd><span>无证据文件</span></dd>\n</dl>\n</article>\n</div>\n<p class=\"incident-note\">诊断边界：异常事件用于校正故障或数据低基数；经营事件/策略变更用于评估上线前后规模、结构和成熟风险，不得混写为系统异常。</p>\n</div>", "kpis": [{"label": "2026-07-16 放款量", "value": "720", "sub": "NGN 13.8M"}, {"label": "2026-06 合同金额", "value": "NGN 418.0M", "sub": "首贷 9,185 / 复贷 10,432 笔"}, {"label": "2026-05 Take Rate", "value": "3.69%", "sub": "成熟资产现金流口径"}, {"label": "2026-07 首贷 Cohort（未成熟）", "value": "未成熟", "sub": "订单 3,076 / 合同金额 NGN 26.0M"}, {"label": "白名单 T0 放款率", "value": "0.53%", "sub": "category_date / T0 / overall"}], "module_status": [{"module": "工作台", "frequency": "日更", "status": "PASS", "range": "2026-01-01 至 2026-07-16", "actual_cutoff": "2026-07-16", "reused": "否", "reason": "本次已刷新至目标观察日", "business_meaning": "本次已刷新至目标观察日", "next_refresh": "2026-07-18", "note": "过程监控，完整日口径", "href": "可视化工作台原型.html"}, {"module": "白名单", "frequency": "日更", "status": "PASS", "range": "2026-03-01 至 2026-07-16", "actual_cutoff": "2026-07-16", "reused": "否", "reason": "本次已刷新至目标观察日", "business_meaning": "本次已刷新至目标观察日", "next_refresh": "2026-07-18", "note": "1,985 行，三套锚点；首页白名单变化来自工作台日更漏斗，专题 tab 为 cohort 产物", "href": "data/manual_exports/whitelist_cohort/2026-03-01_2026-07-16_obs_2026-07-16/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-16_obs_2026-07-16.html"}, {"module": "LTV / MOB", "frequency": "周更", "status": "REUSED", "range": "2026-01 至 2026-07", "actual_cutoff": "2026-07-12", "reused": "是", "reason": "按刷新频率未到本次刷新日，正常沿用最近真实产物", "business_meaning": "按周更/月更频率正常沿用最近真实产物，不代表数据异常", "next_refresh": "2026-07-20", "note": "by month，首贷月 cohort", "href": "LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-07-12.html"}, {"module": "LTV / WOB", "frequency": "周更", "status": "REUSED", "range": "2026-01-01 至 2026-07-12", "actual_cutoff": "2026-07-12", "reused": "是", "reason": "按刷新频率未到本次刷新日，正常沿用最近真实产物", "business_meaning": "按周更/月更频率正常沿用最近真实产物，不代表数据异常", "next_refresh": "2026-07-20", "note": "by week，7天滚动 cohort", "href": "LTV_首贷7天滚动Cohort复购对比可视化_2026-01_obs_2026-07-12.html"}, {"module": "权责", "frequency": "月更", "status": "REUSED", "range": "2026-01 至 2026-06", "actual_cutoff": "2026-06-30", "reused": "是", "reason": "按刷新频率未到本次刷新日，正常沿用最近真实产物", "business_meaning": "按周更/月更频率正常沿用最近真实产物，不代表数据异常", "next_refresh": "2026-08-01", "note": "最新可计算月份：2026-06；最新完全成熟月份：2026-05", "href": "data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30_matrix.html"}], "monthly_series": [{"month": "2026-01", "overall_contract_amt": 214267598.0, "matured_contract_amt": 214267598.0, "net_cash_revenue_amt": 6449359.0, "first_contract_amt": 57541500.0, "reloan_contract_amt": 156726098.0, "take_rate": 0.0301}, {"month": "2026-02", "overall_contract_amt": 226707800.0, "matured_contract_amt": 226707800.0, "net_cash_revenue_amt": 9946700.99, "first_contract_amt": 48520500.0, "reloan_contract_amt": 178187300.0, "take_rate": 0.043875}, {"month": "2026-03", "overall_contract_amt": 313731158.0, "matured_contract_amt": 313731158.0, "net_cash_revenue_amt": -1258076.33, "first_contract_amt": 87990400.0, "reloan_contract_amt": 225740758.0, "take_rate": -0.00401}, {"month": "2026-04", "overall_contract_amt": 338940550.0, "matured_contract_amt": 338940550.0, "net_cash_revenue_amt": 8568682.12, "first_contract_amt": 93850500.0, "reloan_contract_amt": 245090050.0, "take_rate": 0.025281}, {"month": "2026-05", "overall_contract_amt": 376713250.0, "matured_contract_amt": 376713250.0, "net_cash_revenue_amt": 13899737.25, "first_contract_amt": 89184500.0, "reloan_contract_amt": 287528750.0, "take_rate": 0.036897}, {"month": "2026-06", "overall_contract_amt": 417982950.0, "matured_contract_amt": 110507750.0, "net_cash_revenue_amt": 2736439.0, "first_contract_amt": 67526500.0, "reloan_contract_amt": 350456450.0, "take_rate": 0.024762}], "daily_series": [{"day": "2026-06-17", "loan_cnt": 946.0, "contract_amount": 15509000.0}, {"day": "2026-06-18", "loan_cnt": 924.0, "contract_amount": 16088000.0}, {"day": "2026-06-19", "loan_cnt": 625.0, "contract_amount": 14403750.0}, {"day": "2026-06-20", "loan_cnt": 888.0, "contract_amount": 15568750.0}, {"day": "2026-06-21", "loan_cnt": 484.0, "contract_amount": 11668100.0}, {"day": "2026-06-22", "loan_cnt": 607.0, "contract_amount": 13683500.0}, {"day": "2026-06-23", "loan_cnt": 521.0, "contract_amount": 11195600.0}, {"day": "2026-06-24", "loan_cnt": 801.0, "contract_amount": 16657500.0}, {"day": "2026-06-25", "loan_cnt": 670.0, "contract_amount": 14693750.0}, {"day": "2026-06-26", "loan_cnt": 580.0, "contract_amount": 13933000.0}, {"day": "2026-06-27", "loan_cnt": 728.0, "contract_amount": 12460250.0}, {"day": "2026-06-28", "loan_cnt": 415.0, "contract_amount": 8112000.0}, {"day": "2026-06-29", "loan_cnt": 611.0, "contract_amount": 12332250.0}, {"day": "2026-06-30", "loan_cnt": 647.0, "contract_amount": 14175500.0}, {"day": "2026-07-01", "loan_cnt": 773.0, "contract_amount": 12049500.0}, {"day": "2026-07-02", "loan_cnt": 653.0, "contract_amount": 14120000.0}, {"day": "2026-07-03", "loan_cnt": 454.0, "contract_amount": 11275000.0}, {"day": "2026-07-04", "loan_cnt": 526.0, "contract_amount": 9708000.0}, {"day": "2026-07-05", "loan_cnt": 500.0, "contract_amount": 9366000.0}, {"day": "2026-07-06", "loan_cnt": 773.0, "contract_amount": 13287500.0}, {"day": "2026-07-07", "loan_cnt": 613.0, "contract_amount": 12982000.0}, {"day": "2026-07-08", "loan_cnt": 623.0, "contract_amount": 13856500.0}, {"day": "2026-07-09", "loan_cnt": 553.0, "contract_amount": 11837500.0}, {"day": "2026-07-10", "loan_cnt": 620.0, "contract_amount": 11838750.0}, {"day": "2026-07-11", "loan_cnt": 586.0, "contract_amount": 10352500.0}, {"day": "2026-07-12", "loan_cnt": 466.0, "contract_amount": 11109500.0}, {"day": "2026-07-13", "loan_cnt": 646.0, "contract_amount": 12910750.0}, {"day": "2026-07-14", "loan_cnt": 795.0, "contract_amount": 14524000.0}, {"day": "2026-07-15", "loan_cnt": 799.0, "contract_amount": 13101000.0}, {"day": "2026-07-16", "loan_cnt": 720.0, "contract_amount": 13841500.0}], "whitelist_summary": [{"anchor_type": "category_date", "whitelist_mobile_cnt": 667840.0, "register_mobile_cnt": 6051.0, "release_mobile_cnt": 3515.0, "register_rate": 0.009060553425970293, "release_rate": 0.005263236703402012}, {"anchor_type": "create_time", "whitelist_mobile_cnt": 724698.0, "register_mobile_cnt": 27358.0, "release_mobile_cnt": 8708.0, "register_rate": 0.037750897615282504, "release_rate": 0.012016039784848309}, {"anchor_type": "update_time", "whitelist_mobile_cnt": 401599.0, "register_mobile_cnt": 4188.0, "release_mobile_cnt": 1604.0, "register_rate": 0.010428312819504033, "release_rate": 0.003994033849685881}], "ltv_take_rate_rows": [{"cohort_month": "2026-01", "first_loan_order_cnt": 8811.0, "first_contract_amt": 57541500.0, "first_net_take_rate": -0.0658, "cum_repurchase_user_rate": 0.3672}, {"cohort_month": "2026-02", "first_loan_order_cnt": 7148.0, "first_contract_amt": 48520500.0, "first_net_take_rate": -0.0305, "cum_repurchase_user_rate": 0.3969}, {"cohort_month": "2026-03", "first_loan_order_cnt": 10209.0, "first_contract_amt": 87990400.0, "first_net_take_rate": -0.0629, "cum_repurchase_user_rate": 0.3791}, {"cohort_month": "2026-04", "first_loan_order_cnt": 10377.0, "first_contract_amt": 93850500.0, "first_net_take_rate": -0.0373, "cum_repurchase_user_rate": 0.4051}, {"cohort_month": "2026-05", "first_loan_order_cnt": 10296.0, "first_contract_amt": 89184500.0, "first_net_take_rate": -0.066, "cum_repurchase_user_rate": 0.3496}, {"cohort_month": "2026-06", "first_loan_order_cnt": 9185.0, "first_contract_amt": 67526500.0, "first_net_take_rate": -0.0096, "cum_repurchase_user_rate": null}, {"cohort_month": "2026-07", "first_loan_order_cnt": 3076.0, "first_contract_amt": 26018000.0, "first_net_take_rate": null, "cum_repurchase_user_rate": null}], "audit": {"workbench": {"status": "PASS", "issues": [], "latest_complete_day": "2026-07-16", "export_dir": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/db_refresh/2026-07-17", "duration_sec": 166.4, "query_timings": [{"name": "postloan_case_day_detail", "range": "2026-07-16~2026-07-16", "rows": 1406, "duration_sec": 2.27}, {"name": "postloan_snapshot_cache", "rows": 433605, "duration_sec": 0, "missing_ranges": ["2026-07-16~2026-07-16"], "cache_path": "/Users/ohlala/Documents/线上现金贷/data/cache/business_agent/postloan_daily/postloan_case_day_detail_2026-01-01.csv"}, {"name": "postloan_snapshot_aggregate", "rows": 3640, "duration_sec": 2.64}, {"name": "t1", "rows": 591, "duration_sec": 11.36}, {"name": "t1_app", "rows": 1238, "duration_sec": 11.7}, {"name": "t2_overall", "rows": 197, "duration_sec": 22.67}, {"name": "t2_source", "rows": 394, "duration_sec": 18.81}, {"name": "t2_app", "rows": 430, "duration_sec": 18.27}, {"name": "t2_whitelist", "rows": 73, "duration_sec": 9.1}, {"name": "t3_extra", "rows": 197, "duration_sec": 4.29}, {"name": "t3_extra_app", "rows": 197, "duration_sec": 3.59}, {"name": "t3_main", "rows": 197, "duration_sec": 8.92}, {"name": "t3_main_app", "rows": 391, "duration_sec": 10.95}, {"name": "t4_fpd", "rows": 197, "duration_sec": 4.68}, {"name": "t4_fpd_dim", "rows": 1898, "duration_sec": 10.71}, {"name": "t4_highrisk", "rows": 197, "duration_sec": 15.24}], "slow_queries": []}, "ltv": {"rows": 312, "cohort_months": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07"], "matured_rows": 50, "check_status": "PASS", "credit_level_start_date": "2026-04-01", "dimension_check_status": "PASS", "credit_level_dimension_values": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "-1", "-2", "unknown"], "output": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-07-13/monthly_cohort_2026-01-01_2026-07-12_obs_2026-07-12/LTV_首贷月Cohort复购对比_2026-01-01_2026-07-12_obs_2026-07-12.csv", "sql": "/Users/ohlala/Documents/线上现金贷/data/manual_exports/ltv/2026-07-13/monthly_cohort_2026-01-01_2026-07-12_obs_2026-07-12/LTV_首贷月Cohort复购对比_2026-01-01_2026-07-12_obs_2026-07-12.sql"}}};
+    const fmt = {
+      int: v => v == null ? '--' : Math.round(Number(v)).toLocaleString('en-US'),
+      money: v => {
+        if (v == null || Number.isNaN(Number(v))) return '--';
+        const n = Number(v);
+        if (Math.abs(n) >= 1e9) return `NGN ${(n / 1e9).toFixed(2)}B`;
+        return `NGN ${(n / 1e6).toFixed(1)}M`;
+      },
+      pct: v => v == null || Number.isNaN(Number(v)) ? '--' : `${(Number(v) * 100).toFixed(2)}%`
+    };
+    const abs = href => href;
+    const unifiedStatus = payload.meta.unified_status || 'UNKNOWN';
+    const unifiedPill = document.getElementById('unified-status-pill');
+    unifiedPill.textContent = `统一状态 ${unifiedStatus}`;
+    unifiedPill.title = payload.meta.unified_reason || '';
+    unifiedPill.className = `pill ${
+      ['PASS', 'CHECKED'].includes(unifiedStatus) ? 'ok' :
+      ['FAIL', 'CONTENT_FAIL'].includes(unifiedStatus) ? 'fail' :
+      'warn'
+    }`;
+    document.getElementById('link-brief').href = abs(payload.links.brief);
+    document.getElementById('link-workbench').href = abs(payload.links.workbench);
+    document.getElementById('link-whitelist').href = abs(payload.links.whitelist);
+    document.getElementById('link-ltv').href = abs(payload.links.ltv);
+    if (payload.links.ltv_weekly && payload.links.ltv_weekly !== '#') {
+      const weeklyLink = document.createElement('a');
+      weeklyLink.id = 'link-ltv-weekly';
+      weeklyLink.href = abs(payload.links.ltv_weekly);
+      weeklyLink.textContent = 'LTV by week';
+      document.getElementById('link-accrual').before(weeklyLink);
+    }
+    document.getElementById('link-accrual').href = abs(payload.links.accrual);
+    document.getElementById('link-audit').href = abs(payload.links.audit);
+
+    document.getElementById('brief-home').innerHTML = payload.brief_home_html || '<p>每日经营 Agent 简报尚未生成。</p>';
+    document.getElementById('incident-home').innerHTML = payload.incident_html || '<div class="incident-block no-incident"><p>暂无已登记的异常事件或经营事件/策略变更。</p></div>';
+    document.getElementById('brief-full-link').href = abs(payload.links.brief);
+    document.getElementById('workbench-action-link').href = abs(payload.links.workbench);
+
+    document.getElementById('modules').innerHTML = payload.module_status.map(item => `
+      <article class="module">
+        <h3>${item.module}</h3>
+        <span class="status ${String(item.status).toLowerCase()}">${item.status}</span>
+        <p>频率：${item.frequency}；实际截止：${item.actual_cutoff}</p>
+        <p>是否沿用：${item.reused}；原因：${item.reason}</p>
+        <p>业务含义：${item.business_meaning}</p>
+        <p>下次刷新：${item.next_refresh}</p>
+        <p>${item.note}</p>
+        <a href="${item.href}">打开模块</a>
+      </article>
+    `).join('');
+    document.getElementById('module-status-table').innerHTML = `
+      <table>
+        <thead><tr><th>模块</th><th>刷新频率</th><th>本次状态</th><th>实际产物截止日</th><th>是否沿用旧产物</th><th>沿用/刷新原因</th><th>业务含义</th><th>下次刷新日</th></tr></thead>
+        <tbody>
+          ${payload.module_status.map(item => `
+            <tr>
+              <td>${item.module}</td>
+              <td>${item.frequency}</td>
+              <td>${item.status}</td>
+              <td>${item.actual_cutoff}</td>
+              <td>${item.reused}</td>
+              <td>${item.reason}</td>
+              <td>${item.business_meaning}</td>
+              <td>${item.next_refresh}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+    document.getElementById('audit-note').textContent = payload.meta.snapshot_note;
+  </script>
+</body>
+</html>
