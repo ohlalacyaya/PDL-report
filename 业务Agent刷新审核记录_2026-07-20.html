@@ -1,0 +1,94 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>业务Agent刷新审核记录 - 2026-07-20</title><style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;max-width:1180px;margin:32px auto;padding:0 20px;color:#18201d;background:#f7f8f6}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid #dde3de;padding:24px;line-height:1.65}</style></head><body><pre># 业务Agent刷新审核记录 - 2026-07-20
+
+- 运行日：2026-07-21
+- 观察截止日：2026-07-20（默认 `run_date - 1 day`）
+- 默认起始日：2026-01-01
+- 白名单起始日：2026-03-01
+- Dry Run：否
+
+## 模块结果
+
+| 模块 | 刷新频率 | 本次状态 | 实际产物截止日 | 是否沿用 | 沿用/刷新原因 | 业务含义 | 下次刷新日 | 实际使用的产物路径 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| workbench | 日更 | REUSED_EXISTING_TARGET_DAY | 2026-07-20 | 是 | 本次未重新执行工作台模块，沿用已存在的 2026-07-20 目标日产物 | 沿用目标日已有真实产物；由于实际产物截止日等于目标观察日，可用于本次经营分析，但需要保留沿用标记 | 2026-07-22 | csv: `data/manual_exports/db_refresh/2026-07-21/t1_2026-01-01_2026-07-20.csv`&lt;br&gt;validation: `data/manual_exports/db_refresh/2026-07-21/dashboard_daily_refresh_validation.json`&lt;br&gt;html: `可视化工作台原型.html` |
+| whitelist | 日更 | REUSED_EXISTING_TARGET_DAY | 2026-07-20 | 是 | 本次未重新执行白名单模块，沿用已存在的 2026-07-20 目标日产物 | 沿用目标日已有真实产物；由于实际产物截止日等于目标观察日，可用于本次经营分析，但需要保留沿用标记 | 2026-07-22 | csv: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.csv`&lt;br&gt;html: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.html`&lt;br&gt;sql: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.sql`&lt;br&gt;validation: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/whitelist_cohort_conversion_validation.json` |
+| ltv | 周更（每周一） | REUSED | 2026-07-19 | 是 | 按刷新频率未到本次刷新日，正常沿用最近真实产物 | 按周更/月更频率正常沿用最近真实产物，不代表数据异常 | 2026-07-27 | monthly_csv: `data/manual_exports/ltv/2026-07-20/monthly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-07-19_obs_2026-07-19.csv`&lt;br&gt;monthly_html: `LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-07-19.html`&lt;br&gt;monthly_validation: `data/manual_exports/ltv/2026-07-20/monthly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/monthly_ltv_validation.json`&lt;br&gt;weekly_csv: `data/manual_exports/ltv/2026-07-20/weekly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/LTV_首贷7天滚动Cohort复购对比_2026-01-01_2026-07-19_obs_2026-07-19.csv`&lt;br&gt;weekly_html: `LTV_首贷7天滚动Cohort复购对比可视化_2026-01_obs_2026-07-19.html`&lt;br&gt;weekly_validation: `data/manual_exports/ltv/2026-07-20/weekly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/weekly_ltv_validation.json` |
+| accrual | 月更（每月 1 号） | REUSED | 2026-06-30 | 是 | 按刷新频率未到本次刷新日，正常沿用最近真实产物 | 按周更/月更频率正常沿用最近真实产物，不代表数据异常 | 2026-08-01 | csv: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30.csv`&lt;br&gt;html: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30_matrix.html`&lt;br&gt;sql: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30.sql` |
+| unified | 每次刷新后重建 | PASS | 2026-07-20 | 否 | - | 本次已刷新至目标观察日 | 2026-07-22 | html: `统一经营分析入口_2026-07-20.html`&lt;br&gt;diagnosis_json: `data/manual_exports/business_agent_runs/2026-07-21/business_diagnosis_2026-07-20.json`&lt;br&gt;brief_md: `每日经营Agent简报_2026-07-20.md`&lt;br&gt;brief_html: `每日经营Agent简报_2026-07-20.html`&lt;br&gt;brief_quality_json: `data/manual_exports/business_agent_runs/2026-07-21/daily_brief_quality_2026-07-20.json`&lt;br&gt;brief_quality_md: `data/manual_exports/business_agent_runs/2026-07-21/daily_brief_quality_2026-07-20.md`&lt;br&gt;drilldown_tasks_json: `data/manual_exports/business_agent_runs/2026-07-21/diagnostic_drilldown_tasks_2026-07-20.json`&lt;br&gt;drilldown_tasks_md: `data/manual_exports/business_agent_runs/2026-07-21/diagnostic_drilldown_tasks_2026-07-20.md`&lt;br&gt;period_framework_json: `data/manual_exports/business_agent_runs/2026-07-21/period_diagnosis_framework_2026-07-20.json`&lt;br&gt;period_framework_md: `data/manual_exports/business_agent_runs/2026-07-21/period_diagnosis_framework_2026-07-20.md`&lt;br&gt;audit_md: `业务Agent刷新审核记录_2026-07-20.md`&lt;br&gt;audit_html: `业务Agent刷新审核记录_2026-07-20.html`&lt;br&gt;audit_json: `data/manual_exports/business_agent_runs/2026-07-21/business_agent_refresh_2026-07-20.json` |
+
+## 输出文件（真实存在）
+
+### workbench
+- 本次状态：REUSED_EXISTING_TARGET_DAY
+- 原因：本次未重新执行工作台模块，沿用已存在的 2026-07-20 目标日产物
+- 业务含义：沿用目标日已有真实产物；由于实际产物截止日等于目标观察日，可用于本次经营分析，但需要保留沿用标记
+- 实际观察截止日：2026-07-20
+- 是否沿用：是
+- 下次刷新时间：2026-07-22
+- 沿用产物路径：
+- csv: `data/manual_exports/db_refresh/2026-07-21/t1_2026-01-01_2026-07-20.csv`
+- validation: `data/manual_exports/db_refresh/2026-07-21/dashboard_daily_refresh_validation.json`
+- html: `可视化工作台原型.html`
+
+### whitelist
+- 本次状态：REUSED_EXISTING_TARGET_DAY
+- 原因：本次未重新执行白名单模块，沿用已存在的 2026-07-20 目标日产物
+- 业务含义：沿用目标日已有真实产物；由于实际产物截止日等于目标观察日，可用于本次经营分析，但需要保留沿用标记
+- 实际观察截止日：2026-07-20
+- 是否沿用：是
+- 下次刷新时间：2026-07-22
+- 沿用产物路径：
+- csv: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.csv`
+- html: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.html`
+- sql: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/T2_13_whitelist_cohort_t0_t7_t30_cum_conversion_2026-03-01_2026-07-20_obs_2026-07-20.sql`
+- validation: `data/manual_exports/whitelist_cohort/2026-03-01_2026-07-20_obs_2026-07-20/whitelist_cohort_conversion_validation.json`
+
+### ltv
+- 本次状态：REUSED
+- 原因：按刷新频率未到本次刷新日，正常沿用最近真实产物
+- 业务含义：按周更/月更频率正常沿用最近真实产物，不代表数据异常
+- 实际观察截止日：2026-07-19
+- 是否沿用：是
+- 下次刷新时间：2026-07-27
+- 沿用产物路径：
+- monthly_csv: `data/manual_exports/ltv/2026-07-20/monthly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/LTV_首贷月Cohort复购对比_2026-01-01_2026-07-19_obs_2026-07-19.csv`
+- monthly_html: `LTV_首贷月Cohort复购对比可视化_2026-01_obs_2026-07-19.html`
+- monthly_validation: `data/manual_exports/ltv/2026-07-20/monthly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/monthly_ltv_validation.json`
+- weekly_csv: `data/manual_exports/ltv/2026-07-20/weekly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/LTV_首贷7天滚动Cohort复购对比_2026-01-01_2026-07-19_obs_2026-07-19.csv`
+- weekly_html: `LTV_首贷7天滚动Cohort复购对比可视化_2026-01_obs_2026-07-19.html`
+- weekly_validation: `data/manual_exports/ltv/2026-07-20/weekly_cohort_2026-01-01_2026-07-19_obs_2026-07-19/weekly_ltv_validation.json`
+
+### accrual
+- 本次状态：REUSED
+- 原因：按刷新频率未到本次刷新日，正常沿用最近真实产物
+- 业务含义：按周更/月更频率正常沿用最近真实产物，不代表数据异常
+- 实际观察截止日：2026-06-30
+- 是否沿用：是
+- 下次刷新时间：2026-08-01
+- 沿用产物路径：
+- csv: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30.csv`
+- html: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30_matrix.html`
+- sql: `data/manual_exports/monthly_accrual_operating/2026-01-01_2026-06-30_obs_2026-06-30/monthly_accrual_operating_2026-01-01_2026-06-30_obs_2026-06-30.sql`
+
+### unified
+- html: `统一经营分析入口_2026-07-20.html`
+- diagnosis_json: `data/manual_exports/business_agent_runs/2026-07-21/business_diagnosis_2026-07-20.json`
+- brief_md: `每日经营Agent简报_2026-07-20.md`
+- brief_html: `每日经营Agent简报_2026-07-20.html`
+- brief_quality_json: `data/manual_exports/business_agent_runs/2026-07-21/daily_brief_quality_2026-07-20.json`
+- brief_quality_md: `data/manual_exports/business_agent_runs/2026-07-21/daily_brief_quality_2026-07-20.md`
+- drilldown_tasks_json: `data/manual_exports/business_agent_runs/2026-07-21/diagnostic_drilldown_tasks_2026-07-20.json`
+- drilldown_tasks_md: `data/manual_exports/business_agent_runs/2026-07-21/diagnostic_drilldown_tasks_2026-07-20.md`
+- period_framework_json: `data/manual_exports/business_agent_runs/2026-07-21/period_diagnosis_framework_2026-07-20.json`
+- period_framework_md: `data/manual_exports/business_agent_runs/2026-07-21/period_diagnosis_framework_2026-07-20.md`
+- audit_md: `业务Agent刷新审核记录_2026-07-20.md`
+- audit_html: `业务Agent刷新审核记录_2026-07-20.html`
+- audit_json: `data/manual_exports/business_agent_runs/2026-07-21/business_agent_refresh_2026-07-20.json`
+
+## 调度规则
+
+- 工作台：每日刷新。
+- 白名单：每日刷新。
+- LTV：每周一刷新，同时输出 by month / MOB 和 by week / WOB。
+- 权责经营表：每月 1 号刷新。
+- 统一入口：每次调度后重建；低频模块使用不晚于目标观察日的最近一次产物，并在模块卡片展示实际区间。</pre></body></html>
