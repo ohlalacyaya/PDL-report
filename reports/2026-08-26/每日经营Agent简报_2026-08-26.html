@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>每日经营 Agent 简报 - 2026-08-26</title>
+  <style>
+    :root { --bg:#f5f7f4; --panel:#fff; --ink:#18201d; --muted:#64706a; --line:#dbe2dc; --head:#e8f3ee; --blue:#2457c5; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; letter-spacing:0; }
+    main { width:min(1120px, calc(100vw - 40px)); margin:0 auto; padding:28px 0 44px; }
+    article { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px 28px; box-shadow:0 10px 24px rgba(27,39,32,.08); }
+    h1 { margin:0 0 18px; font-size:28px; line-height:1.25; }
+    h2 { margin:28px 0 12px; padding-top:18px; border-top:1px solid var(--line); font-size:19px; }
+    h3 { margin:20px 0 10px; font-size:16px; }
+    h4 { margin:18px 0 8px; font-size:14px; color:#315048; }
+    p, li { font-size:14px; line-height:1.75; }
+    ul, ol { padding-left:22px; }
+    .diagnosis-summary { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; margin:14px 0 18px; }
+    .diagnosis-card { border:1px solid var(--line); border-radius:8px; padding:14px 15px; background:#fff; min-height:112px; }
+    .diagnosis-card h3 { margin:0 0 8px; font-size:13px; color:var(--muted); font-weight:760; }
+    .diagnosis-card p { margin:6px 0 0; color:#1f2d28; font-size:14px; line-height:1.72; }
+    .diagnosis-card.type { background:#f2f8f4; border-color:#cfe5d7; grid-column:span 1; }
+    .diagnosis-card.overall { background:#f6f8fb; border-color:#d6e0ec; }
+    .diagnosis-card.positive { background:#f3faf5; border-color:#cfe7d5; }
+    .diagnosis-card.negative { background:#fff6f3; border-color:#efcfc6; }
+    .diagnosis-card.warning { background:#fffaf0; border-color:#eadbb8; }
+    .diagnosis-card.danger { background:#fff3f3; border-color:#efc7c7; }
+    .diagnosis-card.judgement { grid-column:1 / -1; background:#f7fbf9; border-color:#cfe2d8; }
+    .diagnosis-card.judgement h3 { color:#23483b; }
+    table { width:100%; border-collapse:collapse; margin:10px 0 18px; font-size:13px; }
+    th, td { padding:9px 10px; border-bottom:1px solid #edf1ea; text-align:right; white-space:nowrap; }
+    th:first-child, td:first-child { text-align:left; }
+    th { background:var(--head); color:#315048; font-weight:760; }
+    code { color:#4a3b00; background:#fff7d6; padding:1px 4px; border-radius:4px; }
+    a { color:var(--blue); text-decoration:none; }
+    .toplink { display:inline-flex; margin-bottom:14px; font-size:13px; font-weight:700; }
+    @media (max-width: 860px) {
+      main { width:min(100vw - 24px, 1120px); }
+      article { padding:20px 16px; }
+      .diagnosis-summary { grid-template-columns:1fr; }
+      .diagnosis-card.judgement { grid-column:auto; }
+      table { display:block; overflow:auto; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="toplink" href="./统一经营分析入口_2026-08-26.html">返回统一入口</a>
+    <article>
+<h1>每日经营 Agent 简报 - 2026-08-26</h1>
+<p>&lt;!-- diagnosis_id: c200b0aef5bb8f50 --&gt;</p>
+<p>&lt;!-- active_event_ids: [&quot;EVT-20260702-SKYLEND-14D-PRODUCT-001&quot;,&quot;EVT-20260710-SMARTNAIRA-14D-PRODUCT-001&quot;,&quot;EVT-20260728-NATURAL-TRAFFIC-TEST-001&quot;] --&gt;</p>
+<p>&lt;!-- weekly_active_event_ids: [&quot;EVT-20260702-SKYLEND-14D-PRODUCT-001&quot;,&quot;EVT-20260710-SMARTNAIRA-14D-PRODUCT-001&quot;,&quot;EVT-20260728-NATURAL-TRAFFIC-TEST-001&quot;] --&gt;</p>
+<p>&lt;!-- task_evidence_snapshot: {&quot;extra_reloan_gap_attribution&quot;:{&quot;business_decision_id&quot;:null,&quot;business_disposition&quot;:null,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:38,&quot;owner&quot;:&quot;产品 + 运营 + 数据分析 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;0/3&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/extra_reloan_gap_attribution_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:16,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;主基准对比日&quot;,&quot;business_implication&quot;:&quot;加贷订单变化已按 App、source、产品期限和额度段拆解。&quot;,&quot;change&quot;:&quot;-18.0 单&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;SmartNaira解释 -18.0 单&quot;,&quot;metric&quot;:&quot;加贷订单&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 加贷&quot;},{&quot;baseline&quot;:&quot;主基准对比日&quot;,&quot;business_implication&quot;:&quot;合同金额变化已和订单变化分开归因，用于识别规模缺口是否被金额结构放大或缓冲。&quot;,&quot;change&quot;:&quot;-1230750 NGN&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;SmartNaira解释 -1230750 NGN&quot;,&quot;metric&quot;:&quot;加贷合同金额&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 加贷&quot;},{&quot;baseline&quot;:&quot;主基准客单价&quot;,&quot;business_implication&quot;:&quot;客单价用于判断订单缺口对应的经营质量影响，不能只用订单数量完成诊断。&quot;,&quot;change&quot;:&quot;-16993 NGN&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;客单价 44773 -&gt; 27780 NGN&quot;,&quot;metric&quot;:&quot;加贷客单价&quot;,&quot;primary_dimension&quot;:&quot;加贷金额/订单结构&quot;},{&quot;baseline&quot;:&quot;加贷任务全部订单&quot;,&quot;business_implication&quot;:&quot;产品期限缺失部分不得算作已解释质量影响。&quot;,&quot;change&quot;:&quot;BLOCKED_DATA占比 70.59%&quot;,&quot;direction&quot;:&quot;缺失&quot;,&quot;explained_value&quot;:&quot;未识别 48 / 68 单&quot;,&quot;metric&quot;:&quot;产品期限数据完整率&quot;,&quot;primary_dimension&quot;:&quot;product_term&quot;}],&quot;unexplained_ratio&quot;:0.7058823529411765},&quot;main_reloan_gap_funnel&quot;:{&quot;business_decision_id&quot;:null,&quot;business_disposition&quot;:null,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:36,&quot;owner&quot;:&quot;运营 + 数据分析 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;1/3&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/main_reloan_gap_funnel_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:88,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;上周同日&quot;,&quot;business_implication&quot;:&quot;同周基准用于识别星期效应下的主贷复贷恢复程度。&quot;,&quot;change&quot;:&quot;+152.0 单&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;driver_contribution&quot;:90.63157894736841,&quot;explained_value&quot;:&quot;同方向主要节点贡献 +90.6 单&quot;,&quot;metric&quot;:&quot;主贷复贷放款&quot;,&quot;offset_items&quot;:[{&quot;node&quot;:&quot;再进件到申请承接&quot;,&quot;role&quot;:&quot;抵消项&quot;,&quot;value&quot;:-48.41317365269462},{&quot;node&quot;:&quot;授信通过率&quot;,&quot;role&quot;:&quot;抵消项&quot;,&quot;value&quot;:-5.420422313268191}],&quot;primary_dimension&quot;:&quot;结清用户池&quot;},{&quot;baseline&quot;:&quot;近7日均值&quot;,&quot;business_implication&quot;:&quot;短期均值用于补充定位结清池、再进件、授信、用信和放款节点变化。&quot;,&quot;change&quot;:&quot;+32.0 单&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;driver_contribution&quot;:59.13294797687861,&quot;explained_value&quot;:&quot;同方向主要节点贡献 +59.1 单&quot;,&quot;metric&quot;:&quot;主贷复贷放款&quot;,&quot;offset_items&quot;:[{&quot;node&quot;:&quot;再进件到申请承接&quot;,&quot;role&quot;:&quot;抵消项&quot;,&quot;value&quot;:-36.80413439497831},{&quot;node&quot;:&quot;T0再进件率&quot;,&quot;role&quot;:&quot;抵消项&quot;,&quot;value&quot;:-11.378243239694932}],&quot;primary_dimension&quot;:&quot;结清用户池&quot;}],&quot;unexplained_ratio&quot;:0.0},&quot;mature_risk_deterioration&quot;:{&quot;business_decision_id&quot;:&quot;DEC-20260729-FPD0-MONITOR-001&quot;,&quot;business_disposition&quot;:&quot;ACKNOWLEDGED_MONITORING&quot;,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:39,&quot;owner&quot;:&quot;风控策略 + 数据分析 + 运营&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;0/3&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/mature_risk_deterioration_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:347,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;前7个成熟放款日；当前放款日 2026-08-19&quot;,&quot;business_implication&quot;:&quot;App、source、首贷/主贷/加贷贡献按成熟坏账单相对基准的增量计算；负向值仅作为抵消项。&quot;,&quot;change&quot;:&quot;-0.93pp&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;source 自然量 +2.1 坏账单；首复贷 首贷 +19.6 坏账单&quot;,&quot;metric&quot;:&quot;FPD0&quot;,&quot;primary_dimension&quot;:&quot;自然量 / 首贷&quot;},{&quot;baseline&quot;:&quot;前7个成熟放款日；当前放款日 2026-08-12&quot;,&quot;business_implication&quot;:&quot;App、source、首贷/主贷/加贷贡献按成熟坏账单相对基准的增量计算；负向值仅作为抵消项。&quot;,&quot;change&quot;:&quot;+0.70pp&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;App SmartNaira +19.9 坏账单；source 白名单 +8.9 坏账单；首复贷 首贷 +42.4 坏账单&quot;,&quot;metric&quot;:&quot;FPD7&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 白名单 / 首贷&quot;},{&quot;baseline&quot;:&quot;前7个成熟放款日；当前放款日 2026-07-20&quot;,&quot;business_implication&quot;:&quot;App、source、首贷/主贷/加贷贡献按成熟坏账单相对基准的增量计算；负向值仅作为抵消项。&quot;,&quot;change&quot;:&quot;+4.07pp&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;App SkyLend +29.2 坏账单；source 白名单 +33.5 坏账单；首复贷 首贷 +63.1 坏账单&quot;,&quot;metric&quot;:&quot;M1&quot;,&quot;primary_dimension&quot;:&quot;SkyLend / 白名单 / 首贷&quot;}],&quot;unexplained_ratio&quot;:1.0},&quot;natural_source_abnormal_orders&quot;:{&quot;business_decision_id&quot;:&quot;DEC-20260729-NATURAL-TEST-001&quot;,&quot;business_disposition&quot;:&quot;APPROVED_INTENTIONAL_EXPERIMENT&quot;,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:42,&quot;owner&quot;:&quot;数据分析 + 产品技术 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;0/7&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/natural_source_abnormal_orders_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:2121,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;已批准风控测试范围&quot;,&quot;business_implication&quot;:&quot;该流量已确认属于风控主动测试；需区分批准测试量、注册后入白重分类和超范围订单。&quot;,&quot;change&quot;:&quot;2026-08-26 为 +12 单&quot;,&quot;direction&quot;:&quot;测试量&quot;,&quot;explained_value&quot;:&quot;窗口内 218/2121 单可由注册后入白解释，金额 865000/9099000 NGN&quot;,&quot;metric&quot;:&quot;自然量策略测试放款&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / release_event_source=自然量&quot;}],&quot;unexplained_ratio&quot;:0.8972182932578973},&quot;ongoing_product_event_validation&quot;:{&quot;business_decision_id&quot;:null,&quot;business_disposition&quot;:null,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:38,&quot;owner&quot;:&quot;产品 + 运营 + 数据分析 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;0/2&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/ongoing_product_event_validation_result.json&quot;,&quot;risk_validation_status&quot;:&quot;COMPLETE&quot;,&quot;row_count&quot;:904,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;SkyLend 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;主要维度按日均订单绝对贡献且方向一致选择；主贷-6.2单/日，标记为抵消项。&quot;,&quot;change&quot;:&quot;+0.69%&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;首贷贡献 +6.6 单/日&quot;,&quot;metric&quot;:&quot;日均放款&quot;,&quot;primary_dimension&quot;:&quot;SkyLend / 首贷&quot;},{&quot;baseline&quot;:&quot;SkyLend 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;阶段决策为 STOP，原因：成熟风险至少一项恶化超过3pp；自然量占比4.09%超过1%。&quot;,&quot;change&quot;:&quot;+27.38%&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;日均金额 762250 -&gt; 970929 NGN&quot;,&quot;metric&quot;:&quot;日均合同金额&quot;,&quot;primary_dimension&quot;:&quot;SkyLend / 产品结构&quot;},{&quot;baseline&quot;:&quot;SkyLend 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;客单价方向独立于合同金额方向判断，方向相反时不得合并成单一上升或下降 Finding。&quot;,&quot;change&quot;:&quot;+26.51%&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;客单价 12210 -&gt; 15447 NGN&quot;,&quot;metric&quot;:&quot;客单价&quot;,&quot;primary_dimension&quot;:&quot;SkyLend / 产品结构&quot;},{&quot;baseline&quot;:&quot;SmartNaira 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;主要维度按日均订单绝对贡献且方向一致选择；主贷-17.1单/日，标记为抵消项。&quot;,&quot;change&quot;:&quot;+6.34%&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;首贷贡献 +46.5 单/日&quot;,&quot;metric&quot;:&quot;日均放款&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 首贷&quot;},{&quot;baseline&quot;:&quot;SmartNaira 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;阶段决策为 STOP，原因：成熟风险至少一项恶化超过3pp；自然量占比8.21%超过1%。&quot;,&quot;change&quot;:&quot;+5.88%&quot;,&quot;direction&quot;:&quot;上升&quot;,&quot;explained_value&quot;:&quot;日均金额 11277464 -&gt; 11940089 NGN&quot;,&quot;metric&quot;:&quot;日均合同金额&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 产品结构&quot;},{&quot;baseline&quot;:&quot;SmartNaira 上线前后各14日&quot;,&quot;business_implication&quot;:&quot;客单价方向独立于合同金额方向判断，方向相反时不得合并成单一上升或下降 Finding。&quot;,&quot;change&quot;:&quot;-0.44%&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;客单价 20483 -&gt; 20393 NGN&quot;,&quot;metric&quot;:&quot;客单价&quot;,&quot;primary_dimension&quot;:&quot;SmartNaira / 产品结构&quot;}],&quot;unexplained_ratio&quot;:0.0},&quot;primary_app_gap_attribution&quot;:{&quot;business_decision_id&quot;:null,&quot;business_disposition&quot;:null,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:41,&quot;owner&quot;:&quot;运营 + 产品 + 数据分析 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;1/3&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/primary_app_gap_attribution_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:11,&quot;same_day_deliverable&quot;:null,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;主基准对比日&quot;,&quot;business_implication&quot;:&quot;App 缺口或增量已拆到首贷、主贷、加贷和 source，可用于安排对应业务动作。&quot;,&quot;change&quot;:&quot;-5.0 单&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;主贷解释 +144.0 单&quot;,&quot;metric&quot;:&quot;目标 App 放款&quot;,&quot;primary_dimension&quot;:&quot;主贷&quot;}],&quot;unexplained_ratio&quot;:0.0},&quot;whitelist_firstloan_gap_funnel&quot;:{&quot;business_decision_id&quot;:&quot;DEC-20260806-WHITELIST-P0-001&quot;,&quot;business_disposition&quot;:&quot;ACKNOWLEDGED_OPEN_P0&quot;,&quot;closure_approval_artifact&quot;:null,&quot;closure_approval_status&quot;:null,&quot;closure_approved_at&quot;:null,&quot;closure_approved_by&quot;:null,&quot;closure_reason&quot;:null,&quot;missing_mature_metrics&quot;:[],&quot;observation_date&quot;:&quot;2026-08-26&quot;,&quot;overdue_days&quot;:41,&quot;owner&quot;:&quot;运营 + 数据分析 + 风控策略&quot;,&quot;query_validation_status&quot;:&quot;QUERY_VALIDATED&quot;,&quot;recovery_progress&quot;:&quot;0/3&quot;,&quot;result_artifact&quot;:&quot;data/manual_exports/business_agent_runs/2026-08-27/task_results/2026-08-26/whitelist_firstloan_gap_funnel_result.json&quot;,&quot;risk_validation_status&quot;:null,&quot;row_count&quot;:220,&quot;same_day_deliverable&quot;:&quot;同日提交白名单百单级缺口的漏斗断点、主要批次/App和未解释缺口清单&quot;,&quot;task_state&quot;:&quot;OVERDUE&quot;,&quot;top_findings&quot;:[{&quot;baseline&quot;:&quot;上周同日 2026-08-19&quot;,&quot;business_implication&quot;:&quot;白名单变化已拆成前端基数和转化效率，可据此区分供给问题与策略/链路问题。&quot;,&quot;change&quot;:&quot;-138.0 单&quot;,&quot;direction&quot;:&quot;下降&quot;,&quot;explained_value&quot;:&quot;基数效应 -139.9 单，转化率效应 +1.9 单&quot;,&quot;metric&quot;:&quot;白名单首贷放款&quot;,&quot;primary_dimension&quot;:&quot;注册/进件基数与转化率&quot;}],&quot;unexplained_ratio&quot;:9.332309482356388e-17}} --&gt;</p>
+<ul>
+<li>运行日：2026-08-27</li>
+</ul>
+<ul>
+<li>观察截止日：2026-08-26</li>
+</ul>
+<ul>
+<li>数据范围：2026-01-01 起；白名单从 2026-03-01 起</li>
+</ul>
+<h2>经营诊断结论</h2>
+<div class="diagnosis-summary">
+<section class="diagnosis-card type"><h3>观察日类型</h3><p>承压且结构占比显著变化日。</p></section>
+<section class="diagnosis-card neutral"><h3>多基准判断</h3><p>整体放款较近 7 日均值 -58 单，较前一日 2026-08-25 +4 单，较上周三 2026-08-19 -3 单；合同金额三基准变化分别为 -1,112,900 NGN、+915,000 NGN、+2,022,250 NGN。</p></section>
+<section class="diagnosis-card positive"><h3>主贡献</h3><p>上周同日 2026-08-19口径下，主贷复贷 拉动 +152 单。</p></section>
+<section class="diagnosis-card negative"><h3>主拖累</h3><p>规模拖累：白名单首贷 拖累 -138 单；经营质量拖累：授信通过率下降 21.29pp、进件到用信申请率下降 14.11pp。</p></section>
+<section class="diagnosis-card neutral"><h3>主基准归因</h3><p>主归因基准采用上周同日 2026-08-19：首贷 -137 单，其中白名单 -138 单、自然量异常 +1 单，剔除异常后的正常首贷变化为 -138 单；复贷 +134 单，其中主贷 +152 单、加贷 -18 单。App 同口径下 SmartNaira -5 单。白名单较上周同日 2026-08-19：注册 -311 人、进件 -180 单、用信申请 -146 单、放款 -138 单；基数效应 -140 单、转化率效应 +2 单、净减少 138 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +2 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口。</p></section>
+<section class="diagnosis-card neutral"><h3>近 7 日补充</h3><p>短期补充（近 7 日均值）：首贷 -79 单，其中白名单 -70 单、自然量异常 -9 单；复贷 +21 单，其中主贷 +32 单、加贷 -11 单，为抵消项。白名单较近 7 日均值：注册 -203 人、进件 -180 单、用信申请 -77 单、放款 -70 单；基数效应 -73 单、转化率效应 +3 单、净减少 70 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +3 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口；T0 进件率下降 -5.44pp，前端承接仍需排查。</p></section>
+<section class="diagnosis-card neutral"><h3>异常贡献</h3><p>自然量策略测试放款较上周三异常量增加 1 单，较近 7 日异常量减少 9 单。该流量已确认为风控主动放开测试，需单列规模、App/source、转化和成熟风险；超出批准测试范围时恢复 P0。</p></section>
+<section class="diagnosis-card neutral"><h3>金额量价拆解</h3><p>订单量效应 -1,065,569 NGN，单均/客单价效应 -47,331 NGN，订单量效应与客单价效应未形成反向抵消，合同金额最终 -1,112,900 NGN。首贷金额 -154,157 NGN，复贷合同金额 -958,743 NGN。</p></section>
+<section class="diagnosis-card neutral"><h3>经营事件/策略变更</h3><p>金融产品 / SkyLend 自 2026-07-02 持续生效；金融产品 / SmartNaira 自 2026-07-10 持续生效；风控策略 / 自然量 自 2026-07-28 持续生效。</p></section>
+<section class="diagnosis-card neutral"><h3>成熟风险</h3><p>成熟风险观察：成熟窗口风险信号为 FPD0（放款日 2026-08-19）-0.93pp、FPD7（放款日 2026-08-12）+0.70pp、M1（放款日 2026-07-20）+4.07pp；SkyLend FPD0 51.22%，低于 SmartNaira 56.67%。风险指标对应历史成熟放款日，不能直接归因到观察日放款。高风险用户比例下降或催收改善仅作为反向证据，不能自动抵消成熟风险恶化。催收总回收率较近7个观察日改善 2.16pp。</p></section>
+<section class="diagnosis-card neutral"><h3>LTV</h3><p>2026-08 首贷 Cohort（未成熟）；最新成熟 Cohort 为 2026-06。</p></section>
+<section class="diagnosis-card judgement"><h3>业务判断</h3><p></p></section>
+<ol>
+<li>2026-08-26 是承压且结构占比显著变化日，主基准为上周同日 2026-08-19；合同金额较近7日 -10.20%、较前一日 +10.30%、较上周三 +26.00%；复贷订单占比提升 10.56pp，其中复贷绝对量贡献 +1.30pp，首贷分母变化贡献 +9.26pp。</li>
+</ol>
+<ol>
+<li>规模拖累来自白名单首贷、SmartNaira；经营质量拖累为授信通过率下降 21.29pp、进件到用信申请率下降 14.11pp；上周同日 2026-08-19口径下，主贷复贷 拉动 +152 单。</li>
+</ol>
+<ol>
+<li>业务已知悉成熟风险变化，报告持续注明 FPD0、FPD7、M1 的成熟日期、变化幅度和量化贡献；自然量已确认为风控策略测试，按批准范围持续监控。</li>
+</ol>
+<ol>
+<li>优先动作是拆白名单首贷缺口、拆加贷缺口与质量影响、监控已确认的自然量策略测试，并完成其余 P1 验证。</li>
+</ol>
+</div>
+<h2>Source口径调整和历史重述说明</h2>
+<ul>
+<li>source 已按历史事件时点重述：注册使用 user.create_time，进件使用 user_order.create_time，用信使用 fin_application.create_time，放款事件使用 fin_application.pay_time。</li>
+</ul>
+<ul>
+<li>近3个月受历史当前白名单状态潜在重分类影响：注册 2,143 人、进件 1,810 人、用信 360 人、放款 105 人。</li>
+</ul>
+<ul>
+<li>application_cohort_source：first_whitelist_time &lt;= user_order.create_time；release_event_source：first_whitelist_time &lt;= fin_application.pay_time。放款必须按 pay_time 判断，禁止用当前白名单状态回写历史。</li>
+</ul>
+<ul>
+<li>历史重述分析产物：data/manual_exports/post_registration_whitelist/2026-04-19_2026-07-18_obs_2026-07-18/post_registration_whitelist_summary.json；固定历史 SQL 回归：PASS。</li>
+</ul>
+<h2>整体订单金额</h2>
+<table><thead><tr><th>指标</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>放款订单</td><td>536</td><td>594</td><td>-9.76%</td><td>缺口拖累</td></tr>
+<tr><td>合同金额</td><td>9,800,000 NGN</td><td>10,912,900 NGN</td><td>-10.20%</td><td>金额下降，客单价下降加剧缺口</td></tr>
+<tr><td>单均合同金额</td><td>18,284 NGN</td><td>18,372 NGN</td><td>-88 NGN</td><td>单均合同金额下降</td></tr>
+<tr><td>复贷订单占比</td><td>72.20%</td><td>61.64%</td><td>+10.56pp</td><td>复贷订单占比提升；其中复贷绝对量贡献 +1.30pp，首贷分母变化贡献 +9.26pp</td></tr>
+</tbody></table>
+<h3>三基准对比</h3>
+<table><thead><tr><th>口径</th><th>整体放款</th><th>首贷</th><th>复贷</th><th>合同金额</th><th>诊断</th></tr></thead><tbody>
+<tr><td>vs 近 7 日均值</td><td>-58</td><td>-79</td><td>+21</td><td>-1,112,900 NGN</td><td>用于判断短期偏离</td></tr>
+<tr><td>vs 前一日 2026-08-25</td><td>+4</td><td>-27</td><td>+31</td><td>+915,000 NGN</td><td>用于判断连续变化</td></tr>
+<tr><td>vs 上周同日 2026-08-19</td><td>-3</td><td>-137</td><td>+134</td><td>+2,022,250 NGN</td><td>用于消除星期效应</td></tr>
+</tbody></table>
+<ul>
+<li>金额量价拆解：订单量效应 -1,065,569 NGN，单均/客单价效应 -47,331 NGN，订单量效应与客单价效应未形成反向抵消，合同金额最终 -1,112,900 NGN。首贷金额 -154,157 NGN，复贷合同金额 -958,743 NGN。</li>
+</ul>
+<h2>首贷/复贷</h2>
+<ul>
+<li>主基准结论：主归因基准采用上周同日 2026-08-19：首贷 -137 单，其中白名单 -138 单、自然量异常 +1 单，剔除异常后的正常首贷变化为 -138 单；复贷 +134 单，其中主贷 +152 单、加贷 -18 单。App 同口径下 SmartNaira -5 单。白名单较上周同日 2026-08-19：注册 -311 人、进件 -180 单、用信申请 -146 单、放款 -138 单；基数效应 -140 单、转化率效应 +2 单、净减少 138 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +2 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口。</li>
+</ul>
+<h3>近7日短期补充</h3>
+<table><thead><tr><th>模块</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>首贷放款</td><td>149</td><td>228</td><td>-79</td><td>首贷缺口 -79 单</td></tr>
+<tr><td>复贷放款</td><td>387</td><td>366</td><td>+21</td><td>复贷增量 +21 单</td></tr>
+<tr><td>结清复贷 / 主贷</td><td>362</td><td>330</td><td>+32</td><td>主贷增量 +32 单</td></tr>
+<tr><td>加贷</td><td>25</td><td>36</td><td>-11</td><td>加贷缺口 -11 单</td></tr>
+</tbody></table>
+<ul>
+<li>较近7日，复贷+21单形成短期拉动；较上周三，复贷+134单形成同周拉动。</li>
+</ul>
+<ul>
+<li>近 7 日补充：短期补充（近 7 日均值）：首贷 -79 单，其中白名单 -70 单、自然量异常 -9 单；复贷 +21 单，其中主贷 +32 单、加贷 -11 单，为抵消项。白名单较近 7 日均值：注册 -203 人、进件 -180 单、用信申请 -77 单、放款 -70 单；基数效应 -73 单、转化率效应 +3 单、净减少 70 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +3 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口；T0 进件率下降 -5.44pp，前端承接仍需排查。</li>
+</ul>
+<h2>App/source</h2>
+<h3>主基准 App 归因（上周同日 2026-08-19）</h3>
+<table><thead><tr><th>App</th><th>观察日放款</th><th>主基准变化</th><th>语义</th></tr></thead><tbody>
+<tr><td>SmartNaira</td><td>452</td><td>-5</td><td>拖累</td></tr>
+<tr><td>SkyLend</td><td>84</td><td>+2</td><td>基本持平</td></tr>
+<tr><td>PrimeCash</td><td>-</td><td>-</td><td>基本持平</td></tr>
+</tbody></table>
+<h3>近7日短期补充</h3>
+<table><thead><tr><th>维度层</th><th>维度值</th><th>指标</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>App</td><td>SmartNaira</td><td>整体放款</td><td>452</td><td>495</td><td>-43</td><td>SmartNaira缺口 -43 单</td></tr>
+<tr><td>App</td><td>SkyLend</td><td>整体放款</td><td>84</td><td>99</td><td>-15</td><td>SkyLend缺口 -15 单</td></tr>
+<tr><td>Source</td><td>白名单</td><td>首贷放款</td><td>137</td><td>207</td><td>-70</td><td>白名单缺口 -70 单</td></tr>
+<tr><td>Source</td><td>自然量</td><td>首贷放款</td><td>12</td><td>21</td><td>-9</td><td>自然量异常放款绝对量 12 单，较基准少 9 单</td></tr>
+</tbody></table>
+<ul>
+<li>App 维度看，SmartNaira 是主要缺口来源，整体放款较近 7 日少 43 单；App/source 只能作为交叉维度解释，不能替代首贷/复贷主因。</li>
+</ul>
+<ul>
+<li>Source 维度最大拖累来自 白名单，首贷放款较近 7 日少 70 单。</li>
+</ul>
+<ul>
+<li>较近7日口径下，App 维度暂无正向项。</li>
+</ul>
+<h2>关键漏斗</h2>
+<h3>白名单首贷漏斗（主基准缺口项）</h3>
+<ul>
+<li>白名单较上周同日 2026-08-19：注册 -311 人、进件 -180 单、用信申请 -146 单、放款 -138 单；基数效应 -140 单、转化率效应 +2 单、净减少 138 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +2 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口。</li>
+</ul>
+<ul>
+<li>白名单较近 7 日均值：注册 -203 人、进件 -180 单、用信申请 -77 单、放款 -70 单；基数效应 -73 单、转化率效应 +3 单、净减少 70 单。白名单首贷缺口主要来自前端量下降（注册人数下降和进件基数下降）；转化率净效应 +3 单，对放款缺口形成缓冲，过程率下降仅作为漏斗风险提示；后段改善不足以抵消前端基数缺口；T0 进件率下降 -5.44pp，前端承接仍需排查。</li>
+</ul>
+<table><thead><tr><th>环节</th><th>观察日</th><th>近7日均值</th><th>较近7日</th><th>上周同日</th><th>较上周同日</th></tr></thead><tbody>
+<tr><td>白名单注册人数</td><td>294</td><td>497</td><td>-203</td><td>605</td><td>-311</td></tr>
+<tr><td>进件数</td><td>375</td><td>555</td><td>-180</td><td>555</td><td>-180</td></tr>
+<tr><td>用信申请数</td><td>141</td><td>218</td><td>-77</td><td>287</td><td>-146</td></tr>
+<tr><td>放款数（release_event_source）</td><td>137</td><td>207</td><td>-70</td><td>275</td><td>-138</td></tr>
+<tr><td>授信通过率</td><td>42.67%</td><td>46.89%</td><td>-4.22pp</td><td>63.96%</td><td>-21.29pp</td></tr>
+<tr><td>进件到用信申请率</td><td>37.60%</td><td>39.22%</td><td>-1.62pp</td><td>51.71%</td><td>-14.11pp</td></tr>
+<tr><td>用信申请到放款率</td><td>97.16%</td><td>94.95%</td><td>+2.21pp</td><td>95.82%</td><td>+1.34pp</td></tr>
+</tbody></table>
+<h3>复贷漏斗</h3>
+<table><thead><tr><th>环节</th><th>观察日</th><th>近7日均值</th><th>差异</th><th>诊断</th></tr></thead><tbody>
+<tr><td>主贷结清用户数</td><td>408</td><td>346</td><td>+62</td><td>驱动项：主贷结清用户数 +62</td></tr>
+<tr><td>主贷T0再进件率</td><td>62.01%</td><td>63.38%</td><td>-1.37pp</td><td>抵消项：主贷T0再进件率 -1.37pp</td></tr>
+<tr><td>主贷进件数</td><td>427</td><td>413</td><td>+14</td><td>驱动项：主贷进件数 +14</td></tr>
+<tr><td>主贷授信通过率</td><td>83.61%</td><td>81.82%</td><td>+1.79pp</td><td>驱动项：主贷授信通过率 +1.79pp</td></tr>
+<tr><td>主贷用信申请数</td><td>363</td><td>336</td><td>+27</td><td>驱动项：主贷用信申请数 +27</td></tr>
+<tr><td>主贷放款成功率</td><td>99.72%</td><td>98.10%</td><td>+1.62pp</td><td>驱动项：主贷放款成功率 +1.62pp</td></tr>
+<tr><td>主贷放款数</td><td>362</td><td>330</td><td>+32</td><td>驱动项：主贷放款数 +32</td></tr>
+<tr><td>加贷进件数</td><td>31</td><td>42</td><td>-11</td><td>抵消项：加贷进件数 -11</td></tr>
+<tr><td>加贷放款成功率</td><td>100.00%</td><td>97.24%</td><td>+2.76pp</td><td>驱动项：加贷放款成功率 +2.76pp</td></tr>
+<tr><td>加贷放款数</td><td>25</td><td>36</td><td>-11</td><td>抵消项：加贷放款数 -11</td></tr>
+</tbody></table>
+<ul>
+<li>较近7日，复贷+21单形成短期增长；正向驱动为主贷结清用户数 +62、主贷进件数 +14、主贷授信通过率 +1.79pp、主贷用信申请数 +27、主贷放款成功率 +1.62pp、主贷放款数 +32、加贷放款成功率 +2.76pp；抵消项为主贷T0再进件率 -1.37pp、加贷进件数 -11、加贷放款数 -11。</li>
+</ul>
+<ul>
+<li>风险验证：但由于 FPD7 较基准上升 +0.70pp，需要验证该增量是否来自高风险客群。</li>
+</ul>
+<h2>风险与经营质量</h2>
+<ul>
+<li>成熟风险观察：成熟窗口风险信号为 FPD0（放款日 2026-08-19）-0.93pp、FPD7（放款日 2026-08-12）+0.70pp、M1（放款日 2026-07-20）+4.07pp；SkyLend FPD0 51.22%，低于 SmartNaira 56.67%。风险指标对应历史成熟放款日，不能直接归因到观察日放款。高风险用户比例下降或催收改善仅作为反向证据，不能自动抵消成熟风险恶化。催收总回收率较近7个观察日改善 2.16pp。</li>
+</ul>
+<ul>
+<li>风险与回收指标不能直接归因到 2026-08-26 观察日放款，但已经构成经营质量信号，用于验证当前复贷形成的金额结构缓冲是否伴随风险后置。</li>
+</ul>
+<table><thead><tr><th>指标名称</th><th>最新可用观察日</th><th>最新可用值</th><th>比较基准</th><th>较基准变化</th><th>业务含义</th></tr></thead><tbody>
+<tr><td>FPD0</td><td>2026-08-19</td><td>55.84%</td><td>前 7 个成熟放款日</td><td>-0.93pp</td><td>成熟放款日口径，不能直接归因观察日</td></tr>
+<tr><td>FPD7</td><td>2026-08-12</td><td>42.97%</td><td>前 7 个成熟放款日</td><td>+0.70pp</td><td>成熟放款日口径，不能直接归因观察日</td></tr>
+<tr><td>M1</td><td>2026-07-20</td><td>46.96%</td><td>前 7 个成熟放款日</td><td>+4.07pp</td><td>成熟放款日口径，不能直接归因观察日</td></tr>
+<tr><td>高风险用户比例</td><td>2026-08-26</td><td>12.41%</td><td>近 7 日均值</td><td>-1.26pp</td><td>仅作为反向或补充证据，不能自动抵消成熟风险</td></tr>
+<tr><td>催收总回收率</td><td>2026-08-26</td><td>14.56%</td><td>近 7 日均值</td><td>+2.16pp</td><td>较基准改善；催收改善只能作为反向证据</td></tr>
+<tr><td>催收S0回收率</td><td>2026-08-26</td><td>27.18%</td><td>近 7 日均值</td><td>+5.28pp</td><td>较基准改善；催收改善只能作为反向证据</td></tr>
+<tr><td>催收S1回收率</td><td>2026-08-26</td><td>14.58%</td><td>近 7 日均值</td><td>+3.19pp</td><td>较基准改善；催收改善只能作为反向证据</td></tr>
+<tr><td>LTV</td><td>2026-08-23</td><td>2026-08 首贷 Cohort（未成熟）</td><td>最新成熟 Cohort 2026-06</td><td>不适用</td><td>未成熟 Cohort 不输出 KPI 结论</td></tr>
+<tr><td>权责</td><td>2026-07-31</td><td>最新可计算月份 2026-07 / Take Rate 9.94%（部分成熟）；最新完全成熟月份 2026-06</td><td>月更沿用最近产物</td><td>不适用</td><td>用于验证利润质量，部分成熟月份不能当最终成熟结论</td></tr>
+</tbody></table>
+<h2>下一步动作</h2>
+<table><thead><tr><th>优先级</th><th>动作</th><th>Owner</th><th>总体状态</th><th>原始截止日</th><th>到期/升级</th><th>逾期天数</th><th>同日交付</th><th>查询状态</th><th>业务状态</th><th>诊断状态</th><th>修复状态</th><th>改善观察</th><th>修复后复发观察</th></tr></thead><tbody>
+<tr><td>P0</td><td>拆白名单首贷缺口</td><td>运营 + 数据分析 + 风控策略</td><td>OVERDUE</td><td>2026-07-17</td><td>OVERDUE</td><td>41</td><td>同日提交白名单百单级缺口的漏斗断点、主要批次/App和未解释缺口清单</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td></tr>
+<tr><td>P1</td><td>拆加贷缺口与质量影响</td><td>产品 + 运营 + 数据分析 + 风控策略</td><td>OVERDUE</td><td>2026-07-20</td><td>OVERDUE</td><td>38</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td></tr>
+<tr><td>P1</td><td>监控已确认的自然量策略测试</td><td>数据分析 + 产品技术 + 风控策略</td><td>OVERDUE</td><td>2026-07-16</td><td>OVERDUE</td><td>42</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/7</td><td>NOT_STARTED（0/7）</td></tr>
+<tr><td>P1</td><td>验证持续生效的产品调整表现</td><td>产品 + 运营 + 数据分析 + 风控策略</td><td>OVERDUE</td><td>2026-07-20</td><td>OVERDUE</td><td>38</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/2</td><td>NOT_STARTED（0/2）</td></tr>
+<tr><td>P1</td><td>拆 SmartNaira 同口径放款缺口</td><td>运营 + 产品 + 数据分析 + 风控策略</td><td>OVERDUE</td><td>2026-07-17</td><td>OVERDUE</td><td>41</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED（0/3）</td></tr>
+<tr><td>P1</td><td>拆主贷复贷缺口</td><td>运营 + 数据分析 + 风控策略</td><td>OVERDUE</td><td>2026-07-22</td><td>OVERDUE</td><td>36</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED（0/3）</td></tr>
+<tr><td>P2</td><td>持续注明成熟风险变化</td><td>风控策略 + 数据分析 + 运营</td><td>OVERDUE</td><td>2026-07-19</td><td>OVERDUE</td><td>39</td><td>-</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td></tr>
+</tbody></table>
+<h3>下钻 SQL 执行验证（任务包状态：QUERY_PASS_BUSINESS_OPEN）</h3>
+<table><thead><tr><th>任务</th><th>阶段性决策</th><th>总体状态</th><th>查询状态</th><th>业务状态</th><th>诊断状态</th><th>修复状态</th><th>改善观察</th><th>修复后复发</th><th>EXPLAIN</th><th>输出行数</th><th>耗时</th><th>去重</th><th>对账</th></tr></thead><tbody>
+<tr><td>拆白名单首贷缺口</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td><td>PASS</td><td>220</td><td>24.381s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>拆加贷缺口与质量影响</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td><td>PASS</td><td>16</td><td>1.506s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>拆主贷复贷缺口</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED（0/3）</td><td>PASS</td><td>88</td><td>4.14s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>监控已确认的自然量策略测试</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/7</td><td>NOT_STARTED（0/7）</td><td>PASS</td><td>2121</td><td>14.744s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>验证持续生效的产品调整表现</td><td>STOP</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>0/2</td><td>NOT_STARTED（0/2）</td><td>PASS</td><td>904</td><td>12.556s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>拆 SmartNaira 同口径放款缺口</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_COMPLETE</td><td>FIX_OPEN</td><td>1/3</td><td>NOT_STARTED（0/3）</td><td>PASS</td><td>11</td><td>1.475s</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>持续注明成熟风险变化</td><td>-</td><td>OVERDUE</td><td>QUERY_VALIDATED</td><td>OVERDUE</td><td>DIAGNOSIS_IN_PROGRESS</td><td>FIX_OPEN</td><td>0/3</td><td>NOT_STARTED（0/3）</td><td>PASS</td><td>347</td><td>3.095s</td><td>PASS</td><td>PASS</td></tr>
+</tbody></table>
+<h3>产品事件等长窗口决策</h3>
+<table><thead><tr><th>App</th><th>前/后天数</th><th>日均放款</th><th>日均金额</th><th>客单价</th><th>后窗口首贷/主贷/加贷</th><th>自然量占比</th><th>FPD0/FPD7/M1</th><th>成熟覆盖率</th><th>风险验证</th><th>缺失成熟指标</th><th>决策</th></tr></thead><tbody>
+<tr><td>SkyLend</td><td>14 / 14</td><td>62.4 -&gt; 62.9</td><td>762250 -&gt; 970929</td><td>12210 -&gt; 15447</td><td>首贷 65.57% / 主贷 34.43% / 加贷 0.00%</td><td>4.09%</td><td>FPD0 56.48% / FPD7 47.95% / M1 44.32%</td><td>FPD0 100.00% / FPD7 100.00% / M1 100.00%</td><td>COMPLETE</td><td>-</td><td>STOP</td></tr>
+<tr><td>SmartNaira</td><td>14 / 14</td><td>550.6 -&gt; 585.5</td><td>11277464 -&gt; 11940089</td><td>20483 -&gt; 20393</td><td>首贷 45.72% / 主贷 42.81% / 加贷 11.47%</td><td>8.21%</td><td>FPD0 54.58% / FPD7 43.63% / M1 40.71%</td><td>FPD0 100.00% / FPD7 100.00% / M1 80.16%</td><td>COMPLETE</td><td>-</td><td>STOP</td></tr>
+</tbody></table>
+<h2>数据状态</h2>
+<table><thead><tr><th>模块</th><th>频率</th><th>状态</th><th>实际截止日</th><th>是否沿用</th><th>原因</th><th>耗时</th></tr></thead><tbody>
+<tr><td>workbench</td><td>日更</td><td>PASS</td><td>2026-08-26</td><td>否</td><td>本次已刷新至目标观察日</td><td>4 分 8 秒</td></tr>
+<tr><td>whitelist</td><td>日更</td><td>PASS</td><td>2026-08-26</td><td>否</td><td>本次已刷新至目标观察日</td><td>2 分 43 秒</td></tr>
+<tr><td>ltv</td><td>周更</td><td>REUSED</td><td>2026-08-23</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
+<tr><td>accrual</td><td>月更</td><td>REUSED</td><td>2026-07-31</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
+<tr><td>unified</td><td>每次刷新后重建</td><td>PASS</td><td>2026-08-26</td><td>否</td><td>本次已刷新至目标观察日</td><td>1 分 32 秒</td></tr>
+</tbody></table>
+<ul>
+<li>工作台产物校验状态：PASS。工作台本次已刷新至目标观察日，校验状态 PASS。</li>
+</ul>
+<ul>
+<li>Agent 质检状态：PASS。报告：`data/manual_exports/business_agent_runs/2026-08-27/daily_brief_quality_2026-08-26.md`</li>
+</ul>
+<ul>
+<li>下钻任务包：`data/manual_exports/business_agent_runs/2026-08-27/diagnostic_drilldown_tasks_2026-08-26.md`（7 个任务）</li>
+</ul>
+<ul>
+<li>周/月诊断框架：`data/manual_exports/business_agent_runs/2026-08-27/period_diagnosis_framework_2026-08-26.md`</li>
+</ul>
+    </article>
+  </main>
+</body>
+</html>
