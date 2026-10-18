@@ -234,14 +234,14 @@
 </tbody></table>
 <h2>数据状态</h2>
 <table><thead><tr><th>模块</th><th>频率</th><th>状态</th><th>实际截止日</th><th>是否沿用</th><th>原因</th><th>耗时</th></tr></thead><tbody>
-<tr><td>workbench</td><td>日更</td><td>PASS</td><td>2026-10-17</td><td>否</td><td>本次已刷新至目标观察日</td><td>2 分 14 秒</td></tr>
-<tr><td>whitelist</td><td>日更</td><td>PASS</td><td>2026-10-17</td><td>否</td><td>本次已刷新至目标观察日</td><td>9 秒</td></tr>
+<tr><td>workbench</td><td>日更</td><td>REUSED_EXISTING_TARGET_DAY</td><td>2026-10-17</td><td>是</td><td>本次未重新执行工作台模块，沿用已存在的 2026-10-17 目标日产物</td><td>0 秒</td></tr>
+<tr><td>whitelist</td><td>日更</td><td>REUSED_EXISTING_TARGET_DAY</td><td>2026-10-17</td><td>是</td><td>本次未重新执行白名单模块，沿用已存在的 2026-10-17 目标日产物</td><td>0 秒</td></tr>
 <tr><td>ltv</td><td>周更</td><td>REUSED</td><td>2026-09-27</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
 <tr><td>accrual</td><td>月更</td><td>REUSED</td><td>2026-09-30</td><td>是</td><td>按刷新频率未到本次刷新日，正常沿用最近真实产物</td><td>0 秒</td></tr>
-<tr><td>unified</td><td>每次刷新后重建</td><td>PASS</td><td>2026-10-17</td><td>否</td><td>本次已刷新至目标观察日</td><td>0 秒</td></tr>
+<tr><td>unified</td><td>每次刷新后重建</td><td>PASS</td><td>2026-10-17</td><td>否</td><td>本次已刷新至目标观察日</td><td>1 秒</td></tr>
 </tbody></table>
 <ul>
-<li>工作台产物校验状态：PASS。工作台本次已刷新至目标观察日，校验状态 PASS。</li>
+<li>工作台产物校验状态：PASS。该校验对应当前沿用的目标日工作台产物，模块执行状态以上表为准。</li>
 </ul>
 <ul>
 <li>Agent 质检状态：PASS。报告：`data/audit/business_agent/runs/2026-10-18/daily_brief_quality_2026-10-17.md`</li>
