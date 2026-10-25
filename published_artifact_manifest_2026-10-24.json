@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "check_id": "published_artifact_freshness",
+  "run_date": "2026-10-25",
+  "observe_date": "2026-10-24",
+  "diagnosis_id": "ec781369b0cf0f96",
+  "local_html": "/Users/ohlala/Documents/线上现金贷/reports/daily/2026-10-24/统一经营分析入口_2026-10-24.html",
+  "local_html_sha256": "7b7ab026eb7ad0ba5cc9bdbdd02c544dcbe6f1359637c234dbcfb344652e1be3",
+  "packaged_html": "/Users/ohlala/Documents/线上现金贷/github_pages_export/business_report_2026-10-24.html",
+  "packaged_html_sha256": "7b7ab026eb7ad0ba5cc9bdbdd02c544dcbe6f1359637c234dbcfb344652e1be3",
+  "snapshot_storage": "CONTENT_ADDRESSED_HTML_V1"
+}
